@@ -383,6 +383,21 @@ for ((i=0; i<${#PRS_ARR[@]}; i++)); do
 done
 ```
 
+**Partition-aware severity (when `.claude/tangle-partition.json` exists):**
+
+A blind overlap is not all equally bad. Read the partition exported by `cli-audit-tangle` (same file the chef used to assign commis) and classify each overlap:
+
+```bash
+PART=.claude/tangle-partition.json
+# A file that is a declared boundary function is an EXPECTED fan-in:
+# the PERT already sequenced the plats that bridge it — lower severity.
+BOUNDARY=$(jq -r '.boundary_functions[]?' "${PART}" 2>/dev/null | sort -u)
+```
+
+- **Overlap on a boundary file** → *expected*. The two plats were always going to meet here; the PERT sequenced them. Sequence per the PERT and move on.
+- **Overlap on a non-boundary file between PRs assigned to different clusters** → **cross-cluster leak**: a commis escaped its assigned cluster (an unplanned refactor). This is the high-severity case — report it back to the chef as a file-exclusion breach, not just a routine rebase. It will recur next sprint unless the cluster assignment or the commis scope is fixed.
+- **No partition present** (small project) → fall back to treating every overlap as a plain future conflict.
+
 **Exit actions, in order of preference:**
 
 1. **Sequence the two conflicting PRs** — pick one (lowest slack in the PERT, cf. cli-forge-chef pert-computation.md §4) and **disable auto-merge on the other** until the first lands, then rebase the loser:
