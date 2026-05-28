@@ -83,6 +83,8 @@ These skills benefit from Wave 1 results or cross-reference multiple concerns.
 
 When cli-cycle orchestrates, handoffs are **automatic** — not just recommendations. Each skill's Dynamic Handoffs section produces structured recommendations that cli-cycle collects and acts on.
 
+**Prefer the JSON envelope.** When a skill wrote `.claude/{skill}.json` (per `shared/result-schema.md`), read `score`, `findings[]`, `strengths[]`, and `handoffs[]` straight from it — no prose scraping. `cli-audit-tangle` additionally writes the richer `.claude/tangle-partition.json` consumed by `cli-forge-chef`. Fall back to parsing the markdown report only when no envelope exists.
+
 **Handoff registry format:**
 
 ```
@@ -186,6 +188,9 @@ Important:
   2. Top 3 critical issues found
   3. Top 3 things done well
   4. Full detailed report
+- ALSO emit a machine-readable envelope at `.claude/{skill-name}.json` following
+  `~/.claude/skills/shared/result-schema.md` (score, findings[], strengths[], handoffs[]).
+  cli-cycle aggregates these directly instead of re-parsing your prose.
 
 Target: {project-path}
 Arguments: {scope_directory OR project-path}
