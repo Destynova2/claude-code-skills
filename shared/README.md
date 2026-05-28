@@ -1,0 +1,13 @@
+# shared/
+
+Cross-skill reference files — the common denominators that several `cli-*` skills point to instead of each re-deriving them. Skills reference these as `../../shared/<file>.md` (same resolution convention as `../../gotchas.md`).
+
+| File | What it canonicalizes | Consumed by |
+|---|---|---|
+| `recon.md` | The "read the project first" brief (what/who/problem/headline/differentiator/golden-path) | readme, prez, demo |
+| `gate-ladder.md` | The T0-T4/M0 progressive proof-gate semantics | resilience, oci-rootless, pipeline, audit-test, demo |
+| `determinism.md` | Reproducibility & idempotence toolkit (seed, clock, env, content-hash) | demo, pipeline, resilience, wizard, oci-rootless |
+| `result-schema.md` | Machine-readable result envelope `.claude/<skill>.json` | cli-cycle (aggregates), all audit/forge skills (emit) |
+| `metaphors.md` | Catalog of shared vs. signature metaphors | all biomimetic skills; cli-cycle (consistent vocabulary) |
+
+These ship to `~/.claude/skills/shared/` alongside `~/.claude/skills/gotchas.md`.
