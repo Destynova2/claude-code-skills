@@ -31,6 +31,7 @@
 | `cli-forge-quorum` | Skip (BFT multi-agent orchestration — triggered explicitly, upgrade from chef) |
 | `cli-forge-oci-rootless` | Skip (OCI rootless migration — triggered explicitly on migration projects) |
 | `cli-forge-prez` | Skip (presentation generation — triggered explicitly) |
+| `cli-forge-demo` | Skip (demo-kit generation — triggered explicitly). A **stale demo** (commands in `docs/demos/**/DEMO.md` no longer match the code) is detected by `cli-audit-sync`, not by running this skill |
 | `cli-watermark` | Skip (steganographic watermarking — triggered explicitly) |
 
 ---
@@ -343,6 +344,7 @@ During the fix phase (options 1-4 or convergence), cli-cycle uses **generation s
 | `cli-forge-readme` | Triage items about missing/outdated README |
 | `cli-forge-schema` | Triage items about missing diagrams |
 | `cli-forge-pipeline` | Triage items about missing/broken CI stages (not just audit — can generate jobs) |
+| `cli-forge-demo` | Triage items about a missing or stale demo kit — regenerate `DEMO.md` + seed/reset wired into the project's runner |
 | `cli-git-conventional` | **Always** — format ALL commit messages during correction using ghostwriter style, zero AI markers |
 
 **Workflow during correction:**

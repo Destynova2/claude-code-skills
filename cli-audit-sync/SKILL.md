@@ -37,7 +37,7 @@ Detect every place where documentation says one thing and the code says another.
 |-------|-------|---------------|----------------|
 | **Layer 1 — Structural** | lychee-style | Internal links, anchors, images, code file refs, imports | Broken refs |
 | **Layer 2 — Semantic** | DocPrism/Swimm | Module/function/type names, endpoints, CLI flags, env vars, versions | Stale names |
-| **Layer 3 — Executable** | Docs-as-Tests | Shell commands, install steps, code snippets, Mermaid diagrams | Broken examples |
+| **Layer 3 — Executable** | Docs-as-Tests | Shell commands, install steps, code snippets, Mermaid diagrams, **demo kits** (`docs/demos/**/DEMO.md`: each beat's command vs its declared expected output) | Broken examples, stale demo |
 
 Read `references/layers.md` for detailed check tables, methodology, and safety rules per layer.
 
@@ -136,6 +136,7 @@ This fills a gap NO mainstream tool covers: cross-format command/env duplication
 | README architecture section outdated | `/cli-forge-readme` | Update README |
 | Stale diagrams | `/cli-forge-schema` | Regenerate from current code |
 | API reference mentions deleted functions | `/cli-audit-code` | Check for dead code |
+| Demo kit beats no longer match code (commands fail or output differs) | `/cli-forge-demo` | Regenerate the stale demo from the current golden path |
 
 **Rule:** Recommend, don't auto-execute.
 
