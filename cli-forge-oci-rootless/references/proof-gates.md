@@ -3,6 +3,8 @@
 The migration verdict must be based on executable proof, not architectural
 assertion. Use this matrix to turn claims into gates.
 
+> The T0-T4/M0 rung **semantics** are shared across skills (resilience, pipeline, audit-test) in `../../shared/gate-ladder.md` — the lithic names below map onto those rungs. Reproducible-build / idempotency techniques are shared in `../../shared/determinism.md`.
+
 ## Gate notation
 
 Each gate should record:

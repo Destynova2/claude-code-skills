@@ -41,7 +41,7 @@ Each analogy maps to a concrete, testable audit check. Only actionable rules are
 | **Seed germination** | Ask 3-5 seed values max. If more, you're encoding the tree in the seed |
 | **Axolotl** (facultative metamorphosis) | Never show advanced options by default. `--advanced` is opt-in |
 | **Immune system** | Doctor checks are pattern-based (schema, connectivity), not intent-based |
-| **Homeostatic set point** | `wizard apply` is idempotent: run 1x or 100x, same result |
+| **Homeostatic set point** | `wizard apply` is idempotent: run 1x or 100x, same result (the idempotence/determinism toolkit is shared in `../../shared/determinism.md`) |
 | **Tardigrade** (cryptobiosis) | Every config section has a safe degraded state when dependencies are down |
 | **Principle of least action** | Every question must reduce configuration entropy. Derivable = don't ask |
 | **2nd law of thermodynamics** | Config drifts without doctor. Doctor is the energy that fights entropy |

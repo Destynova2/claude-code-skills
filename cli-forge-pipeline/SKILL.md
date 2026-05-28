@@ -59,7 +59,7 @@ Draw the actual dependencies. Identify sequential jobs that could run in paralle
 Does each job do ONE thing? Are artifacts properly defined (stigmergy)? Are there generalist jobs that should be split?
 
 ### Step 3 — Slime mold audit (Physarum)
-Are there jobs running without any relevant change? Are cache keys based on content? Are retries selective?
+Are there jobs running without any relevant change? Are cache keys based on content? Are retries selective? Content-hashed keys and reproducibility are shared in `../../shared/determinism.md`. CI stages map onto the shared T0-T4 rungs (`../../shared/gate-ladder.md`): the **release gate fails at the lowest red rung**.
 
 ### Step 4 — Army ants audit
 Which slow jobs can be fanned out in parallel? Are runners ephemeral? Are fan-ins happening too early?

@@ -50,6 +50,8 @@ Evaluate a test plan or test suite against ISTQB standards, TMMi maturity model,
 
 Score each dimension **0-4**, then compute a weighted final score. Read `references/dimensions.md` for detailed scoring criteria, evidence patterns, and per-dimension guidance.
 
+> A test plan's reach can be read against the shared **T0-T4/M0 ladder** (`../../shared/gate-ladder.md`): how far up the rungs (static contract → component → fresh deploy → day-2 ops → stress) does the suite actually go? Most plans stall at T1-T2.
+
 | # | Dimension | Weight | Key question |
 |---|-----------|--------|-------------|
 | D1 | Scope & Objectives | 7% | Is what's tested (and what's not) explicit? |

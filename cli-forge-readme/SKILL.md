@@ -33,7 +33,9 @@ A README is a **landing page**, not a technical manual.
 
 ### Step 1 — Detect project context
 
-Read the project root to auto-detect the type:
+Build the shared reconnaissance brief first — read `../../shared/recon.md` (what / who / problem / headline / differentiator / golden-path). The same brief feeds prez and demo, so the README, slides, and live demo tell one story.
+
+Then read the project root to auto-detect the type:
 
 | Signal | Project Type |
 |--------|-------------|

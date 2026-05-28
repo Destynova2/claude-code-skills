@@ -60,7 +60,7 @@ Read `references/tiers.md` for the three tiers:
 
 ### Step 1 — Reconnaissance
 
-Read the project. Build a mental model of: what it does, who it's for, what problem it solves, what makes it different. Same approach as `cli-forge-readme` Step 0.
+Read the project. Build a mental model of: what it does, who it's for, what problem it solves, what makes it different. Use the shared reconnaissance brief — read `../../shared/recon.md` (the same model readme and demo use, so all three tell one story).
 
 ### Step 2 — Choose narrative framework
 

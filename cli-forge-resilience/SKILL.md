@@ -163,7 +163,7 @@ Create a **Prod-Parity Matrix**. Compare **Observed Dev/Staging** vs **Expected 
 
 ### Step 4 — Derive the test ladder
 
-Read `references/test-ladder.md` for the full ladder, examples, and escalation rules.
+Read `references/test-ladder.md` for the full ladder, examples, and escalation rules. The rung **semantics** are shared across skills (oci, pipeline, audit-test) in `../../shared/gate-ladder.md`; this skill's biology names map onto those rungs. Reproducibility/idempotency techniques (T3 reruns, mutation baselines) are shared in `../../shared/determinism.md`.
 
 Use this ladder:
 
