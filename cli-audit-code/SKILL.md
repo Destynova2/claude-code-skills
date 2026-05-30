@@ -128,6 +128,7 @@ CQI = Σ(wᵢ × sᵢ) / Σ(wᵢ) × 10
 | `cli-audit-doc` | Scores doc quality. cli-audit-code scores **code quality** |
 | `cli-audit-test` | Scores test strategy. cli-audit-code checks **test code quality** (C8) |
 | `cli-forge-lld` | Validates implementation matches the LLD design |
+| `cli-forge-perf` | Detects static perf anti-patterns (alloc in hot path, quadratic complexity, hidden-cost abstractions). `cli-forge-perf` verifies they are **dynamically** costly via profiling + bench |
 | `cli-cycle` | Calls cli-audit-code as part of full project review |
 
 ## Dynamic Handoffs
@@ -142,6 +143,7 @@ After your analysis, recommend these skills if conditions are met:
 | Missing or stale documentation (C7 low) | `/cli-forge-doc` | Generate/update project docs |
 | Test quality issues (C8 low) | `/cli-audit-test` | Full test strategy audit |
 | CI/CD config present but not audited | `/cli-forge-pipeline` | Pipeline optimization |
+| Static perf anti-pattern detected (alloc in loop, O(n²), N+1) on a hot service | `/cli-forge-perf` | Confirm the dynamic cost and lock the fix with an A/B bench gate |
 
 **Rule:** Recommend, don't auto-execute. Phrase as: "Consider running `/cli-audit-tangle` — 3 god modules detected that need topology analysis."
 

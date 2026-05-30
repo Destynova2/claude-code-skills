@@ -333,5 +333,6 @@ Each item must include:
 | Risk comes from component-level contracts or DB/API design | `/cli-forge-lld` | Tighten low-level contracts |
 | Infra/deploy complexity dominates the issue | `/cli-forge-infra` | Simplify and harden delivery path |
 | Docs, wrappers, and code disagree | `/cli-audit-sync` | Catch doc-code drift |
+| Stress / phase-transition surfaces detected but no perf budget or A/B harness | `/cli-forge-perf` | T4 stress-strain becomes measurable: bench protocol + roofline + reproducible A/B (`../../shared/determinism.md`) |
 
 **Rule:** recommend handoffs, do not auto-execute them unless the user explicitly asks.

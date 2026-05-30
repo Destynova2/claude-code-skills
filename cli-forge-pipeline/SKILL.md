@@ -202,6 +202,7 @@ If > 2 mutations pass silently, the pipeline has holes.
 | Tests referenced in CI but not audited | `/cli-audit-test` | Test strategy audit |
 | Pipeline builds containers | `/cli-forge-infra` | Container/image audit |
 | Pipeline has > 10 jobs with complex dependencies | `/cli-audit-tangle` | CI dependency topology |
+| Pipeline lacks a perf budget gate, or A/B benches are not reproducible | `/cli-forge-perf` | Bench protocol + perfloop.py A/B + content-hashed cache → reproducible perf gate |
 
 **Rule:** Recommend, don't auto-execute.
 
@@ -211,4 +212,5 @@ If > 2 mutations pass silently, the pipeline has holes.
 |-------|-------------|
 | `cli-audit-test` | D13 covers drift detection within tests. cli-forge-pipeline covers the **CI that executes** those tests |
 | `cli-audit-code` | Audits code quality. cli-forge-pipeline audits **pipeline quality** |
+| `cli-forge-perf` | Pipeline is the natural home of the perf gate: content-hashed cache (`../../shared/determinism.md`) makes baselines reproducible; A/B bench jobs run on every PR; lowest red rung of `../../shared/gate-ladder.md` includes T4 perf stress |
 | `cli-cycle` | Calls cli-forge-pipeline as part of the full review |

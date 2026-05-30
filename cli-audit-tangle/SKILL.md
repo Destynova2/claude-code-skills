@@ -423,6 +423,7 @@ tangle_score = 100
 | `cli-forge-schema` | Can visualize the call graph as a Mermaid diagram |
 | `cargo-machete` | Finds unused **dependencies**. tangle finds unused **functions** |
 | `cli-forge-pipeline` | Generates CI/CD pipelines. tangle audits their **dependency topology** |
+| `cli-forge-perf` | tangle finds god functions **structurally**; `cli-forge-perf` confirms they are the **dynamic** hot path via profiling + bench. Pipeline: tangle exports `tangle-partition.json` → perf reads it to prioritize the diagnostic |
 | `cli-cycle` | Should call cli-audit-tangle as part of the full project review |
 
 ## Dynamic Handoffs
@@ -434,6 +435,7 @@ After your analysis, recommend these skills if conditions are met:
 | CI/CD deadlocks or bottleneck jobs | `/cli-forge-pipeline` | Pipeline optimization with parallelism patterns |
 | Call graph worth visualizing (> 20 nodes) | `/cli-forge-schema` | Generate Mermaid diagram of the topology |
 | God functions with low code quality (LOC > 100, deep nesting) | `/cli-audit-code` on those files | Deep quality check on the most critical code |
+| God functions in a perf-critical context (latency SLO, hot service) | `/cli-forge-perf` on those functions | Confirm they are the dynamic hot path before refactoring; profile + bench drive priority |
 | Module boundaries suggest architectural redesign | `/cli-forge-hld` | High-level design for the new structure |
 | Shell scripts tangled (sourcing chains, circular includes) | `/cli-audit-shell` | Shell-specific structural analysis |
 

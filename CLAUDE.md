@@ -27,11 +27,11 @@ rm -rf ~/.claude/skills/shared && cp -r shared ~/.claude/skills/shared
 
 Do NOT use symlinks — use real copies.
 
-## Current skills (27)
+## Current skills (28)
 
 **Audit (9):** cli-audit-code, cli-audit-doc, cli-audit-drift, cli-audit-shell, cli-audit-sync, cli-audit-tangle, cli-audit-test, cli-audit-wizard, cli-cycle
 
-**Forge (16):** cli-forge-arch, cli-forge-chef, cli-forge-demo, cli-forge-doc, cli-forge-github, cli-forge-hld, cli-forge-infra, cli-forge-lld, cli-forge-oci-rootless, cli-forge-pipeline, cli-forge-prez, cli-forge-quorum, cli-forge-readme, cli-forge-resilience, cli-forge-schema, cli-forge-tree
+**Forge (17):** cli-forge-arch, cli-forge-chef, cli-forge-demo, cli-forge-doc, cli-forge-github, cli-forge-hld, cli-forge-infra, cli-forge-lld, cli-forge-oci-rootless, cli-forge-perf, cli-forge-pipeline, cli-forge-prez, cli-forge-quorum, cli-forge-readme, cli-forge-resilience, cli-forge-schema, cli-forge-tree
 
 **Git (1):** cli-git-conventional
 

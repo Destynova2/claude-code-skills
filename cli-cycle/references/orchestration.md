@@ -32,6 +32,7 @@
 | `cli-forge-oci-rootless` | Skip (OCI rootless migration — triggered explicitly on migration projects) |
 | `cli-forge-prez` | Skip (presentation generation — triggered explicitly) |
 | `cli-forge-demo` | Skip (demo-kit generation — triggered explicitly). A **stale demo** (commands in `docs/demos/**/DEMO.md` no longer match the code) is detected by `cli-audit-sync`, not by running this skill |
+| `cli-forge-perf` | Skip (perf optimization workflow — triggered explicitly). Wave 2 handoff target: `cli-audit-tangle` (god functions = candidate hot paths) and `cli-audit-test` (D6 NFR low) both recommend it |
 | `cli-watermark` | Skip (steganographic watermarking — triggered explicitly) |
 
 ---

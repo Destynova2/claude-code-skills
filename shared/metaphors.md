@@ -30,6 +30,7 @@
 | `cli-forge-demo` | the theatre: script/blocking, reset the stage, understudy, showstopper | performing arts |
 | `cli-forge-chef` | brigade de cuisine (Chef / Sous-Chef / Commis) | kitchen craft |
 | `cli-forge-quorum` | Byzantine consensus + Petri nets | distributed systems |
+| `cli-forge-perf` | Knuth's roofline (Amdahl's law, latency hierarchy, hot path / cold path) | computer architecture + applied statistics |
 | `cli-watermark` | adversary evolution (Gen 0-5), honey-tokens, paper town | security / cartography |
 
 ## Rule

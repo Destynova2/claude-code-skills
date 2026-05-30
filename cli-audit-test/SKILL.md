@@ -166,6 +166,7 @@ Use the output format below.
 | `cli-audit-drift` | Checks behavioral conformity via contracts. cli-audit-test checks **test-level** drift detection (D13) |
 | `cli-audit-sync` | Verifies doc-code coherence. cli-audit-test verifies **test-requirement coherence** |
 | `cli-forge-schema` | Can visualize test plan as diagrams (pyramid, state machines) |
+| `cli-forge-perf` | D6 (NFR) and D7 (risk) cover perf as *intent*; `cli-forge-perf` provides the executable bench harness (A/B, distribution, permutation test) that turns the intent into a non-regression gate |
 | `cli-cycle` | Calls cli-audit-test as part of the full project review |
 
 ## Dynamic Handoffs
@@ -176,6 +177,7 @@ Use the output format below.
 | Test pyramid inverted (too many E2E, few unit) | `/cli-audit-tangle` | Find god functions that resist unit testing |
 | Missing drift detection in tests (D13 low) | `/cli-audit-drift` | Bootstrap CONTRACTS.md |
 | CI has no test stage | `/cli-forge-pipeline` | Add test jobs to pipeline |
+| D6 (perf/NFR) low or no perf budget gate | `/cli-forge-perf` | Catalogue + harnais A/B exécutable pour transformer le SLO en test de non-régression |
 
 **Rule:** Recommend, don't auto-execute.
 
