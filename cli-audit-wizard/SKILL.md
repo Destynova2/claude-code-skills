@@ -406,6 +406,8 @@ Read `references/anti-patterns.md` for the named anti-patterns with detection he
 
 ### Step 7 -- Score and report
 
+Finding tier and confidence semantics are canonical in `../../shared/triage.md` (Tier 3/2/1 + GRADE + triangulation). Law violations are Tier 3 by default; lifecycle gaps are Tier 2.
+
 ## Output Format
 
 ```markdown

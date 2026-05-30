@@ -76,6 +76,8 @@ CQI = Σ(wᵢ × sᵢ) / Σ(wᵢ) × 10
 
 ### Step 5 — Generate report
 
+Finding tier and confidence semantics are canonical in `../../shared/triage.md` (Tier 3/2/1 + GRADE + triangulation). Emit each finding with its tier and confidence so `cli-cycle` can aggregate without re-parsing.
+
 ## Output Format
 
 ```markdown

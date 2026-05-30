@@ -96,7 +96,7 @@ Normalize to 0-100 scale. Read `references/scoring-framework.md` for TMMi mappin
 
 ### Step 6 — Generate report
 
-Use the output format below.
+Use the output format below. Finding tier and confidence semantics are canonical in `../../shared/triage.md` (Tier 3/2/1 + GRADE + triangulation). D-dimension findings carry tier and confidence so `cli-cycle` can aggregate without re-parsing.
 
 ## Output Format
 

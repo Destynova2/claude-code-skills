@@ -265,7 +265,7 @@ A LOW confidence finding can still be Tier 3 if the **impact** is critical (secu
 
 **Rule: NEVER truncate. Show ALL corrections found, classified by tier.**
 
-The triage is inspired by emergency medicine triage (treat the most critical first) and the immune system (prioritize threats by severity).
+The triage is inspired by emergency medicine triage (treat the most critical first) and the immune system (prioritize threats by severity). Semantics are factored into `../../shared/triage.md` so skills running standalone (resilience, the audit-* skills) use the same tier × confidence model.
 
 #### Tier classification criteria
 

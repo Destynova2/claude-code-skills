@@ -256,7 +256,7 @@ Score each dimension **0–4**:
 
 ### Step 9 — Produce a prioritized action plan
 
-Use 3 tiers:
+Use 3 tiers (tier semantics are canonical in `../../shared/triage.md` — Tier 3 = critical / Tier 2 = major / Tier 1 = minor, independent of GRADE confidence):
 
 - **Tier 3 — Critical:** false green in CI, missing runtime proof, data-loss risk, auth drift, secret drift, deploy non-idempotency, hidden path mismatch
 - **Tier 2 — Major:** parity gaps, weak observability, missing degraded-mode tests, incomplete runbook, backup/restore not proven

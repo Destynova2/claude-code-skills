@@ -111,6 +111,8 @@ Read `references/scoring.md` for the SQI formula, severity classification, and b
 SQI = Sigma(wi x si) / Sigma(wi) x 10
 ```
 
+Finding tier and confidence semantics are canonical in `../../shared/triage.md` (Tier 3/2/1 + GRADE + triangulation). S-dimension findings carry tier and confidence so `cli-cycle` can aggregate without re-parsing.
+
 ## Output Format
 
 ```markdown
