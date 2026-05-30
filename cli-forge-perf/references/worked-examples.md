@@ -2,9 +2,9 @@
 
 Le reste du skill donne des principes ; ici, des traces complètes
 **symptôme → mesure → diagnostic → fix → re-mesure → leçon**. Les exemples
-marqués *(mesuré)* ont été chronométrés avec `scripts/perfloop.py` et sont
-reproductibles ; les autres sont *(illustratif)* ou *(publié)* faute de DB/GPU
-sous la main.
+marqués *(mesuré)* ont été chronométrés par A/B interleavé + test de
+permutation (protocole de `bench-protocol.md`) et sont reproductibles ; les
+autres sont *(illustratif)* ou *(publié)* faute de DB/GPU sous la main.
 
 ## Exemple 1 — Le N+1 (illustratif)
 
@@ -38,7 +38,7 @@ cache → on s'attend à un parcours strided plus lent. « Vrai et faux à la fo
 
 **Mesure.** Réduction d'une matrice 4000×4000 en numpy, parcours contigu
 (`a.sum(axis=1)`) vs strided (`a.sum(axis=0)`), via
-`perfloop.py ab "...strided" "...contig" --interleave` :
+une mesure A/B interleavée (protocole `bench-protocol.md`) :
 ```
 strided (axis=0) : médiane 210.5 ms
 contigu (axis=1) : médiane 207.2 ms
@@ -51,7 +51,7 @@ blocs, gestion du strided optimisée). L'abstraction a déjà gagné la bataille
 layout à ta place.
 
 **Leçon (double).** (1) **Mesure, ne suppose pas** : l'intuition cache était
-correcte en théorie, fausse ici en pratique — perfloop a évité un faux positif.
+correcte en théorie, fausse ici en pratique — le test de permutation a évité un faux positif.
 (2) L'ordre de boucle redevient un **vrai 5-10×** quand c'est **toi** qui
 contrôles le parcours mémoire (boucle C/Rust manuelle sur un grand tableau,
 row-major vs column-major). La règle « valeur identique, comportement différent »
@@ -82,7 +82,7 @@ Roofline appliqué (cf. `systems-hardware.md`).
 liste grossit.
 
 **Mesure.** `q in liste` (O(n)) vs `q in set` (O(1)), 10 000 tests sur 20 000
-éléments, via `perfloop.py ab "python3 scan.py" "python3 setlk.py" --interleave` :
+éléments, via une mesure A/B interleavée (`hyperfine` pour la boîte noire CLI, ou un harnais in-process) :
 ```
 liste (scan O(n)) : médiane 1.024 s
 set   (O(1))      : médiane 18.8 ms

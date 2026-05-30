@@ -27,7 +27,7 @@ Le premier passage paie des coûts uniques qui ne se reproduiront pas en prod
 stable — ou l'inverse. À chauffer avant de mesurer : **JIT** (JVM, V8, PyPy)
 qui compile à chaud, **cache CPU** et **TLB**, **prédicteur de branchement**,
 **page faults** (first-touch mémoire), **montée en fréquence turbo**, connexions
-/ pools établis. Fix : runs de warmup jetés (cf. `perfloop.py --warmup`). Mais
+/ pools établis. Fix : runs de warmup explicitement jetés (W=3-10 selon le régime). Mais
 distingue : si la prod fait surtout des appels *à froid*, c'est le froid qu'il
 faut mesurer.
 
@@ -61,7 +61,7 @@ d'abord l'overhead du timer lui-même et soustrais-le.
 
 Tu as lancé A le matin, B l'après-midi : charge, température CPU, voisin bruyant,
 autre déploiement ont changé. Le "gain" est un artefact temporel. Fix :
-**interleave** les runs (A,B,A,B… — cf. `perfloop.py --interleave`), randomise
+**interleave** les runs (A,B,A,B… — `hyperfine` le fait nativement, sinon code-le), randomise
 l'ordre, lance dans le même environnement, à la même fraîcheur de cache.
 
 ## 8. État de cache (chaud vs froid)
@@ -104,4 +104,4 @@ décision finale.
 5. A/B **interleavé** dans le même environnement (pas deux moments) ?
 6. Charge/concurrence/état de cache **représentatifs** de la prod ?
 7. Je rapporte une **distribution** (p95/p99), et le Δ dépasse le bruit
-   (cf. test de permutation de `perfloop.py`) ?
+   (test de permutation ou Mann-Whitney U — pas un t-test : la distribution n'est pas gaussienne) ?

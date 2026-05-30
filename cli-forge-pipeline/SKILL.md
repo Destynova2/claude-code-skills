@@ -202,7 +202,7 @@ If > 2 mutations pass silently, the pipeline has holes.
 | Tests referenced in CI but not audited | `/cli-audit-test` | Test strategy audit |
 | Pipeline builds containers | `/cli-forge-infra` | Container/image audit |
 | Pipeline has > 10 jobs with complex dependencies | `/cli-audit-tangle` | CI dependency topology |
-| Pipeline lacks a perf budget gate, or A/B benches are not reproducible | `/cli-forge-perf` | Bench protocol + perfloop.py A/B + content-hashed cache → reproducible perf gate |
+| Pipeline lacks a perf budget gate, or A/B benches are not reproducible | `/cli-forge-perf` | Native bench protocol (Criterion/benchstat/hyperfine) + content-hashed cache → reproducible perf gate |
 
 **Rule:** Recommend, don't auto-execute.
 

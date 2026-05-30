@@ -85,31 +85,33 @@ Trois portes obligatoires. Tant qu'une case n'est pas cochée, on ne passe pas.
 
 > **Position sur le gate-ladder partagé** (`../../shared/gate-ladder.md`) — le GATE de perf est un **T1-T4 spécialisé** : le bench in-process est T1 (composant), la baseline reproductible est T2 (environnement maîtrisé), l'A/B sous charge est T4 (stress). Une régression de perf observée en prod sans test T4 = "false green" — exactement le défaut que le ladder existe pour rattraper.
 
-### Harnais exécutable
+### Harnais natif (langue-agnostique)
 
-`scripts/perfloop.py` (Python, zéro dépendance) rend ce gate opérationnel :
-- `run` mesure une commande et sort la **distribution** (médiane, p95/p99, σ).
-- `ab` compare deux variantes et **tranche par test de permutation** (Δ dans le
-  bruit → "pas de gain prouvé"). `--interleave` annule la dérive temporelle.
-- `autotune "v1" "v2" "v3"…` benche N variantes, les **classe**, et teste chacune
-  vs la meilleure : **l'ablation devient automatique** (le skill ne la conseille
-  plus, il la fait).
-- `sweep "cmd --threads={}" 1 2 4 8 16` balaye un paramètre et sort la **courbe**
-  + l'optimum.
-- `cost --saved-ms 8 --rps 500 [--instances-removed 2]` chiffre un gain en
-  **€/kWh/CO₂** (modèle + garde-fous : `references/cost-accounting.md`).
+Le **protocole** (warmup, N échantillons, distribution + p95/p99 + σ, A/B interleavé, test de permutation, anti-DCE) s'implémente dans n'importe quel langage. **L'actif réutilisable n'est pas un script** — c'est la méthode de mesure et la règle de verdict. `references/bench-protocol.md` formalise ce protocole et **route vers l'outil natif mûr** selon le langage :
 
-Si `hyperfine`/Criterion/pytest-benchmark sont dispos, ils sont préférables pour
-le sub-milliseconde ; `perfloop.py` est le fallback universel (et air-gap-friendly).
-Traces de bout en bout avec vrais chiffres : `references/worked-examples.md`.
+| Cas | Outil natif recommandé | Significativité statistique |
+|---|---|---|
+| Rust, micro in-process | **Criterion** (`criterion-rs`) ou `divan` | baseline intégré + détection de régression |
+| Go | `testing.B` + **benchstat** | test U de Mann-Whitney |
+| C/C++ | **Google Benchmark** ou `clock_gettime` manuel | scripts maison |
+| JVM (Java/Kotlin/Scala) | **JMH** | intervalles de confiance |
+| JS/TS | **mitata** ou tinybench | intégré |
+| CLI / boîte noire | **hyperfine** | ratio + σ, A/B intégré |
+| Python | **pytest-benchmark** ou `timeit` | intégré |
 
-**Le langage du runner est accessoire** : l'actif est le *protocole* de mesure
-(warmup, distribution, test de permutation, anti-DCE), implémentable partout.
-`perfloop.py` n'en est qu'une implémentation CLI ; pour mesurer **in-process**
-ou sur une cible **sans python** (conteneur scratch, embarqué), génère un harnais
-**natif** dans la langue voulue : `scripts/perfgen.py --lang rust|go|c|hyperfine`.
-Protocole + routage vers les outils natifs (Criterion, benchstat, JMH…) :
-`references/bench-protocol.md`.
+**Préfère TOUJOURS** un framework natif mûr à une boucle maison : ils gèrent warmup, outliers et stats bien mieux qu'un harnais ad-hoc. Pour le sub-ms et l'in-process, c'est obligatoire — l'overhead d'un sous-process domine la mesure.
+
+Squelettes prêts à copier (Rust/Criterion, Rust std seul pour l'air-gap, Go/benchstat, C, hyperfine) + règle de routage détaillée : `references/bench-protocol.md` §Squelettes.
+
+Modes opératoires courants (à implémenter dans le langage cible — patterns, pas scripts) :
+- **A/B avec significativité** : interleaver A,B,A,B…, comparer médianes, test de permutation (ou Mann-Whitney). Δ dans le bruit ⇒ pas de gain prouvé.
+- **Ablation / autotune** : bencher N variantes, classer par médiane, tester chacune vs la meilleure. « ≈ dans le bruit » des suivantes = égalité, pas victoire.
+- **Sweep paramétrique** : balayer (threads, batch size, cache size…), sortir la courbe + l'optimum. L'optimum est rarement à un extrême — élargir si c'en est un.
+- **Chiffrage €/kWh/CO₂ d'une optim** : modèle + garde-fous (latence ≠ énergie, carbone embarqué, effet rebond) dans `references/cost-accounting.md`.
+
+Traces complètes (symptôme → fix → chiffres) : `references/worked-examples.md`.
+
+**Pourquoi pas de script générique fourni ?** Le langage d'un runner est accessoire (il dort en attendant le sous-process), mais aucun langage n'est portable partout : Python n'existe pas dans un conteneur FROM scratch ni en embarqué ; un binaire Rust ne tourne pas sur la JVM. La portabilité réelle vient du **protocole** et de son implémentation **native** dans la cible — pas d'un script à packager.
 
 ### Mode recherche : quand la réponse n'est pas dans le catalogue
 
@@ -211,6 +213,7 @@ boucle serrée**. C'est la base de la priorité #2 et #3.
 | Bloque sur de l'I/O, threads, UI qui freeze, débit faible | `references/async-concurrency.md` |
 | Page web lente, mauvais score Lighthouse, LCP/CLS/INP | `references/frontend-web.md` |
 | Je ne sais pas où est le goulot, "X est plus lent que Y", besoin de tracing/profiling | `references/profiling.md` |
+| « C'est combien environ ? » ordre de grandeur d'un coût (RAM vs disque, RTT, syscall) | Table « Latency numbers » plus haut dans ce SKILL.md |
 | Limites hardware, calcul intensif, crypto/compression lente, embarqué, conso, saturer CPU/RAM/IO, trade-off proc/RAM/bus, syscalls | `references/systems-hardware.md` |
 | Trop de dépendances, libs redondantes/empilées, binaire trop gros, build/lib mal configurés | `references/dependencies.md` |
 | Inférence LLM lente, augmenter les tok/s, débit GPU, quantization, KV cache, serving | `references/llm-inference.md` |
@@ -269,7 +272,7 @@ Avant de profiler/bencher, vérifie si ces skills ont déjà produit du matérie
 | `cli-audit-tangle` | `.claude/tangle-partition.json` : god functions, cluster Fiedler, boundary functions | les **god functions sont les premiers candidats au profiling** — fan-in × LoC × call count = priorité du diagnostic |
 | `cli-forge-resilience` | Le **stress-strain** (rung T4) et les **resource cliffs / phase transitions** | les cliffs de ressource (CPU 80 %, mémoire OOM, disque plein) sont des **bornes Amdahl** déjà documentées |
 | `cli-audit-test` | La nominale du plan de test et D6 (NFR perf) | les benchs deviennent des **tests de non-régression** ; le test plan documente le SLO cible |
-| `cli-audit-drift` | `CONTRACTS.md` : invariants de latence/débit (« doit répondre en < 100 ms p95 ») | si l'invariant existe, le GATE doit le rejouer — sinon ce n'est pas un gain, c'est une violation à chasser |
+| `cli-audit-drift` | `CONTRACTS.md` : invariants comportementaux. Si un invariant *de perf* y a été ajouté (« p95 < 100 ms »), le GATE doit le rejouer ; sinon, le budget perf vient du plan de test (`cli-audit-test` D6/NFR) ou d'un SLO externe | un gain qui viole un invariant existant n'est pas un gain, c'est une régression à chasser |
 | `cli-forge-pipeline` | Les jobs CI existants + la stratégie de cache | un bench A/B se branche dans le pipeline ; cache content-hashé = baseline reproductible (cf. `../../shared/determinism.md`) |
 | `cli-forge-infra` | Le profil hardware réel (NUMA, CPU model, RAM) | calibre le roofline ; un bench sur laptop ne prédit pas la prod si la membrane diffère |
 
@@ -295,9 +298,9 @@ Avant de profiler/bencher, vérifie si ces skills ont déjà produit du matérie
 | Gain significatif mais aucun test de non-régression | `/cli-audit-test` | D6/D7 : le gain doit être verrouillé en CI |
 | Bench A/B non rejouable (médiane bouge entre runs) | `/cli-audit-wizard` (idempotence du setup) + lire `../../shared/determinism.md` | Le harnais ou l'environnement n'est pas pinné — pas un problème de perf |
 | Cliff de ressource observé (OOM, CPU 100 %, file pleine) | `/cli-forge-resilience` (T4) | Phase transition à documenter dans le runbook, pas seulement à benchmarker |
-| Bench in-house alors qu'un outil natif existe (Criterion, JMH, benchstat) | (interne) Génère le harnais natif via `scripts/perfgen.py --lang …` | Les stats des outils natifs sont rigoureuses, le maison ment |
+| Bench in-house alors qu'un outil natif existe (Criterion, JMH, benchstat, hyperfine) | (interne) Implémente le squelette natif de `references/bench-protocol.md` §Squelettes | Les stats des outils natifs sont rigoureuses, le maison ment |
 | Aucun cache CI / baseline reproductible | `/cli-forge-pipeline` | Sans cache content-hashé, l'A/B mesure aussi le bruit du CI |
-| Claim de gain en mémoire/€/CO₂ sans modèle explicite | (interne) `scripts/perfloop.py cost …` | Chiffrer avec garde-fous (`references/cost-accounting.md`), pas à la louche |
+| Claim de gain en mémoire/€/CO₂ sans modèle explicite | (interne) Applique le modèle de `references/cost-accounting.md` | Chiffrer avec garde-fous (latence ≠ énergie, effet rebond), pas à la louche |
 
 **Règle :** recommande, n'exécute pas sans demande explicite.
 
@@ -325,5 +328,3 @@ Avant de profiler/bencher, vérifie si ces skills ont déjà produit du matérie
 | `references/bench-protocol.md` | Protocole portable + routage vers Criterion/benchstat/JMH/hyperfine |
 | `references/cost-accounting.md` | Modèle €/kWh/CO₂ + garde-fous (latence ≠ énergie, rebond) |
 | `references/_project-profiles.md` | Contextes récurrents (Rust, air-gapped, footprint conteneur, M5, crypto) |
-| `scripts/perfloop.py` | Harnais A/B + distribution + permutation, stdlib seul |
-| `scripts/perfgen.py` | Génère un bench natif (Rust/Criterion, Go/benchstat, C, hyperfine) |

@@ -1,27 +1,17 @@
 # Protocole de bench (langue-agnostique)
 
-`perfloop.py` n'est qu'**une** implémentation d'un protocole. L'actif réutilisable
-n'est pas le Python — c'est la **méthode de mesure** et la **règle de verdict**,
-qui s'implémentent dans n'importe quel langage. Ce fichier définit le protocole,
-**route vers l'outil natif** selon le langage/cas, et donne des **squelettes prêts
-à copier** (« génère la preuve dans la langue que tu veux »).
+L'actif réutilisable de la mesure de perf n'est ni un outil ni un langage — c'est la **méthode** (warmup, distribution, A/B interleavé, test de permutation, anti-DCE) et la **règle de verdict** (Δ dans le bruit ⇒ pas de gain). Ce fichier définit le protocole, **route vers l'outil natif** selon le langage/cas, et donne des **squelettes prêts à copier** dans la langue voulue.
 
-## Pourquoi un driver générique, et où il s'arrête
+## Frontière de mesure & portabilité (avant de choisir un outil)
 
-Un *driver* de bench est de l'orchestration : il dort en attendant le sous-process.
-Sa propre vitesse n'a **aucune** importance → le langage du driver est accessoire.
-Ce qui compte :
-- **La frontière de mesure.** Mesurer une commande externe (boîte noire) inclut le
+Deux contraintes décident le choix :
+- **Frontière de mesure.** Mesurer une commande externe (boîte noire) inclut le
   **démarrage du process** : inutilisable sous la milliseconde (cf.
   `benchmarking-traps.md` §6). Pour un hot path fin, il faut mesurer **in-process,
   dans le langage cible**.
-- **La portabilité réelle.** « Zéro dépendance » côté Python suppose python3
-  présent — faux dans un conteneur FROM scratch, sur un nœud minimal ou en
-  embarqué. Là, le bench doit être **natif** (compilé dans l'artefact).
+- **Portabilité réelle.** Aucun runtime n'est portable partout : Python n'existe pas dans un conteneur FROM scratch, sur un nœud minimal ou en embarqué. Un binaire Rust ne tourne pas sur la JVM. Pour une cible minimale, le bench doit être **natif** (compilé dans l'artefact, ou intégré au framework de test du langage).
 
-Donc : `perfloop.py` = **runner CLI zéro-setup pour de la boîte noire** quand
-python3 est là. Pour le sub-ms, l'in-process et les cibles minimales → outil natif
-ci-dessous.
+Pour la boîte noire CLI quand l'environnement le permet : **hyperfine** (Rust, binaire statique) est le défaut — warmup, A/B avec ratio + σ, JSON exportable, pas de dépendance interpréteur.
 
 ## Le protocole (identique quel que soit le langage)
 
@@ -42,7 +32,7 @@ ci-dessous.
 | C/C++ | **Google Benchmark** (ou `clock_gettime` à la main) | à la main / scripts |
 | JVM | **JMH** | intervalles de confiance |
 | JS/TS | **mitata** / tinybench | intégré |
-| CLI / boîte noire | **hyperfine** | ratio + σ ; sinon `perfloop.py` (permutation) |
+| CLI / boîte noire | **hyperfine** | ratio + σ, A/B intégré |
 | Python | **pytest-benchmark** / `timeit` | intégré |
 
 Préfère **toujours** un framework natif mûr (Criterion, JMH, benchstat) à une
@@ -98,12 +88,9 @@ static double now(void){ struct timespec t; clock_gettime(CLOCK_MONOTONIC,&t); r
 ```sh
 hyperfine --warmup 3 -N 'cmdA' 'cmdB'          # -N: pas de shell (overhead minimal)
 hyperfine --export-json r.json 'cmdA' 'cmdB'   # exploitable par script
-# fallback sans hyperfine : perfloop.py ab "cmdA" "cmdB" --interleave
 ```
 
-Le générateur `scripts/perfgen.py` émet ces squelettes (`--lang rust|rust-std|go|c|hyperfine`).
-C'est de l'outillage **build-time** : il tourne sur ta machine de dev et produit du
-code **natif** qui s'exécute avec zéro Python (donc valable en air-gap/embarqué).
+Les squelettes ci-dessus sont prêts à copier — sélectionne la langue cible selon le tableau de routage et adapte les paramètres (W warmup, N runs) au régime visé.
 
 ## Checklist protocole
 1. Frontière correcte : in-process (sub-ms / hot path) vs boîte noire (CLI) ?

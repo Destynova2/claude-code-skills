@@ -1,9 +1,9 @@
 # Comptabilité multi-dimensionnelle (€, watts, CO₂)
 
 La perf n'est pas qu'une histoire de millisecondes : c'est une décision
-**économique et physique**. Ce fichier documente le modèle derrière
-`scripts/perfloop.py cost` et, surtout, ses **limites** — pour chiffrer un gain
-honnêtement, pas pour faire du greenwashing.
+**économique et physique**. Ce fichier documente un modèle simple pour chiffrer
+un gain en €/kWh/CO₂ et, surtout, ses **limites** — pour le faire honnêtement,
+pas pour faire du greenwashing.
 
 ## Le modèle (ordres de grandeur)
 

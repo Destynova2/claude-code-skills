@@ -33,7 +33,7 @@ s'applique quand même).
 - **Profiling** : `cargo flamegraph` (CPU), `dhat`/`heaptrack` (allocs), Criterion
   (micro-bench in-process, mieux que le wall-clock pour le sub-ms), `cargo bloat`
   (footprint). **Contrainte air-gap** : ces outils doivent être dans l'image
-  offline. `scripts/perfloop.py` est **stdlib-only** → tourne partout, bon fallback.
+  offline (`hyperfine` statique pour la boîte noire, Criterion compilé dans le binaire de test pour l'in-process).
 - **Crypto** (audit logs signés type ECDSA-P256) : si le **débit** de signature/
   vérif devient un goulot, évalue **Ed25519 + batch verification** (plus rapide,
   constant-time plus simple), **BLAKE3** pour le hash/Merkle des logs, et
