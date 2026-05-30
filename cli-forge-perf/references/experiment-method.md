@@ -13,6 +13,34 @@ confirmation fait "voir" des gains qui n'existent pas. Une hypothèse qui survit
 une vraie tentative de réfutation est solide ; une qu'on n'a fait que caresser ne
 vaut rien.
 
+## 1b. Discipline de la conclusion (« définitif » ≠ « plausible »)
+
+Avant d'écrire **« root cause trouvé »**, **« définitif »**, **« certain »** ou
+**« impossible »** : écris explicitement le test qui prouverait l'hypothèse
+**fausse** et fais-le passer. Si tu ne sais pas l'écrire — ou tu refuses de le
+lancer — tu n'as pas de root cause, tu as une hypothèse qui te plaît.
+
+Le piège est universel et survient dans n'importe quelle stack (Rust ↔ Python,
+Go ↔ C, JVM ↔ natif, frontend ↔ backend, kernel ↔ userspace, browser ↔ node,
+client ↔ serveur) : un test confirme la *corrélation* entre une variable et un
+résultat, et la corrélation est interprétée comme *causalité*. Sans test de
+réfutation, le claim « définitif » dure jusqu'au prochain test contradictoire —
+qui arrive toujours.
+
+**Règle pratique** : pour chaque claim « définitif », nomme explicitement
+(a) **2-3 hypothèses alternatives** que ce claim est censé éliminer, (b) le
+**test qui les élimine**. Si la liste est vide, le claim n'est pas une
+conclusion — c'est un slogan.
+
+**Tests interdits** (ils confirment au lieu de réfuter) :
+- *« le seul fix qui marche est X → la cause est X »* — non, ça prouve juste
+  que X corrèle. Test correct : isole CE qui change avec X (un axe à la fois)
+  et teste les variantes qui le séparent du résultat.
+- *« j'ai essayé Y et Z, ça ne marche pas → c'est forcément W »* — argument par
+  élimination sans vérification que Y/Z étaient testés correctement.
+- *« 70 tests verts → c'est correct »* — les tests vérifient ce qu'ils ont été
+  conçus pour vérifier, pas l'invariant qui te manque.
+
 ## 2. Borne théorique d'abord (raisonner par l'absurde)
 
 Avant de coder, calcule le **gain maximal possible**. Suppose l'optim parfaite :
@@ -69,6 +97,51 @@ Deux règles non négociables :
   `bench-protocol.md` § Routage GPU). Bumper sans profil = pari coûteux ; profile
   d'abord, puis bump *si et seulement si* le kernel s'avère intrinsèquement plus
   lent dans la version pinned.
+
+## 3c. Port-by-comparison : ne pas quit à la frontière framework
+
+Cas symétrique du §3b. Un appel **marche** dans le stack A (souvent un binding
+officiel : Python/nanobind, Node/N-API, JVM/JNI, Ruby/FFI…) et **casse** dans le
+stack B (souvent un binding tiers : crate Rust, module Go cgo, package Swift…) —
+**mêmes données, mêmes args, même fonction native sous-jacente**. Le réflexe
+*« je ne peux pas sans débugger les internes du framework »* est presque toujours
+faux : le lever est **le diff entre les deux chemins**, pas une nouvelle
+intuition.
+
+Procédure (langage-agnostique) :
+
+1. **Capture le call au niveau natif dans les deux mondes.** Selon l'OS et la
+   stack :
+   - `lldb` / `gdb` breakpoint sur la fonction native commune (toutes plateformes).
+   - `dtruss` (macOS) / `strace` (Linux) / Process Monitor (Windows) sur le binaire.
+   - Patch du binding qui marche pour écrire les args struct sur stderr
+     (pointeurs, flags, strides, dtype, stream, capability bits…).
+
+   Tu obtiens **deux dumps** sur la *même* entrée.
+
+2. **Diff binaire** des structs. Tout champ qui diffère est suspect *et*
+   falsifiable : aligne-le côté qui casse, re-test, refute ou confirme. Un par
+   un, pas plusieurs (cf. §3 ablation).
+
+3. **Pour les handles opaques** (tensors / arrays / buffers GPU / sockets /
+   handles OS — `mlx_array`, `torch.Tensor`, `np.ndarray`, `tf.Tensor`,
+   `cl_mem`, `VkBuffer`, `HANDLE`…) : casse le lineage / le graph parent en
+   sérialisant + re-chargeant via le format public (safetensors, npy, raw
+   bytes, protobuf). Tu obtiens une struct fraîche dont la généalogie est
+   connue, identique côté A et B.
+
+**Règles non négociables :**
+
+- **« Au-delà du raisonnable »** / **« limite atteinte »** à la frontière d'un
+  framework qui marche ailleurs = quit injustifié. La frontière est l'endroit
+  où on sort le profiler bas niveau, **pas** l'endroit où on abandonne.
+- Le **workaround** est acceptable **temporairement** (cf. `benchmarking-traps.md`
+  §12), mais tagué explicitement avec ticket de suivi, sinon il devient permanent.
+- **Le binding qui marche est ton oracle.** Si A marche et B casse, A fait
+  *forcément* quelque chose en plus — soit explicitement (init, eval,
+  contiguous), soit implicitement (stream par défaut, device par défaut,
+  capability bits, layout normalization). Diffe les **sources des deux
+  bindings**, pas seulement les call paths observés.
 
 ## 4. Gérer l'aléa (variance) — dans les deux sens
 
@@ -152,3 +225,11 @@ marche pas est une information (elle élague l'espace pour la suite).
    de dégrader (Pareto) ?
 6. Ai-je **visualisé** les données (pas juste les stats) et écarté les confondants
    (corrélation ≠ causalité) ?
+7. **Discipline de la conclusion** (§1b) : pour chaque claim « définitif », ai-je
+   nommé 2-3 alternatives et le test qui les élimine ?
+8. **Workaround net** (cf. `benchmarking-traps.md` §12) : si mon « fix » est un
+   contournement, ai-je mesuré le coût net (gain − coût) et tagué
+   `WORKAROUND, target: real fix` ?
+9. **Frontière framework** (§3c) : si je suis tenté de quit à « limite atteinte »
+   sur une stack qui marche ailleurs, ai-je vraiment diffé les structs / call
+   paths des deux bindings, pas juste essayé des variantes dans mon code ?

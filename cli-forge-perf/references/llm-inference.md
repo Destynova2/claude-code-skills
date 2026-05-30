@@ -103,7 +103,7 @@ coût bas avant de toucher au code.
      un gain qui n'existe pas.*
 2. **Ablation par pin emboîté** (cf. `experiment-method.md` §3b) — la matrice
    à planifier en une seule passe :
-   - Pin **version** (Python@vX vs vY sur le *même* modèle) → version isolée.
+   - Pin **version du runtime** (vX vs vY sur le *même* modèle, *même* entrée — peu importe la stack Python, Rust, Go, JVM…) → version isolée.
    - Pin **architecture** (modèle dense connu vs nouveau format) → archi isolée.
    - Pin **composant** (forward avec/sans MoE, avec/sans linear-attn, avec/sans
      shared-expert) → kernel suspect isolé.

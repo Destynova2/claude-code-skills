@@ -94,6 +94,38 @@ optimises un cas qui n'existe pas. Fix : profile la **vraie charge** (cf.
 ratios de cache hit), et préfère un macro-benchmark de bout en bout pour la
 décision finale.
 
+## 12. Workaround net-négatif présenté comme fix
+
+Un contournement qui *résout* un bug mais coûte plus que ce qu'il rapporte n'est
+**pas un fix** — c'est une régression. Variations universelles, valables dans
+toutes les stacks :
+
+- Upcaster en précision supérieure (`f32` au lieu de `bf16`) pour contourner un
+  bug d'accumulation → résultat correct, débit ↓.
+- Désactiver le cache HTTP pour contourner un bug d'invalidation → latence ×10.
+- Retomber sur l'algo O(n²) pour contourner un bug du O(n log n) → coût quadratique.
+- Forcer un seul thread pour contourner une data race → débit divisé par N.
+- Désactiver le JIT pour contourner un bug de compilation → cold-start permanent.
+- `sleep(N)` pour contourner une race → débit ↓ + race toujours là.
+
+**Règles :**
+
+- **Mesure l'impact net** : gain de correction − coût du contournement. Si net
+  négatif → ce n'est **pas** un fix.
+- **Ne le présente jamais** comme « bug corrigé » / « port réussi » / « ça marche
+  maintenant ». Étiquette-le `WORKAROUND, target: real fix` avec un ticket de
+  suivi nommé.
+- **Ne le merge pas en main** sans gate explicite (env var, feature flag, doc
+  visible). Sinon il devient permanent et plus personne ne cherchera le vrai fix.
+- Le done-gate (`../../shared/done-gate.md` phase 3) attrape ça par construction :
+  *« gain non significatif → revert »*. Si la mesure est **négative**, la règle
+  se durcit : revert obligatoire **ou** tag explicite avec engagement de suivi.
+
+**Symptôme à reconnaître :** le diff montre une amélioration (le bug ne se
+reproduit plus), le bench montre une régression (le débit baisse), et le PR
+est mergé parce que *« ça marche maintenant »*. Quand le rapport de PR célèbre
+la sortie du bug sans citer le coût du contournement → c'est ce piège.
+
 ## Checklist anti-pièges (avant de claimer un gain)
 1. Le résultat est-il **consommé** (sinon DCE) et les **entrées variables**
    (sinon constant folding) ?
