@@ -667,6 +667,8 @@ The Chef:
 Each votes independently: APPROVE / DENY+solution / CONCERN+solution.
 Resolution rounds if no consensus. Human escalation < 2%.
 
+Prompts are CLI surfaces — ask once, default sensibly, recap before action, ship as committable files. The canonical 4 Laws + surface mapping is `../../shared/cli-ergonomics.md`.
+
 ### 2.4 — The Sous-Chef (MANDATORY — embedded in the Chef prompt)
 
 **COPY the prompt from `references/chef-prompt-template.md` section "Spawn the Sous-Chef".**

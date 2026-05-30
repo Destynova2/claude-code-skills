@@ -55,7 +55,7 @@ Each analogy maps to a concrete, testable audit check. Only actionable rules are
 
 ## The 4 Laws of Good Wizards
 
-These are non-negotiable. A wizard that violates any of these is broken.
+These are non-negotiable. A wizard that violates any of these is broken. The Laws are factored into `../../shared/cli-ergonomics.md` so `cli-audit-shell` (S9), `cli-forge-chef` (prompt design), and `cli-forge-infra` (operator wrappers) can reuse the same semantics across CLI, TUI, agent prompt, and CI surfaces.
 
 ### Law 1 -- Ask once, derive the rest (Germination)
 

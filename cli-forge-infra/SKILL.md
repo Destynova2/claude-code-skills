@@ -69,6 +69,8 @@ For each service involved:
 
 Build the **dependency tree** (ASCII graph), **init precedence** (boot order: infra → trust anchor → platform → app), and **escalation ladder** (Level 0 defaults → Level 4 operator/GitOps). Recommend the **lowest level that meets requirements**.
 
+When choosing between two ops tools at the same level, prefer the one whose CLI/operator wrapper respects the 4 Laws (ask once, defaults, recap, config-as-code) — the canonical surface mapping is in `../../shared/cli-ergonomics.md`. A CLI with `--help`, defaults, `--dry-run`, and a committable config file beats an interactive wizard that asks the same questions on every run.
+
 ### Step 4: Propose Solutions
 
 When one clear option exists, present: what changes, why it's better, what it eliminates, migration path. When multiple valid options exist, present a **decision table** and **ask the user to choose**.
