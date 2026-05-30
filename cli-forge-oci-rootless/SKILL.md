@@ -435,7 +435,7 @@ follow these hardening patterns.
 
 ### Step 6 — Require proof before declaring convergence
 
-Use the T0/T1/T2/T3/T4/M0 matrix. The rung **semantics** are shared across skills — see `../../shared/gate-ladder.md`. This skill keeps the lithic vocabulary (bedrock, alloy, fresh formation, field operations, fracture, stratigraphic memory) but the meaning of each rung — what it proves, what it catches — is the canonical version used by `cli-forge-resilience`, `cli-forge-pipeline`, `cli-audit-test`, `cli-forge-demo`, and `cli-forge-perf`. Load `references/proof-gates.md` when available.
+Use the T0/T1/T2/T3/T4/M0 matrix. The rung **semantics** are shared across skills — see `../../shared/gate-ladder.md`. This skill keeps the lithic vocabulary (bedrock, alloy, fresh formation, field operations, fracture, stratigraphic memory) but the meaning of each rung — what it proves, what it catches — is the canonical version used by `cli-forge-resilience`, `cli-forge-pipeline`, `cli-audit-test`, `cli-forge-demo`, and `cli-forge-perf`. Load `references/proof-gates.md` when available. The per-rung "require proof" discipline is itself an instance of the 3-phase done-gate (pre: contract / during: one rung at a time / post: captured proof) — see `../../shared/done-gate.md`.
 
 | Level | Name | Purpose | Examples |
 |---|---|---|---|

@@ -821,6 +821,8 @@ every other role; the apply quorum protocol gates the apply pane itself.
 
 ## Phase 3 — Check before service
 
+The 8+ hard gates below are this phase's post-verification step; the 3-phase definition-of-done structure (pre → during → post) is canonical in `../../shared/done-gate.md`.
+
 1. Check tmuxinator syntax: `tmuxinator doctor`
 2. Verify all paths exist
 3. Verify branches don't conflict — each commis MUST have its own branch (G36). Run:

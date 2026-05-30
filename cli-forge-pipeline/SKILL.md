@@ -172,6 +172,8 @@ For each scenario: what mitigation ALREADY exists? If none → accepted risk, do
 
 ## Pipeline Mutation Testing
 
+The mutation set + scorecard threshold is this skill's post-verification gate; the 3-phase definition-of-done structure (pre → during → post) is canonical in `../../shared/done-gate.md`.
+
 | Mutation | Expected | If it passes = bug |
 |----------|----------|-------------------|
 | Remove a `needs:` | Job runs too early | DAG misconfigured |

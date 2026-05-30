@@ -230,7 +230,7 @@ If they do not exist, generate starter templates for:
 
 ### Step 8 — Score resilience
 
-Read `references/scoring.md` for the detailed 15-dimension framework.
+Read `references/scoring.md` for the detailed 15-dimension framework. The score (≥ 45/60 + mutation tests pass) is this skill's post-verification gate — the 3-phase definition-of-done structure (pre → during → post) is canonical in `../../shared/done-gate.md`.
 
 Score each dimension **0–4**:
 

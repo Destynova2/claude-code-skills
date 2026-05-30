@@ -63,7 +63,7 @@ rien. Méthode en boucle :
 
 ### Le GATE — definition-of-done (ne pas sauter)
 
-Trois portes obligatoires. Tant qu'une case n'est pas cochée, on ne passe pas.
+Trois portes obligatoires. Tant qu'une case n'est pas cochée, on ne passe pas. La structure 3-phases (pré → pendant → post) est canonique dans `../../shared/done-gate.md` — ce GATE en est la spécialisation perf (distribution + permutation + anti-DCE en post). Les autres forge-* skills (resilience, pipeline, oci-rootless, demo, chef) instancient le même squelette pour leur domaine.
 
 **Avant de toucher au code :**
 - [ ] baseline chiffrée et **reproductible** (même entrée, même environnement).

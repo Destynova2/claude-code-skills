@@ -183,6 +183,8 @@ After generation, run the doc-audit framework on the result. See `reference.md` 
 
 ### Quick Audit Checklist
 
+This checklist + the Doc Debt threshold form this skill's post-verification gate before publishing; the 3-phase definition-of-done structure (pre → during → post) is canonical in `../../shared/done-gate.md`.
+
 For each generated file, verify:
 
 1. **Accuracy**: Does the doc match the actual code? (Read the implementation.)

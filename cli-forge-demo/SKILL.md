@@ -136,7 +136,7 @@ Always emit a short pre-flight in `DEMO.md` (read `references/staging.md` for th
 
 ### Step 6 — Quality gate
 
-Before delivering, verify:
+The 8 boxes below are this skill's post-verification gate; the 3-phase definition-of-done structure (pre → during → post) is canonical in `../../shared/done-gate.md`. Before delivering, verify:
 
 - [ ] **Same show every night** — seed + clock pinned; two consecutive dry-runs produce identical output
 - [ ] **Reset is idempotent** — running it twice lands on the same `s0`
