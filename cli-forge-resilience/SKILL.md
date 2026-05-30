@@ -1,7 +1,7 @@
 ---
 name: cli-forge-resilience
 metadata:
-  author: ThomasD343
+  author: clement
 description: >
   Generate a production-parity resilience blueprint: test battery, troubleshooting
   runbook, failure-injection plan, and incident blackbox templates. Uses

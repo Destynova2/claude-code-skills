@@ -1,7 +1,7 @@
 ---
 name: cli-forge-demo
 metadata:
-  author: Destynova2
+  author: clement
 description: >
   Generate a reproducible live-demo kit for any project: a staged demo script
   (DEMO.md), deterministic seed and idempotent reset wired into the project's
@@ -45,10 +45,10 @@ A live demo is a **staged performance**, not an improvisation. Eight mappings ca
 | Stage craft | What it means for the demo |
 |---|---|
 | **The script & blocking** | `DEMO.md` — exact lines (what you say) and exact marks (the precise commands). No improvisation on stage. |
-| **Same show every night** | Fixed seed: state, data, **clock**, and environment are pinned so the run is deterministic. Reality is seeded like a PRNG. |
+| **Same show every night** | Fixed seed: state, data, **clock**, and environment are pinned so the run is deterministic. Reality is seeded like a PRNG. The canonical reproducibility toolkit is `../../shared/determinism.md` (consumed by `cli-forge-pipeline`, `cli-forge-resilience`, `cli-forge-perf`, `cli-audit-wizard`, `cli-forge-oci-rootless`) — demo is the *visible* twin of that contract. |
 | **Reset the stage** | Returning to `s0` is **idempotent** and fast (`reset ∘ reset = reset`) so you can run the demo back-to-back. |
 | **Open with the showstopper** | Do the last thing first — front-load the payoff (Great Demo!'s "Do It"), then peel back how. |
-| **Hit your marks** | Golden path / vertical slice only. Every beat earns its place; deviation is where demos die. |
+| **Hit your marks** | Golden path / vertical slice only. Every beat earns its place; deviation is where demos die. The golden path is **the T2-T3 rung** of `../../shared/gate-ladder.md` made visible — what a demo *shows* is exactly what a fresh deploy + first operation *proves*. |
 | **No scene runs long** | No uninterrupted segment over ~76 seconds (Gong data). Segment, checkpoint, interact. |
 | **The understudy** | A pre-recorded backup (GIF / asciinema cast) and an offline mode. Never debug live > 45 s. |
 | **The matinée** | The self-guided version the audience can re-run alone (interactive walkthrough). |

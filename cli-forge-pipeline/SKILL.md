@@ -1,7 +1,7 @@
 ---
 name: cli-forge-pipeline
 metadata:
-  author: Destynova2
+  author: clement
 description: >
   Expert CI/CD pipeline optimizer using biomimetic patterns from nature: leafcutter ants
   (task partitioning), slime mold (adaptive path optimization), army ants (self-organizing

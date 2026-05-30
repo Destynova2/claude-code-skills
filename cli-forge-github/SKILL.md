@@ -1,7 +1,7 @@
 ---
 name: cli-forge-github
 metadata:
-  author: Destynova2
+  author: clement
 description: >
   Audit and fix GitHub repository health: rulesets vs CI alignment, branch hygiene,
   PR lifecycle, release automation flow, permission issues, and transient CI failures.

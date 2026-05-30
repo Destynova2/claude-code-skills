@@ -1,7 +1,7 @@
 ---
 name: cli-forge-prez
 metadata:
-  author: Destynova2
+  author: clement
 description: >
   Generate technical presentation decks in Marp Markdown from code, architecture,
   or documentation. Produces speaker-ready slides with notes, dark theme, and CI

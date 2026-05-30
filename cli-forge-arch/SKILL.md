@@ -1,7 +1,7 @@
 ---
 name: cli-forge-arch
 metadata:
-  author: Destynova2
+  author: clement
 description: "Router for architecture design. Detects whether the user needs an HLD or LLD and delegates to the appropriate skill. Use when the user says 'design doc', 'architecture', or is ambiguous about HLD vs LLD. For explicit HLD requests, use cli-forge-hld directly. For explicit LLD requests, use cli-forge-lld directly."
 argument-hint: "[system-name-or-description]"
 context: fork

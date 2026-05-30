@@ -1,7 +1,7 @@
 ---
 name: cli-watermark
 metadata:
-  author: Destynova2
+  author: clement
 description: >
   Steganographic code watermarking for IP defense. Generates multi-layered fingerprints
   that survive AI rewrites, language changes, renaming, and clean-code passes. Produces

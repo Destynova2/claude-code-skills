@@ -1,7 +1,7 @@
 ---
 name: cli-forge-oci-rootless
 metadata:
-  author: ThomasD343
+  author: clement
   version: lithic-v3
 description: >
   Agentic migration architect for transforming Ansible, bare-metal, VM,
