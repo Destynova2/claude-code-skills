@@ -551,3 +551,93 @@ The `&` is critical — without it tmuxinator blocks waiting for the sleep. The 
 **Kept here for archival reference:** if you write any bash script that uses arrays + `set -u`, always use `${arr[@]+"${arr[@]}"}` (conditional expansion) instead of `"${arr[@]}"`. The conditional form expands to nothing when the array is empty, instead of raising "unbound variable" on bash 3.2 (the macOS default).
 
 **Why this matters:** Without the fix, every brigade start requires a human to attach to tmux and type "go". That defeats the unattended-sprint value proposition and burns 30-60 min of wall-clock per sprint waiting to be noticed.
+
+---
+
+## G39 — Inter-agent `permission_request` deadlock kills sub-agents silently (CRITICAL — RUNTIME BUG)
+
+**Problem:** Sub-agents spawned via `TeamCreate` + `Agent` (commis, voting Sous-Chefs, Maître d'hôtel) start cleanly, claim tasks, and start writing — then the **first time they hit a tool call (Edit/Write)**, they emit an inter-agent `permission_request` to the Chef and **die before consuming the response**. The Chef sends back `permission_response: success` (visible in the inbox JSON, `read: false`), but the sub-agent process is already gone.
+
+**Symptoms:**
+- `~/.claude/teams/{session}/config.json` lists all members as expected
+- Initial spawn produces `claude --agent-id ...@{session}` processes (visible in `ps -ef`)
+- Sub-agents post setup messages, claim tasks, write to shared-state — looks healthy
+- After the first tool call: **0 processes with `--agent-id`** in `ps -ef`
+- Inboxes accumulate messages nobody reads
+- 0 commit pushed, 0 branch on origin, 0 PR created
+- The Chef pane keeps reporting "Brigade idle confirmée" because it has no way to know its teammates are dead
+
+**Cause:** Bug in the Claude Code runtime layer that delivers `permission_response` back to a blocked tool call inside a sub-agent. The contre-chef-inter (G29) is supposed to pre-approve these cards but does not capture the **inter-agent** permission card type — only the UI variant.
+
+This is **not a `cli-forge-chef` bug**. The scaffolding (worktrees per G36, prompts, tmuxinator config) is correct. Worktrees get created, branches get registered, processes spawn — only the inter-agent permission delivery is broken.
+
+**Confirmed twice on the `grob` project**: a Phase P sprint (5 plats, only 1/5 produced output) and a `grob-q1` brigade (3 plats, 0/3 produced output). Both rescued by direct takeover.
+
+**Detection (run after 5 min):**
+
+```bash
+# All three should be > 0 within 10 min of launch.
+ps -ef | grep "claude.*--agent-id" | grep -v grep | wc -l
+gh pr list --state open --search "<plat-branch-pattern>" | wc -l
+git ls-remote --heads origin '<plat-branch-pattern>' | wc -l
+```
+
+Inboxes for the symptom signature:
+
+```bash
+python3 -c "
+import json
+for n in ['commis-a', 'commis-b']:
+    d = json.load(open(f'/Users/ludwig/.claude/teams/{session}/inboxes/{n}.json'))
+    last = d[-1]
+    if 'permission_response' in str(last) and last.get('read') is False:
+        print(f'{n}: DEADLOCKED on permission_response (never read)')
+"
+```
+
+If both signals confirm: **the brigade is dead, take over in direct mode**.
+
+**Direct takeover protocol** (proven recipe — used twice on this project):
+
+1. `tmux kill-session -t {session}` + `kill <chef-pid> <ccheck-pid> <inter-pid>` — cleanup zombies
+2. `git worktree remove --force` on the brigade's worktrees (they may be empty shells with no checkout — that's the related G40 below)
+3. Delete + recreate the commis branches from current `main`. No data loss: the worktrees never wrote anything that pushed.
+4. Implement each plat directly in the main repo, switching branches per plat. **Reuse the prompts written by `cli-forge-chef`** in `.claude/prompts/chef-{session}.md` as the spec — they contain accurate file paths, LoC estimates, and quality gates.
+5. Standard flow per plat: edit, `cargo fmt && cargo clippy && cargo test`, commit (Conventional + zero AI signature per `cli-git-conventional`), `git push`, `gh pr create --base main --body-file /tmp/...`, `gh pr merge <num> --auto --merge`.
+
+A 3-plat brigade (~850 LoC) takes ~2-3 h direct vs the brigade's promised parallelism. Acceptable cost given the runtime is broken upstream.
+
+**Workarounds for retrying the multi-agent path** (if you must):
+
+- **Pane-spawned commis instead of TeamCreate**: write the tmuxinator config so each commis gets its own `tmux` window with `claude --append-system-prompt-file commis-X.md`, instead of relying on `Agent` tool spawning. Pane-spawned `claude` instances hit the local UI permission flow (which works), not the inter-agent flow (which doesn't).
+- **`--dangerously-skip-permissions` on commis too**: skips the deadlock entirely but removes the security review on file edits. Only acceptable in trusted-codebase contexts.
+
+**Don'ts:**
+
+- Don't spend more than 10 min waiting for a silent brigade. `tmux send-keys` to inter-agent panes and `SendMessage` to dead sub-agents both proven inert.
+- Don't trust "Brigade idle confirmée" from the Chef as a sign of health.
+- Don't blame `cli-forge-chef`. The G36 worktree fix it added even worked. Blame the runtime.
+
+---
+
+## G40 — `Agent` tool with `isolation: worktree` may create empty worktree shells
+
+**Problem:** Spawning a sub-agent with `isolation: worktree` (the harness flag, not the brigade-setup-worktrees.sh fix) creates a directory under the worktree path that contains only `.git`, `.claude/`, `target/` and `signatures/` — but **no source files** (`src/`, `Cargo.toml`, `profiles/`, etc.). The sub-agent's `cd <worktree>` succeeds, `git status` reports the right branch, but there is nothing to edit. Any `Edit` tool call against an absolute path under that worktree silently writes to the void (the file is created at the path, but never tracked by git, never seen by `cargo`).
+
+**How it manifests:** the sub-agent reports "Successfully edited X" and "cargo test passed", but `git status` in the main repo shows nothing, and `find <worktree>/src -type f` returns nothing.
+
+**Cause:** Inconsistent worktree initialisation in the runtime when `isolation: worktree` is requested via the `Agent` tool itself (vs the explicit `brigade-setup-worktrees.sh` G36 fix used by this skill, which works correctly).
+
+**Fix:** Always set up worktrees via the skill's `brigade-setup-worktrees.sh` (G36), never via `Agent({ isolation: "worktree" })`. The setup script does an explicit `git worktree add` per commis with the right base branch and verifies the checkout.
+
+**Detection:**
+
+```bash
+ls -la /Users/ludwig/workspace/{repo}-wt-commis-{plat}/
+# Healthy worktree: many directories (src, tests, profiles, ...)
+# Empty shell:     only .claude, .git, signatures, target
+```
+
+If the worktree is an empty shell, the sub-agent will appear to work but produce no real diff. Combine with G39 — both failure modes have very similar symptoms (zero PR pushed) and often co-occur.
+
+**Don't:** don't try to "fix up" an empty-shell worktree by `cp -r` from the main repo. Remove it (`git worktree remove --force`) and recreate via the script.

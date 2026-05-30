@@ -853,7 +853,11 @@ Present to the user:
 2. The menu (PERT)
 3. Files generated
 4. How to launch: `tmuxinator start {session}`
-5. Gotchas to watch for
+5. **Health-check protocol after launch (MANDATORY — G39, G40):**
+   - At T+5 min, run the three detection commands listed in `references/gotchas-chef.md` **G39** (process count, open PRs, remote branches). All three must be > 0 by T+10 min.
+   - If any is still 0 at T+10 min, the brigade is dead in the runtime layer (G39 deadlock or G40 empty worktree). **Take over in direct mode** — the prompts in `.claude/prompts/chef-{session}.md` are valid specs to execute manually.
+   - Do not blame the skill. The scaffolding is correct; the upstream `Agent` + `TeamCreate` permission delivery is broken.
+6. Other gotchas to watch for (G24 ccheck, G25 trust guard, G26 protected branch — see `references/gotchas-chef.md`)
 
 ## Phase 5 — The ccheck runs automatically
 
@@ -879,7 +883,7 @@ To stop: `CronDelete {job_id}`
 
 | File | Content |
 |------|---------|
-| `references/gotchas-chef.md` | 17 known pitfalls (G24 ccheck, G25 trust guard, G26 protected branch) |
+| `references/gotchas-chef.md` | 19 known pitfalls (G24 ccheck, G25 trust guard, G26 protected branch, **G39 inter-agent permission deadlock + takeover protocol, G40 empty worktree shells**) |
 | `references/templates.md` | Index of all templates |
 | `references/shared-state-template.md` | The carnet de cuisine |
 | `references/chef-prompt-template.md` | Chef + Sous-Chef + Commis instructions |
