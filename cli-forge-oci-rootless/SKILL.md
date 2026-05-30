@@ -413,6 +413,7 @@ follow these hardening patterns.
 - wrappers are adapters only
 - no critical command hidden only in docs or scripts
 - stable output where monitoring or automation depends on it
+- this is **rung 1** of `../../shared/escalation-ladder.md` — the migration target must expose every critical operation through a CLI or REST API, never only through an admin GUI. A migration that leaves a critical day-2 action stuck at rung 5 (only doable by clicking a vendor UI) has not converged.
 
 #### Compatibility layer
 

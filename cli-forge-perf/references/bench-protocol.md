@@ -54,6 +54,8 @@ Pour une question de **« où va le temps GPU par kernel ? »**, utilise un *pro
 
 Ce sont **deux outils pour deux questions distinctes**, pas deux niveaux d'un même outil. Tomber dans le mauvais (par exemple ouvrir un `.gputrace` 17 Go pour chercher un goulot de débit) brûle des heures pour zéro signal exploitable.
 
+Pour le principe général « quand passer du headless au GUI ? » et les conditions de rung 5, voir `../../shared/escalation-ladder.md` — `xctrace` = rung 1, GPU debugger / `.gputrace` = rung 5, et le réflexe « j'attaque direct en GUI » est un anti-pattern documenté.
+
 ## Squelettes prêts à copier
 
 **Rust — Criterion (recommandé)** — `Cargo.toml`: `[dev-dependencies] criterion="0.5"`,

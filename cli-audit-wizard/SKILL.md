@@ -57,6 +57,8 @@ Each analogy maps to a concrete, testable audit check. Only actionable rules are
 
 These are non-negotiable. A wizard that violates any of these is broken. The Laws are factored into `../../shared/cli-ergonomics.md` so `cli-audit-shell` (S9), `cli-forge-chef` (prompt design), and `cli-forge-infra` (operator wrappers) can reuse the same semantics across CLI, TUI, agent prompt, and CI surfaces.
 
+A wizard lives at **rung 1** of `../../shared/escalation-ladder.md` — a setup CLI that asks once, recaps, and writes config-as-code. A "wizard" that drives a vendor GUI through screenshots and clicks is rung 5 and fails all 4 Laws by construction (no scripting, no recap, no replayability). If the only path is GUI driving, that's not a wizard — that's a last-resort bridge, and the lower rungs of the ladder must be exhausted first.
+
 ### Law 1 -- Ask once, derive the rest (Germination)
 
 If you can calculate a value from another, do not ask the question.

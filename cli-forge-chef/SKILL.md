@@ -776,6 +776,8 @@ The contre-chef-inter is a **Haiku-powered team member** in its own tmux window 
 
 **Why different from ccheck:** ccheck sends `tmux send-keys Enter` (keyboard); contre-chef-inter sends `SendMessage` (team protocol). They handle **orthogonal** permission pathways. Both are needed at tier ≥ M.
 
+**Note on `tmux send-keys` as rung 5:** keyboard injection into a UI is **rung 5 of `../../shared/escalation-ladder.md`** — used here only because the underlying Claude Code UI exposes no programmatic permission-grant API (rungs 1-4 don't exist for this specific flow). It is gated on the ccheck's read-the-diff decision and logged for audit. Never extend this pattern to operations that have a real API.
+
 ### 2.7 — Permissions (one `settings.local.json` per worktree)
 
 Read `references/permissions-template.md`.

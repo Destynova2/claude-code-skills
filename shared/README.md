@@ -9,6 +9,7 @@ Cross-skill reference files — the common denominators that several `cli-*` ski
 | `determinism.md` | Reproducibility & idempotence toolkit (seed, clock, env, content-hash) | demo, pipeline, resilience, wizard, oci-rootless, perf (reproducible baselines) |
 | `result-schema.md` | Machine-readable result envelope `.claude/<skill>.json` | cli-cycle (aggregates), all audit/forge skills (emit) |
 | `metaphors.md` | Catalog of shared vs. signature metaphors | all biomimetic skills; cli-cycle (consistent vocabulary) |
+| `escalation-ladder.md` | 5-rung CLI → file → private API → IPC → GUI ladder for "no headless path exists" | perf, infra, audit-wizard, forge-chef, oci-rootless |
 | `cli-ergonomics.md` | The 4 Laws (ask once / defaults / recap / config-as-code) and surface mapping (CLI / TUI / wizard / CI) | audit-wizard, audit-shell, forge-chef, forge-infra |
 | `triage.md` | Phoenix 3-2-1 tiers, GRADE confidence, multi-method triangulation | cli-cycle (full Phoenix), forge-resilience (Step 9), all audit-* skills (finding tier × confidence) |
 | `tiering.md` | Mitosis S/M/L/XL — scale depth of output to size of input | forge-chef (brigade size), audit-tangle (analysis depth), forge-hld (doc sections), audit-sync (audit layers), forge-pipeline (workflow fission) |
