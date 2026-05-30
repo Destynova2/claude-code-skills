@@ -109,6 +109,7 @@ These strategies are detailed in `references/patterns.md`. Read it when applying
 | Complex deployment needing architecture doc | `/cli-forge-hld` | Generate HLD |
 | Pipeline config present | `/cli-forge-pipeline` | Optimize CI/CD |
 | Multiple config files to manage | `/cli-forge-tree` | Project structure audit |
+| Sizing / capacity decision pending (instances × W × €/year) or hardware profile drives runtime latency | `/cli-forge-perf` | Cost-accounting model (€/kWh/CO₂) + roofline-aware bench calibrated on the target hardware |
 
 **Rule:** Recommend, don't auto-execute.
 

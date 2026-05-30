@@ -167,7 +167,7 @@ Use the output format below.
 | `cli-audit-sync` | Verifies doc-code coherence. cli-audit-test verifies **test-requirement coherence** |
 | `cli-forge-schema` | Can visualize test plan as diagrams (pyramid, state machines) |
 | `cli-forge-perf` | D6 (NFR) and D7 (risk) cover perf as *intent*; `cli-forge-perf` provides the executable bench harness (A/B, distribution, permutation test) that turns the intent into a non-regression gate |
-| `cli-cycle` | Calls cli-audit-test as part of the full project review |
+| `cli-cycle` | Calls cli-audit-test as part of the full project review; emit `.claude/cli-audit-test.json` per `../../shared/result-schema.md` for orchestrator aggregation |
 
 ## Dynamic Handoffs
 

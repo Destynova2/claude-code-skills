@@ -221,6 +221,7 @@ When no CONTRACTS.md exists, the skill switches from audit to generation:
 | Contracted functions have god-level complexity | `/cli-audit-tangle` | Topology suggests extraction before contract can be enforced |
 | Drift caused by dependency update | `/cli-forge-infra` | Check version compatibility |
 | No tests covering contracted behavior | `/cli-audit-test` | Test the invariants |
+| Performance invariant present in CONTRACTS.md (« p95 < 100 ms ») but no bench enforces it | `/cli-forge-perf` | Translate the perf invariant into an executable A/B bench gate via the protocol catalogue + native harness routing |
 
 **Rule:** Recommend, don't auto-execute.
 
@@ -242,7 +243,7 @@ When no CONTRACTS.md exists, the skill switches from audit to generation:
 | `cli-audit-code` | Scores code quality. cli-audit-drift checks **behavioral conformity** to intentions |
 | `cli-audit-sync` | Checks doc-code coherence. cli-audit-drift checks **contract-code coherence** |
 | `cli-forge-doc` | Can generate documentation. cli-audit-drift generates **CONTRACTS.md** (a different artifact) |
-| `cli-cycle` | Should call cli-audit-drift as part of the full project review |
+| `cli-cycle` | Should call cli-audit-drift as part of the full project review; emit `.claude/cli-audit-drift.json` per `../../shared/result-schema.md` for orchestrator aggregation |
 
 ## What this skill does NOT do
 

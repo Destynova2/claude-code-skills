@@ -129,7 +129,7 @@ CQI = Σ(wᵢ × sᵢ) / Σ(wᵢ) × 10
 | `cli-audit-test` | Scores test strategy. cli-audit-code checks **test code quality** (C8) |
 | `cli-forge-lld` | Validates implementation matches the LLD design |
 | `cli-forge-perf` | Detects static perf anti-patterns (alloc in hot path, quadratic complexity, hidden-cost abstractions). `cli-forge-perf` verifies they are **dynamically** costly via profiling + bench |
-| `cli-cycle` | Calls cli-audit-code as part of full project review |
+| `cli-cycle` | Calls cli-audit-code as part of full project review; emit `.claude/cli-audit-code.json` per `../../shared/result-schema.md` for orchestrator aggregation |
 
 ## Dynamic Handoffs
 

@@ -919,3 +919,4 @@ To stop: `CronDelete {job_id}`
 | `/cli-forge-doc` | If a quality gate detects missing docs — the Sous-Chef triggers generation |
 | `/cli-forge-schema` | If a quality gate detects a missing diagram — Mermaid generation |
 | `/cli-forge-github` | Post-sprint — clean orphan branches, check rulesets vs CI alignment, close stale PRs |
+| `/cli-forge-perf` | Tier XL's `sous-chef-perf` (OPS cluster) runs `cli-forge-perf` as a quality gate before merge — the catalogued bench protocol replaces ad-hoc perf claims |

@@ -146,7 +146,7 @@ Both complement each other. Run cli-audit-doc for quality, cli-audit-sync for ac
 | `cli-audit-sync` | Checks doc **accuracy**. cli-audit-doc checks doc **quality** |
 | `cli-audit-code` | Scores code quality. cli-audit-doc scores **doc quality** |
 | `cli-forge-doc` | Generates docs. cli-audit-doc **audits** existing docs |
-| `cli-cycle` | Calls cli-audit-doc as part of full project review |
+| `cli-cycle` | Calls cli-audit-doc as part of full project review; emit `.claude/cli-audit-doc.json` per `../../shared/result-schema.md` for orchestrator aggregation |
 
 ## Reference Sources
 

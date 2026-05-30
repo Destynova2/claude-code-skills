@@ -347,6 +347,8 @@ constraints, and reboot expectations.
 
 Assign each responsibility to one owner.
 
+**Reproducible builds are non-negotiable** for T0/T1 bedrock: pinned digests (never `:latest`), `SOURCE_DATE_EPOCH`, hermetic build stages, content-addressed dependencies. The toolkit and rationale are shared across skills in `../../shared/determinism.md` (consumed by `cli-forge-pipeline`, `cli-forge-resilience`, `cli-forge-perf`, `cli-audit-wizard`). A migration that produces non-reproducible artifacts cannot pass T1.
+
 Load `references/containerfile-patterns.md` when available. Every image MUST
 follow these hardening patterns.
 
@@ -433,8 +435,7 @@ follow these hardening patterns.
 
 ### Step 6 — Require proof before declaring convergence
 
-Use the T0/T1/T2/T3/T4/M0 matrix. Load `references/proof-gates.md` when
-available.
+Use the T0/T1/T2/T3/T4/M0 matrix. The rung **semantics** are shared across skills — see `../../shared/gate-ladder.md`. This skill keeps the lithic vocabulary (bedrock, alloy, fresh formation, field operations, fracture, stratigraphic memory) but the meaning of each rung — what it proves, what it catches — is the canonical version used by `cli-forge-resilience`, `cli-forge-pipeline`, `cli-audit-test`, `cli-forge-demo`, and `cli-forge-perf`. Load `references/proof-gates.md` when available.
 
 | Level | Name | Purpose | Examples |
 |---|---|---|---|

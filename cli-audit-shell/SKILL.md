@@ -169,7 +169,7 @@ SQI = Sigma(wi x si) / Sigma(wi) x 10
 | `cli-forge-infra` | Audits infra config and ops patterns. cli-audit-shell audits the **scripts themselves** |
 | `cli-audit-tangle` | Detects structural coupling. cli-audit-shell detects **bash-specific** structural issues |
 | `cli-forge-pipeline` | Optimizes CI/CD pipelines. cli-audit-shell audits **shell scripts used in CI** |
-| `cli-cycle` | Should call cli-audit-shell as part of full project review when shell scripts exist |
+| `cli-cycle` | Should call cli-audit-shell as part of full project review when shell scripts exist; emit `.claude/cli-audit-shell.json` per `../../shared/result-schema.md` for orchestrator aggregation |
 
 ## Dynamic Handoffs
 
