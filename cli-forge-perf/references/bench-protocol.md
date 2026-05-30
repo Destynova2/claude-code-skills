@@ -34,10 +34,25 @@ Pour la boîte noire CLI quand l'environnement le permet : **hyperfine** (Rust, 
 | JS/TS | **mitata** / tinybench | intégré |
 | CLI / boîte noire | **hyperfine** | ratio + σ, A/B intégré |
 | Python | **pytest-benchmark** / `timeit` | intégré |
+| **macOS GPU / Metal** | **`xctrace record --template 'Metal System Trace'`** (headless, sans Xcode) | timeline GPU exportable XML/JSON, agrégation par **compute pipeline label = nom du kernel** |
+| **Linux GPU / CUDA** | **`nsys profile`** (Nsight Systems CLI) | timeline kernel + traces NVTX, exportable via `nsys stats` |
 
 Préfère **toujours** un framework natif mûr (Criterion, JMH, benchstat) à une
 boucle maison : ils gèrent warmup, outliers et stats bien mieux. Le squelette
 « à la main » n'est qu'un fallback air-gap quand tu ne peux pas ajouter la dépendance.
+
+### Piège GPU à éviter (inspection ≠ profil)
+
+Pour une question de **« où va le temps GPU par kernel ? »**, utilise un *profiler* (timeline temporelle, agrégation par label de pipeline) — **pas un *inspecteur*** (replay GUI d'un dispatch pour lire buffers/textures/shader-line cost). Le piège classique :
+
+| Outil | Question répondue | Tu en as besoin si… |
+|---|---|---|
+| **macOS** `xctrace Metal System Trace` (profiler) | où passe le temps ? | tu cherches le hotspot kernel — **headless, agent-friendly** |
+| **macOS** `.gputrace` + GPU Debugger Xcode (inspecteur) | que contient ce dispatch ? | tu veux lire un buffer ou auditer un shader ligne par ligne — **GUI-only** |
+| **CUDA** `nsys profile` (Nsight Systems) | où passe le temps ? | profil temporel kernel-level |
+| **CUDA** Nsight Graphics (inspecteur) | que contient cette frame ? | inspection draw/dispatch |
+
+Ce sont **deux outils pour deux questions distinctes**, pas deux niveaux d'un même outil. Tomber dans le mauvais (par exemple ouvrir un `.gputrace` 17 Go pour chercher un goulot de débit) brûle des heures pour zéro signal exploitable.
 
 ## Squelettes prêts à copier
 

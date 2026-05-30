@@ -39,6 +39,37 @@ ce que fait un fader, tu le bouges **seul**.
   quelques secondes, pour bouger un fader et voir l'effet immédiatement. La
   boucle courte est ce qui rend l'expérimentation productive.
 
+## 3b. Comparer deux stacks (langue + lib) : pin emboîté
+
+Cas fréquent : *« pourquoi mon binaire Rust est plus lent que l'équivalent
+Python ? »* (ou : Go vs Rust, JVM vs natif, framework A vs B). Trois confondants
+empilés peuvent tous donner l'écart : le **code** (ton implémentation), la
+**lib** (binding/wrapper), la **version** de la lib sous-jacente (ex. : un
+binding Rust plafonné à mlx-c 0.25 vs Python à mlx 0.31). Ne tire **aucune**
+conclusion sur le code avant d'avoir épluché les deux autres.
+
+Protocole — pin par couches du plus extérieur au plus intérieur :
+
+1. **Pin version** sur les deux stacks (vX vs vY *côté Python seul*, sur le
+   *même* modèle, *même* entrée). Si l'écart disparaît → c'est la lib/version,
+   pas ton code. **Stop, sors.**
+2. **Pin format/architecture** (même version, modèle dense classique vs nouveau
+   format suspecté). Si l'écart n'apparaît que sur le nouveau → c'est un
+   kernel/chemin de code spécifique à ce format.
+3. **Pin composant** (le forward avec et sans un sous-bloc — MoE, linear-attn,
+   shared-expert, etc.). Le sous-bloc dont l'inclusion change le verdict **est**
+   le coupable.
+
+Deux règles non négociables :
+- **Un échec de chargement est une donnée**, pas un blocage. *« Architecture non
+  supportée par cette version »* tranche l'hypothèse « c'est la version »
+  côté cette branche — sans qu'aucun chiffre ne soit mesuré.
+- **Avant de bumper la lib** (forker un binding, vendorer une dépendance C,
+  etc.) : **profile d'abord** le kernel suspect intra-version (cf.
+  `bench-protocol.md` § Routage GPU). Bumper sans profil = pari coûteux ; profile
+  d'abord, puis bump *si et seulement si* le kernel s'avère intrinsèquement plus
+  lent dans la version pinned.
+
 ## 4. Gérer l'aléa (variance) — dans les deux sens
 
 L'aléa est un outil, à augmenter ou diminuer selon l'objectif :

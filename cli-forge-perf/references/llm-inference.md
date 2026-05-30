@@ -88,6 +88,44 @@ plus qu'un moteur lent sur un contexte compact.
   SGLang si tes workloads ont des préfixes partagés (chat, RAG, multi-turn) ;
   TensorRT-LLM si un seul modèle en prod et le throughput prime.
 
+## Diagnostic : où va le temps GPU, sans deviner ?
+
+Quand un binaire d'inférence est trop lent (cross-langage, cross-version, ou
+nouvelle architecture), suis cet ordre — chaque étape élimine une hypothèse à
+coût bas avant de toucher au code.
+
+1. **Classifier la phase** avant de mesurer fin :
+   - **TTFT élevé** → prefill **compute-bound** → chemin FlashAttention / batch /
+     chunked prefill.
+   - **tok/s decode bas** → **memory-bandwidth-bound**. Borne du gain
+     = `débit_mémoire / octets_par_token` (roofline). À 70-80 % de la borne, le
+     levier n'est plus le code — c'est quantization ou hardware. *Arrête de chasser
+     un gain qui n'existe pas.*
+2. **Ablation par pin emboîté** (cf. `experiment-method.md` §3b) — la matrice
+   à planifier en une seule passe :
+   - Pin **version** (Python@vX vs vY sur le *même* modèle) → version isolée.
+   - Pin **architecture** (modèle dense connu vs nouveau format) → archi isolée.
+   - Pin **composant** (forward avec/sans MoE, avec/sans linear-attn, avec/sans
+     shared-expert) → kernel suspect isolé.
+   Un test qui **échoue à charger** (« archi non supportée par cette version »)
+   **est une donnée**, pas un blocage — c'est ce qui tranche.
+3. **Profiler per-kernel** une fois et une seule, **headless** :
+   - **macOS / Metal** : `xctrace record --template "Metal System Trace"` → export
+     XML → agrège par compute pipeline label → tableau **kernel | count | temps
+     GPU cumulé | %**.
+   - **Linux / CUDA** : `nsys profile` + `nsys stats` → idem.
+   - Routage détaillé : `bench-protocol.md` § Routage.
+
+### Anti-pattern « `.gputrace` ≠ profiler »
+
+Sur macOS, un `.gputrace` (capturé via `MTLCaptureManager` ou Xcode) répond à
+« *que contient* ce dispatch ? » — buffers, textures, pipeline state, coût par
+ligne de shader. Un Metal System Trace répond à « *où passe* le temps ? » —
+distribution par kernel. **Deux outils, deux questions distinctes**, pas deux
+niveaux du même outil. Symptôme du piège : 40 min à piloter Xcode pour ouvrir
+un trace 17 Go au lieu de 2 min d'`xctrace` headless. Sur CUDA, **Nsight
+Graphics ≠ Nsight Systems** — même distinction.
+
 ## Checklist tok/s
 1. Mon goulot est-il le **decode** (memory-bandwidth) ou le **prefill** (TTFT) ?
 2. Ai-je quantifié au niveau acceptable (FP8, voire INT4) avec de bons kernels ?
