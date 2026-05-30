@@ -67,6 +67,8 @@ If the user already provided context, use that instead of asking redundant quest
 
 ### Step 3 — Size the document (Mitosis)
 
+S/M/L/XL semantics are canonical in `../../shared/tiering.md` — the tables below specialize them to system complexity and the arc42 section inclusion matrix.
+
 **Detect the tier from signals:**
 
 | Signal | Tier |

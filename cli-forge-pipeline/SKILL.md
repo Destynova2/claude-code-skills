@@ -45,7 +45,7 @@ Read `references/patterns.md` for detailed explanations, biology, and dual GitLa
 | 3 | **Army ants** (Eciton) | Fan-out / Fan-in + Ephemeral Runners | Maximum parallelism, disposable runners |
 | 4 | **Honeybees** (Apis) | Autoscaling + Priority-based Runner Tagging | Resources proportional to load |
 | 5 | **Mycelium** | Multi-Registry Fallback + Distributed Cache | Zero SPOF, waterfall cache |
-| 6 | **Mitosis** | Workflow Fission | Pipeline too big → split into independent workflows |
+| 6 | **Mitosis** | Workflow Fission | Pipeline too big → split into independent workflows (S/M/L/XL semantics canonical in `../../shared/tiering.md`) |
 | 7 | **Immune system** (VDJ) | Combinatorial Fuzzing + Property-Based Testing | Explore the input space, not just the known cases |
 | 8 | **Fungal spores** | Full Combinatorial Matrix | OS × arch × version × features, fail-fast: false |
 | 9 | **Tardigrade** | Chaos Engineering / Fault Injection | Inject failures to prove survival |

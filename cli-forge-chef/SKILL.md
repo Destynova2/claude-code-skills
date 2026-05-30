@@ -474,7 +474,7 @@ When multiple commis are done:
 
 ### 0.4 — Choose model and brigade size (Mitosis)
 
-Read `references/simplified-model.md`. Two models exist — pick based on tier:
+Read `references/simplified-model.md`. Two models exist — pick based on tier. The S/M/L/XL semantics are canonical in `../../shared/tiering.md` — this skill's tier table specializes them to brigade composition (1 commis → full XL brigade w/ sous-chef clusters).
 
 | Signal | Tier | Model | Agents | Quality gates |
 |--------|------|--------|--------|---------------|

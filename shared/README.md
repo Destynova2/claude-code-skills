@@ -11,5 +11,6 @@ Cross-skill reference files — the common denominators that several `cli-*` ski
 | `metaphors.md` | Catalog of shared vs. signature metaphors | all biomimetic skills; cli-cycle (consistent vocabulary) |
 | `cli-ergonomics.md` | The 4 Laws (ask once / defaults / recap / config-as-code) and surface mapping (CLI / TUI / wizard / CI) | audit-wizard, audit-shell, forge-chef, forge-infra |
 | `triage.md` | Phoenix 3-2-1 tiers, GRADE confidence, multi-method triangulation | cli-cycle (full Phoenix), forge-resilience (Step 9), all audit-* skills (finding tier × confidence) |
+| `tiering.md` | Mitosis S/M/L/XL — scale depth of output to size of input | forge-chef (brigade size), audit-tangle (analysis depth), forge-hld (doc sections), audit-sync (audit layers), forge-pipeline (workflow fission) |
 
 These ship to `~/.claude/skills/shared/` alongside `~/.claude/skills/gotchas.md`.

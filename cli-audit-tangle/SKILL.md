@@ -61,6 +61,8 @@ Read `references/analysis-methods.md` for detailed algorithms and interpretation
 
 ## Mitosis — Scale analysis to project size
 
+S/M/L/XL semantics are canonical in `../../shared/tiering.md` — the table below specializes them to function-count thresholds and analysis depth.
+
 | Signal | Tier | Analysis depth |
 |--------|------|---------------|
 | < 50 functions | **S** | Full graph + metrics + cycles. Skip Fiedler (too small) |

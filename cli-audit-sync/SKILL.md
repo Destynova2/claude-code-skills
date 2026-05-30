@@ -45,6 +45,8 @@ Read `references/layers.md` for detailed check tables, methodology, and safety r
 
 ### Mitosis — Scale to doc volume
 
+S/M/L/XL semantics are canonical in `../../shared/tiering.md` — the table below specializes them to doc-file count and audit-layer depth.
+
 | Tier | Signal | Depth |
 |------|--------|-------|
 | **S** | 1-2 doc files | Layer 1 only + quick Layer 2 |
