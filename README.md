@@ -61,6 +61,8 @@ Type `/cli-` in Claude Code, hit tab, pick a skill:
 | `/cli-forge-arch [system]` | Router — detects HLD vs LLD intent and delegates to the appropriate skill. Use when ambiguous |
 | `/cli-forge-doc [repo]` | Generates dual documentation — AI-optimized (AGENTS.md, llms.txt) + human-readable (Diataxis structure) |
 | `/cli-forge-infra [service]` | Ops integration — reads service docs, finds simplest config path, builds dependency trees, proposes upgrades with ADRs |
+| `/cli-forge-resilience [service]` | Resilience & operations — generates prod-parity matrices, runbooks, agent-ready ops packs, failure-injection plans, and incident memory |
+| `/cli-forge-choice-ux [flow]` | Choice UX — simplifies checkout, signup, pricing, settings, configurators, and guided flows using decision-load, friction, accessibility, and conversion heuristics |
 | `/cli-forge-readme [path]` | Generates a professional README using the 3-tier pyramid: hook, quickstart, contribute |
 | `/cli-forge-schema [desc]` | Generates GitHub-compatible Mermaid diagrams — picks the right type, splits complex ones, converts tables/kanban/PERT + 12 other formats |
 | `/cli-forge-pipeline [yaml]` | CI/CD pipeline optimizer using biomimetic patterns (ants, slime mold, bees, mycelium). Works with GitLab CI, GitHub Actions, and any CI system |
@@ -124,6 +126,10 @@ cli-code-skills/
 │   └── references/        #   Diataxis framework templates
 ├── cli-forge-infra/       # /cli-forge-infra — ops integration
 │   └── references/        #   scoring, patterns, checklists
+├── cli-forge-resilience/  # /cli-forge-resilience — resilience, runbooks, agent-ready ops
+│   └── references/        #   models, tests, runbook templates, agent ops
+├── cli-forge-choice-ux/   # /cli-forge-choice-ux — choice, checkout, signup, settings UX
+│   └── references/        #   principles, scorecard, flow patterns
 ├── cli-forge-pipeline/    # /cli-forge-pipeline — CI/CD pipeline optimizer (biomimetic)
 ├── cli-forge-readme/      # /cli-forge-readme — README generation (RCI)
 ├── cli-forge-schema/      # /cli-forge-schema — Mermaid diagrams

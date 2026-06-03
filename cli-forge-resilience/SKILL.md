@@ -4,14 +4,16 @@ metadata:
   author: clement
 description: >
   Generate a production-parity resilience blueprint: test battery, troubleshooting
-  runbook, failure-injection plan, and incident blackbox templates. Uses
+  runbook, agent-ready operations pack, failure-injection plan, and incident
+  blackbox templates. Uses
   biological and physical reasoning — genome/contracts, membranes/boundary
   conditions, homeostasis/health checks, immune system/negative tests,
   stress-strain/failure budgets, phase transitions/resource cliffs,
   hysteresis/reruns, and memory cells/post-incident capitalisation. Use
   whenever the user asks to prevent prod bugs, make dev/staging closer to prod,
   design pre-prod checks, write a runbook, create a smoke test ladder, harden
-  deployments, or turn incidents into durable anti-regressions.
+  deployments, define N1/N2/N3 operations, govern agent autonomy, or turn
+  incidents into durable anti-regressions.
 argument-hint: "[service-name-or-repo-path-or-incident-doc]"
 context: fork
 agent: general-purpose
@@ -53,6 +55,7 @@ Read `references/models.md` for the full biology + physics mapping.
 | Signal from user | What to generate |
 |---|---|
 | "runbook", "troubleshoot", "ops guide", "what do I check first" | Runbook + capture checklist + fast triage decision tree |
+| "agent-ready runbook", "N1/N2/N3", "L1/L2/L3", "support tiers", "agent autonomy", "ops pack" | Runbook + support tier matrix + agent autonomy policy + capability contracts |
 | "make staging/dev closer to prod", "prod-like", "preprod" | Prod-parity matrix + test ladder + parity gaps |
 | "prevent prod bugs", "harden", "resilience", "release gate" | Full resilience blueprint |
 | "incident blackbox", "postmortem", "capitalise incident" | Blackbox update + anti-regression battery + runbook delta |
@@ -212,6 +215,9 @@ The runbook MUST include:
 5. **Rollback / containment** — how to stop blast radius without hiding evidence
 6. **Anti-regression reruns** — what to rerun after the fix
 7. **Closure criteria** — when the incident is truly closed
+8. **Agent readiness** — support tier, autonomy level, capability contracts, approval boundary, and escalation bundle
+
+If the user mentions support levels, N1/N2/N3, L1/L2/L3, agent execution, autonomous remediation, MCP tools, or regulated operations, read `references/agent-ops.md` and generate an operations pack in addition to the human runbook.
 
 ### Step 7 — Capitalise memory
 
@@ -300,13 +306,19 @@ Each item must include:
 ### Anti-Regression Reruns
 ### Closure Criteria
 
-## 6. Incident Memory / Blackbox Delta
+## 6. Agent Operations Pack
+### Support Tier Matrix
+### Agent Autonomy Policy
+### Capability Contracts
+### Approval and Escalation Boundaries
+
+## 7. Incident Memory / Blackbox Delta
 | Incident or Recurrent Hurdle | Missing Guardrail | Add This Test | Add This Runbook Step |
 
-## 7. Dimension Scores
+## 8. Dimension Scores
 | # | Dimension | Score | /4 | Evidence | Gap |
 
-## 8. Action Plan
+## 9. Action Plan
 ### Tier 3 — Critical
 ### Tier 2 — Major
 ### Tier 1 — Minor

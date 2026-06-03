@@ -5,6 +5,9 @@
 ## Suggested file layout
 
 - `docs/runbooks/{service}-runbook.md`
+- `docs/operations/{service}-agent-policy.md`
+- `docs/operations/{service}-capability-contracts.yaml`
+- `docs/operations/{service}-escalation-matrix.md`
 - `docs/testing/{service}-resilience-matrix.md`
 - `docs/incidents/incident-blackbox.md`
 - `docs/incidents/postmortems/{date}-{incident}.md`
@@ -22,6 +25,9 @@
 - Runtime:
 - Critical dependencies:
 - Primary source(s) of truth:
+- Support tier owner:
+- Default agent autonomy:
+- Last reviewed:
 
 ## 2. Invariants
 | Invariant | Source of Truth | Verification Command | Blast Radius |
@@ -53,17 +59,26 @@
 - Blast-radius reduction:
 - What NOT to delete before evidence capture:
 
-## 7. Anti-regression reruns
+## 7. Agent readiness
+| Action | Support Tier | Max Autonomy | Preconditions | Blast Radius | Approval | Escalation |
+
+### Capability contracts
+- Contract source:
+- Audit trail:
+- Human-only boundaries:
+
+## 8. Anti-regression reruns
 ### Minimum reruns
 ### Broader matrix reruns
 
-## 8. Closure criteria
+## 9. Closure criteria
 - symptom captured
 - first useful signal captured
 - root cause localized
 - source of truth corrected
 - durable guardrail added
 - relevant levels rerun
+- agent policy / capability contracts updated if an agent can execute the operation
 - runbook/blackbox updated
 ```
 
