@@ -58,6 +58,16 @@ Score each dimension **0.0-1.0**, then compute a weighted CQI. Read `references/
 
 Glob source files. For broad audit, prioritize: entry points, public API modules, most-changed files (git log), largest files.
 
+### Context Budget Rule
+
+Do not read a large source file end-to-end as the first step.
+
+- For files over 300 lines or directory audits, start with inventory only: file list, line counts, symbol or function index, git churn, and focused risk greps.
+- When evidence points at a line, read a bounded slice around it: about 75 lines before and after, 150 lines max by default. Use `nl -ba path | sed -n 'START,ENDp'`, `sed -n 'START,ENDp'`, or `rtk read -n -m 150 path` when RTK is available.
+- Read a full file only when it is 300 lines or less, or when whole-file semantics are required. State that reason in the report.
+- Reuse previously read slices and line references instead of re-reading the same file.
+- Prefer RTK wrappers for noisy shell output when available: `rtk git`, `rtk cargo`, `rtk grep`, `rtk find`, and bounded `rtk read`. Do not treat generic `rtk log` output as authoritative for structured JSON logs unless a domain-specific filter verifies it.
+
 ### Step 2 — Detect language and context
 
 Identify project language, framework, and type (library, CLI, service, script). This determines which idiom checks apply and what scoring standards are proportional.
