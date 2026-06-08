@@ -10,7 +10,7 @@ agent: general-purpose
 
 > **Language rule:** Skill instructions are written in English. When generating user-facing output, detect the project's primary language (from README, comments, docs, commit messages) and produce the document in that language. If the project is bilingual, ask the user which language to use before proceeding.
 
-**Gotchas** — read `../../gotchas.md` before producing output to avoid known mistakes.
+**Gotchas** — read `../gotchas.md` before producing output to avoid known mistakes.
 
 # Arch Router — HLD / LLD Dispatcher
 

@@ -29,7 +29,7 @@ Detect every place where documentation says one thing and the code says another.
 
 **Documentation is a contract with the reader.** Every statement in docs is an implicit promise: "this is true right now." This skill finds broken promises.
 
-**Gotchas** — read `../../gotchas.md` before producing output to avoid known mistakes.
+**Gotchas** — read `../gotchas.md` before producing output to avoid known mistakes.
 
 ## Three-Layer Verification
 
@@ -45,7 +45,7 @@ Read `references/layers.md` for detailed check tables, methodology, and safety r
 
 ### Mitosis — Scale to doc volume
 
-S/M/L/XL semantics are canonical in `../../shared/tiering.md` — the table below specializes them to doc-file count and audit-layer depth.
+S/M/L/XL semantics are canonical in `../shared/tiering.md` — the table below specializes them to doc-file count and audit-layer depth.
 
 | Tier | Signal | Depth |
 |------|--------|-------|
@@ -128,7 +128,7 @@ This fills a gap NO mainstream tool covers: cross-format command/env duplication
 | `cli-audit-drift` | Checks **contract-code** coherence. cli-audit-sync checks **doc-code** coherence |
 | `cli-forge-schema` | Generates diagrams. cli-audit-sync **verifies** existing diagrams match code |
 | `cli-forge-readme` | Generates READMEs. cli-audit-sync **verifies** existing README matches reality |
-| `cli-cycle` | Calls cli-audit-sync as part of the full project review; emit `.claude/cli-audit-sync.json` per `../../shared/result-schema.md` for orchestrator aggregation |
+| `cli-cycle` | Calls cli-audit-sync as part of the full project review; emit `.claude/cli-audit-sync.json` per `../shared/result-schema.md` for orchestrator aggregation |
 
 ## Dynamic Handoffs
 

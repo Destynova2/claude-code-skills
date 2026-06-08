@@ -41,7 +41,7 @@ Each analogy maps to a concrete, testable audit check. Only actionable rules are
 | **Seed germination** | Ask 3-5 seed values max. If more, you're encoding the tree in the seed |
 | **Axolotl** (facultative metamorphosis) | Never show advanced options by default. `--advanced` is opt-in |
 | **Immune system** | Doctor checks are pattern-based (schema, connectivity), not intent-based |
-| **Homeostatic set point** | `wizard apply` is idempotent: run 1x or 100x, same result (the idempotence/determinism toolkit is shared in `../../shared/determinism.md`) |
+| **Homeostatic set point** | `wizard apply` is idempotent: run 1x or 100x, same result (the idempotence/determinism toolkit is shared in `../shared/determinism.md`) |
 | **Tardigrade** (cryptobiosis) | Every config section has a safe degraded state when dependencies are down |
 | **Principle of least action** | Every question must reduce configuration entropy. Derivable = don't ask |
 | **2nd law of thermodynamics** | Config drifts without doctor. Doctor is the energy that fights entropy |
@@ -55,9 +55,9 @@ Each analogy maps to a concrete, testable audit check. Only actionable rules are
 
 ## The 4 Laws of Good Wizards
 
-These are non-negotiable. A wizard that violates any of these is broken. The Laws are factored into `../../shared/cli-ergonomics.md` so `cli-audit-shell` (S9), `cli-forge-chef` (prompt design), and `cli-forge-infra` (operator wrappers) can reuse the same semantics across CLI, TUI, agent prompt, and CI surfaces.
+These are non-negotiable. A wizard that violates any of these is broken. The Laws are factored into `../shared/cli-ergonomics.md` so `cli-audit-shell` (S9), `cli-forge-chef` (prompt design), and `cli-forge-infra` (operator wrappers) can reuse the same semantics across CLI, TUI, agent prompt, and CI surfaces.
 
-A wizard lives at **rung 1** of `../../shared/escalation-ladder.md` — a setup CLI that asks once, recaps, and writes config-as-code. A "wizard" that drives a vendor GUI through screenshots and clicks is rung 5 and fails all 4 Laws by construction (no scripting, no recap, no replayability). If the only path is GUI driving, that's not a wizard — that's a last-resort bridge, and the lower rungs of the ladder must be exhausted first.
+A wizard lives at **rung 1** of `../shared/escalation-ladder.md` — a setup CLI that asks once, recaps, and writes config-as-code. A "wizard" that drives a vendor GUI through screenshots and clicks is rung 5 and fails all 4 Laws by construction (no scripting, no recap, no replayability). If the only path is GUI driving, that's not a wizard — that's a last-resort bridge, and the lower rungs of the ladder must be exhausted first.
 
 ### Law 1 -- Ask once, derive the rest (Germination)
 
@@ -408,7 +408,7 @@ Read `references/anti-patterns.md` for the named anti-patterns with detection he
 
 ### Step 7 -- Score and report
 
-Finding tier and confidence semantics are canonical in `../../shared/triage.md` (Tier 3/2/1 + GRADE + triangulation). Law violations are Tier 3 by default; lifecycle gaps are Tier 2.
+Finding tier and confidence semantics are canonical in `../shared/triage.md` (Tier 3/2/1 + GRADE + triangulation). Law violations are Tier 3 by default; lifecycle gaps are Tier 2.
 
 ## Output Format
 
@@ -511,7 +511,7 @@ wqi = 100
 3. **Test the re-run path.** A wizard that works once but breaks on re-run is worse than no wizard.
 4. **Scriptability is not optional.** If a wizard can't run in CI, it's incomplete.
 5. **Doctor mode is not a nice-to-have.** It's half the wizard. Setup without doctor is a one-shot anti-pattern.
-6. **Gotchas** -- read `../../gotchas.md` before producing output to avoid known mistakes.
+6. **Gotchas** -- read `../gotchas.md` before producing output to avoid known mistakes.
 
 ## Integration with other cli-* skills
 
@@ -523,7 +523,7 @@ wqi = 100
 | `cli-audit-tangle` | Checks wizard config **dependency topology** (circular config refs) |
 | `cli-forge-infra` | Generates infra configs. wizard audits **how** those configs are generated |
 | `cli-forge-pipeline` | CI/CD pipelines. wizard audit checks **non-interactive CI mode** |
-| `cli-cycle` | Should call cli-audit-wizard as part of the full project review; emit `.claude/cli-audit-wizard.json` per `../../shared/result-schema.md` for orchestrator aggregation |
+| `cli-cycle` | Should call cli-audit-wizard as part of the full project review; emit `.claude/cli-audit-wizard.json` per `../shared/result-schema.md` for orchestrator aggregation |
 
 ## Dynamic Handoffs
 
@@ -532,7 +532,7 @@ wqi = 100
 | Wizard is a bash script with UX issues | `/cli-audit-shell` | Shell quality audit |
 | Wizard generates YAML/config files | `/cli-forge-infra` | Validate generated configs |
 | Wizard has no --help or getopts | `/cli-audit-shell` (S9 CLI Ergonomics) | Shell quality audit |
-| Setup is idempotent but downstream perf benches drift (medians move between runs on same input) | `/cli-forge-perf` | The reproducibility toolkit (`../../shared/determinism.md`) governs both — wizard fixes the setup, perf measures the consequence |
+| Setup is idempotent but downstream perf benches drift (medians move between runs on same input) | `/cli-forge-perf` | The reproducibility toolkit (`../shared/determinism.md`) governs both — wizard fixes the setup, perf measures the consequence |
 
 **Rule:** Recommend, don't auto-execute.
 

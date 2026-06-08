@@ -5,7 +5,7 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
-  <img src="https://img.shields.io/badge/skills-32-green.svg" alt="32 Skills">
+  <img src="https://img.shields.io/badge/skills-30-green.svg" alt="30 Skills">
   <img src="https://img.shields.io/badge/claude--code-skills-8A2BE2" alt="Claude Code Skills">
   <img src="https://img.shields.io/badge/cursor-compatible-F7DF1E" alt="Cursor Compatible">
   <a href="https://github.com/Destynova2/cli-code-skills/stargazers"><img src="https://img.shields.io/github/stars/Destynova2/cli-code-skills?style=flat" alt="Stars"></a>
@@ -21,10 +21,10 @@
 
 ```bash
 git clone https://github.com/Destynova2/cli-code-skills.git
-cp -r cli-code-skills/cli-* ~/.claude/skills/
+cli-code-skills/scripts/install_skills.sh
 ```
 
-Type `/cli-` in Claude Code, hit tab, pick a skill:
+Type `/cli-` in Claude Code or Codex, hit tab, pick a skill:
 
 ```
 /cli-audit-code src/          → Clean Code score with per-category breakdown
@@ -49,26 +49,44 @@ Type `/cli-` in Claude Code, hit tab, pick a skill:
 | Skill | What it does |
 |-------|-------------|
 | `/cli-audit-code [path]` | Scores code against Clean Code principles — 10 categories: naming, functions, DRY, error handling, cognitive load. Works with any language |
-| `/cli-audit-xray [path]` | Reveals hidden semantic, mathematical, dataflow, and resource-flow structure; produces optimization cards with invariants, risk, and validation |
 | `/cli-audit-doc [path]` | Scores documentation quality against RFC 1574, Diataxis, Microsoft M-DOC — 6 categories, any language |
+| `/cli-audit-drift [path]` | Detects silent semantic drift between CONTRACTS.md intentions and implementation behavior |
+| `/cli-audit-shell [path]` | Audits shell scripts against Google Shell Style Guide and operational safety patterns |
 | `/cli-audit-sync [path]` | Verifies doc-code coherence: stale references, broken links, terminology drift, outdated diagrams, non-working examples. 3 layers: structural, semantic, executable |
+| `/cli-audit-tangle [path]` | Detects god functions, dependency cycles, dead nodes, and tangled call graph topology |
 | `/cli-audit-test [path]` | Scores test plan quality against ISTQB/TMMi — 12 dimensions: techniques (BVA, pairwise, decision table...), pyramid balance, negative testing, NFR, CI integration. Anti-pattern detection |
+| `/cli-audit-wizard [path]` | Audits setup/init/doctor/config wizard UX and lifecycle quality |
+| `/cli-audit-xray [path]` | Reveals hidden semantic, mathematical, dataflow, and resource-flow structure; produces optimization cards with invariants, risk, and validation |
 
 ### `cli-forge-*` — Generate
 
 | Skill | What it does |
 |-------|-------------|
-| `/cli-forge-hld [system]` | High-Level Design — C4 L1-L2 diagrams, capacity estimation, ATAM tradeoff analysis, ADRs, deployment architecture. Sources: arc42, Google Design Docs, ByteByteGo |
-| `/cli-forge-lld [component]` | Low-Level Design — C4 L3-L4, class/sequence/state diagrams, API contracts (OpenAPI), DB schemas, STRIDE threat model, testability design. Sources: Clean Architecture, DDD, GoF |
 | `/cli-forge-arch [system]` | Router — detects HLD vs LLD intent and delegates to the appropriate skill. Use when ambiguous |
-| `/cli-forge-doc [repo]` | Generates dual documentation — AI-optimized (AGENTS.md, llms.txt) + human-readable (Diataxis structure) |
-| `/cli-forge-infra [service]` | Ops integration — reads service docs, finds simplest config path, builds dependency trees, proposes upgrades with ADRs |
-| `/cli-forge-resilience [service]` | Resilience & operations — generates prod-parity matrices, runbooks, agent-ready ops packs, failure-injection plans, and incident memory |
+| `/cli-forge-chef [sprint]` | Generates a multi-agent Brigade de Cuisine orchestrator with tmux, prompts, worktrees, and gates |
 | `/cli-forge-choice-ux [flow]` | Choice UX — simplifies checkout, signup, pricing, settings, configurators, and guided flows using decision-load, friction, accessibility, and conversion heuristics |
-| `/cli-forge-readme [path]` | Generates a professional README using the 3-tier pyramid: hook, quickstart, contribute |
-| `/cli-forge-schema [desc]` | Generates GitHub-compatible Mermaid diagrams — picks the right type, splits complex ones, converts tables/kanban/PERT + 12 other formats |
+| `/cli-forge-demo [project]` | Generates a reproducible live-demo kit, reset path, demo script, and delivery support |
+| `/cli-forge-doc [repo]` | Generates dual documentation — AI-optimized (AGENTS.md, llms.txt) + human-readable (Diataxis structure) |
+| `/cli-forge-github [repo]` | Audits GitHub repository health: rulesets, PR lifecycle, CI checks, releases, branches |
+| `/cli-forge-hld [system]` | High-Level Design — C4 L1-L2 diagrams, capacity estimation, ATAM tradeoff analysis, ADRs, deployment architecture. Sources: arc42, Google Design Docs, ByteByteGo |
+| `/cli-forge-infra [service]` | Ops integration — reads service docs, finds simplest config path, builds dependency trees, proposes upgrades with ADRs |
+| `/cli-forge-lld [component]` | Low-Level Design — C4 L3-L4, class/sequence/state diagrams, API contracts (OpenAPI), DB schemas, STRIDE threat model, testability design. Sources: Clean Architecture, DDD, GoF |
+| `/cli-forge-oci-rootless [service]` | Designs migrations from legacy/systemd/bare-metal deployments to rootless OCI operations |
+| `/cli-forge-perf [scope]` | Builds performance diagnostics, native benchmark protocols, and optimization validation plans |
 | `/cli-forge-pipeline [yaml]` | CI/CD pipeline optimizer using biomimetic patterns (ants, slime mold, bees, mycelium). Works with GitLab CI, GitHub Actions, and any CI system |
+| `/cli-forge-prez [topic]` | Generates technical presentation decks in Marp Markdown |
+| `/cli-forge-quorum [sprint]` | Generates Byzantine-fault-tolerant REC-Quorum multi-agent orchestration |
+| `/cli-forge-readme [path]` | Generates a professional README using the 3-tier pyramid: hook, quickstart, contribute |
+| `/cli-forge-resilience [service]` | Resilience & operations — generates prod-parity matrices, runbooks, agent-ready ops packs, failure-injection plans, and incident memory |
+| `/cli-forge-schema [desc]` | Generates GitHub-compatible Mermaid diagrams — picks the right type, splits complex ones, converts tables/kanban/PERT + 12 other formats |
 | `/cli-forge-tree [path]` | Visualizes, audits, or scaffolds project directory structures with naming conventions |
+
+### Other Skills
+
+| Skill | What it does |
+|-------|-------------|
+| `/cli-git-conventional` | Enforces Conventional Commits, SemVer, branch naming, and zero AI trailers |
+| `/cli-watermark` | Adds and verifies multi-layer code provenance watermarks |
 
 ## Naming Convention
 
@@ -86,7 +104,14 @@ cli-<action>-<target>
 
 ```bash
 git clone https://github.com/Destynova2/cli-code-skills.git
-cp -r cli-code-skills/cli-* ~/.claude/skills/
+cli-code-skills/scripts/install_skills.sh --claude
+```
+
+### Codex
+
+```bash
+git clone https://github.com/Destynova2/cli-code-skills.git
+cli-code-skills/scripts/install_skills.sh --codex
 ```
 
 ### Cursor IDE
@@ -100,16 +125,30 @@ cp -r cli-code-skills/.cursor/rules/* your-project/.cursor/rules/
 
 ```bash
 cd cli-code-skills && git pull
-cp -r cli-* ~/.claude/skills/
+scripts/install_skills.sh
 ```
+
+## Validation
+
+Run the repository checks before publishing skill changes:
+
+```bash
+python3 scripts/validate_skills.py
+```
+
+The validator checks the skill count, frontmatter, README/CLAUDE inventories,
+shared-file paths, and Claude/Codex-neutral `cli-cycle` orchestration. The same
+check runs in GitHub Actions on pushes and pull requests.
 
 ## Project Structure
 
 ```
 cli-code-skills/
+├── .github/workflows/     # Repository validation workflow
 ├── .claude-plugin/        # Plugin manifest for marketplace
 │   └── plugin.json
 ├── .cursor/rules/         # Cursor IDE rules (4 core skills)
+├── docs/reviews/          # cli-cycle audit reports
 ├── cli-cycle/             # /cli-cycle — orchestrator
 ├── cli-audit-code/        # /cli-audit-code — Clean Code scoring (CQI)
 │   └── references/        #   12 categories, scoring framework, anti-patterns
@@ -117,29 +156,60 @@ cli-code-skills/
 │   └── references/        #   SOG, optimization families, examples, risk rules
 ├── cli-audit-doc/         # /cli-audit-doc — documentation quality (DQI)
 │   └── references/        #   12 categories, scoring framework, anti-patterns
+├── cli-audit-drift/       # /cli-audit-drift — semantic drift against contracts
+│   └── references/        #   contract templates and drift detection rules
+├── cli-audit-shell/       # /cli-audit-shell — shell quality and safety
+│   └── references/        #   shell categories, scoring, anti-patterns
 ├── cli-audit-sync/        # /cli-audit-sync — doc-code coherence
+│   └── references/        #   coherence layers and duplication rules
+├── cli-audit-tangle/      # /cli-audit-tangle — call graph topology
+│   └── references/        #   graph methods, analogies, fix patterns
 ├── cli-audit-test/        # /cli-audit-test — test plan quality & maturity
 │   └── references/        #   dimensions, techniques, anti-patterns, scoring
+├── cli-audit-wizard/      # /cli-audit-wizard — setup/config UX lifecycle
+│   └── references/        #   flows, doctor checks, tooling ladder
 ├── cli-forge-arch/        # /cli-forge-arch — HLD/LLD router
 │   └── references/        #   templates (backward compat)
+├── cli-forge-chef/        # /cli-forge-chef — multi-agent brigade orchestrator
+│   └── references/        #   prompts, tmuxinator, quality gates
+├── cli-forge-choice-ux/   # /cli-forge-choice-ux — choice, checkout, signup, settings UX
+│   └── references/        #   principles, scorecard, flow patterns
+├── cli-forge-demo/        # /cli-forge-demo — reproducible live-demo kit
+│   └── references/        #   staging, dramaturgy, tooling, templates
+├── cli-forge-github/      # /cli-forge-github — GitHub repository health
+│   └── references/        #   repo health patterns and checks
 ├── cli-forge-hld/         # /cli-forge-hld — High-Level Design
 │   └── references/        #   sections, scoring, anti-patterns, estimation
-├── cli-forge-lld/         # /cli-forge-lld — Low-Level Design
-│   └── references/        #   sections, scoring, anti-patterns, LLD template
 ├── cli-forge-doc/         # /cli-forge-doc — full project documentation
 │   └── references/        #   Diataxis framework templates
 ├── cli-forge-infra/       # /cli-forge-infra — ops integration
 │   └── references/        #   scoring, patterns, checklists
+├── cli-forge-lld/         # /cli-forge-lld — Low-Level Design
+│   └── references/        #   sections, scoring, anti-patterns, LLD template
+├── cli-forge-oci-rootless/ # /cli-forge-oci-rootless — rootless OCI migration
+│   └── references/        #   scenarios, proof gates, handoffs
+├── cli-forge-perf/        # /cli-forge-perf — performance optimization method
+│   └── references/        #   profiling, benchmarks, domains, examples
+├── cli-forge-pipeline/    # /cli-forge-pipeline — CI/CD pipeline optimizer (biomimetic)
+│   └── references/        #   pipeline templates, scoring, cache strategy
+├── cli-forge-prez/        # /cli-forge-prez — technical slide decks
+│   └── references/        #   slide structure and presentation patterns
+├── cli-forge-quorum/      # /cli-forge-quorum — REC-Quorum orchestration
+│   └── references/        #   quorum phases, templates, gotchas
+├── cli-forge-readme/      # /cli-forge-readme — README generation (RCI)
+│   └── references/        #   README pyramid and project types
 ├── cli-forge-resilience/  # /cli-forge-resilience — resilience, runbooks, agent-ready ops
 │   └── references/        #   models, tests, runbook templates, agent ops
-├── cli-forge-choice-ux/   # /cli-forge-choice-ux — choice, checkout, signup, settings UX
-│   └── references/        #   principles, scorecard, flow patterns
-├── cli-forge-pipeline/    # /cli-forge-pipeline — CI/CD pipeline optimizer (biomimetic)
-├── cli-forge-readme/      # /cli-forge-readme — README generation (RCI)
 ├── cli-forge-schema/      # /cli-forge-schema — Mermaid diagrams
 │   └── references/        #   diagram types, conversions, modes
 ├── cli-forge-tree/        # /cli-forge-tree — directory structure (SHS)
 │   └── references/        #   archetypes, conventions
+├── cli-git-conventional/  # /cli-git-conventional — commits, SemVer, branches
+│   └── references/        #   branch, command, and SemVer rules
+├── cli-watermark/         # /cli-watermark — code provenance watermarking
+│   └── references/        #   watermark layers and proof bundle
+├── shared/                # Shared cross-skill contracts
+├── scripts/               # Installation and repository validation utilities
 ├── gotchas.md             # Persistent lessons-learned, read by all skills
 └── README.md
 ```

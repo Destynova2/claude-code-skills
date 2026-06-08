@@ -31,7 +31,7 @@ allowed-tools:
 
 > **Language rule:** Les instructions du skill sont en français (le catalogue lui-même). Pour les artefacts générés (rapports, benches, scripts), détecte la langue du projet (README, commentaires, docs, commits) et produis dans cette langue. Si le projet est bilingue, demande à l'utilisateur.
 
-> **Gotchas:** Lis `../../gotchas.md` AVANT de produire un livrable.
+> **Gotchas:** Lis `../gotchas.md` AVANT de produire un livrable.
 
 # Perf Optimization
 
@@ -59,11 +59,11 @@ rien. Méthode en boucle :
 4. **Re-mesure** — confirme le gain réel. Si nul ou négatif, **reviens en arrière**.
    Garde le code lisible si le gain n'est pas significatif.
 
-> **Reproductibilité** — un bench n'a de valeur que s'il est rejouable à l'identique : seed, horloge, environnement, ordre, locale. Le toolkit canonique est partagé : `../../shared/determinism.md`. Sans ces pins, deux exécutions consécutives produisent des chiffres différents et l'A/B devient impossible à départager.
+> **Reproductibilité** — un bench n'a de valeur que s'il est rejouable à l'identique : seed, horloge, environnement, ordre, locale. Le toolkit canonique est partagé : `../shared/determinism.md`. Sans ces pins, deux exécutions consécutives produisent des chiffres différents et l'A/B devient impossible à départager.
 
 ### Le GATE — definition-of-done (ne pas sauter)
 
-Trois portes obligatoires. Tant qu'une case n'est pas cochée, on ne passe pas. La structure 3-phases (pré → pendant → post) est canonique dans `../../shared/done-gate.md` — ce GATE en est la spécialisation perf (distribution + permutation + anti-DCE en post). Les autres forge-* skills (resilience, pipeline, oci-rootless, demo, chef) instancient le même squelette pour leur domaine.
+Trois portes obligatoires. Tant qu'une case n'est pas cochée, on ne passe pas. La structure 3-phases (pré → pendant → post) est canonique dans `../shared/done-gate.md` — ce GATE en est la spécialisation perf (distribution + permutation + anti-DCE en post). Les autres forge-* skills (resilience, pipeline, oci-rootless, demo, chef) instancient le même squelette pour leur domaine.
 
 **Avant de toucher au code :**
 - [ ] baseline chiffrée et **reproductible** (même entrée, même environnement).
@@ -83,7 +83,7 @@ Trois portes obligatoires. Tant qu'une case n'est pas cochée, on ne passe pas. 
       fait, runs A/B interleavés. Détail : `references/benchmarking-traps.md`.
 - [ ] gain réel **non significatif** → revert et garde la lisibilité.
 
-> **Position sur le gate-ladder partagé** (`../../shared/gate-ladder.md`) — le GATE de perf est un **T1-T4 spécialisé** : le bench in-process est T1 (composant), la baseline reproductible est T2 (environnement maîtrisé), l'A/B sous charge est T4 (stress). Une régression de perf observée en prod sans test T4 = "false green" — exactement le défaut que le ladder existe pour rattraper.
+> **Position sur le gate-ladder partagé** (`../shared/gate-ladder.md`) — le GATE de perf est un **T1-T4 spécialisé** : le bench in-process est T1 (composant), la baseline reproductible est T2 (environnement maîtrisé), l'A/B sous charge est T4 (stress). Une régression de perf observée en prod sans test T4 = "false green" — exactement le défaut que le ladder existe pour rattraper.
 
 ### Harnais natif (langue-agnostique)
 
@@ -254,7 +254,7 @@ qui fait **moins de travail**, pas celui qui fait le même travail "plus vite".
 
 ## Sortie machine-lisible (cli-cycle)
 
-Quand ce skill tourne sous `cli-cycle`, émet une enveloppe `.claude/cli-forge-perf.json` au format `../../shared/result-schema.md` :
+Quand ce skill tourne sous `cli-cycle`, émet une enveloppe `.claude/cli-forge-perf.json` au format `../shared/result-schema.md` :
 
 - `score` : « perf budget compliance » (% de cas hot-path qui passent le GATE) si la cible a un budget ; sinon `null`.
 - `findings[]` : un par hotspot non traité ou par claim de gain non significatif (`tier`: 3 si bottleneck en prod, 2 si dégradation détectée, 1 si micro-optim spéculative).
@@ -270,11 +270,11 @@ Avant de profiler/bencher, vérifie si ces skills ont déjà produit du matérie
 | Source skill | Quoi récupérer | Où ça atterrit |
 |---|---|---|
 | `cli-audit-tangle` | `.claude/tangle-partition.json` : god functions, cluster Fiedler, boundary functions | les **god functions sont les premiers candidats au profiling** — fan-in × LoC × call count = priorité du diagnostic |
-| `cli-audit-xray` | Optimization Cards (`../../shared/optimization-card.md`) : hypothèses, invariants, validation attendue | transforme une intuition sémantique en bench ciblé ; le GATE perf prouve ou rejette la carte |
+| `cli-audit-xray` | Optimization Cards (`../shared/optimization-card.md`) : hypothèses, invariants, validation attendue | transforme une intuition sémantique en bench ciblé ; le GATE perf prouve ou rejette la carte |
 | `cli-forge-resilience` | Le **stress-strain** (rung T4) et les **resource cliffs / phase transitions** | les cliffs de ressource (CPU 80 %, mémoire OOM, disque plein) sont des **bornes Amdahl** déjà documentées |
 | `cli-audit-test` | La nominale du plan de test et D6 (NFR perf) | les benchs deviennent des **tests de non-régression** ; le test plan documente le SLO cible |
 | `cli-audit-drift` | `CONTRACTS.md` : invariants comportementaux. Si un invariant *de perf* y a été ajouté (« p95 < 100 ms »), le GATE doit le rejouer ; sinon, le budget perf vient du plan de test (`cli-audit-test` D6/NFR) ou d'un SLO externe | un gain qui viole un invariant existant n'est pas un gain, c'est une régression à chasser |
-| `cli-forge-pipeline` | Les jobs CI existants + la stratégie de cache | un bench A/B se branche dans le pipeline ; cache content-hashé = baseline reproductible (cf. `../../shared/determinism.md`) |
+| `cli-forge-pipeline` | Les jobs CI existants + la stratégie de cache | un bench A/B se branche dans le pipeline ; cache content-hashé = baseline reproductible (cf. `../shared/determinism.md`) |
 | `cli-forge-infra` | Le profil hardware réel (NUMA, CPU model, RAM) | calibre le roofline ; un bench sur laptop ne prédit pas la prod si la membrane diffère |
 
 ## Integration with other cli-* skills
@@ -299,7 +299,7 @@ Avant de profiler/bencher, vérifie si ces skills ont déjà produit du matérie
 | Profil plat ou coût réparti entre transformations sans rewrite évident | `/cli-audit-xray` | Extraire dataflow/resource-flow et générer des Optimization Cards avant de micro-optimiser |
 | Hot path = god function (fan-in × LoC élevé) | `/cli-audit-tangle` | Diagnostic topologique avant de mesurer ; le refactor structurel précède l'optim |
 | Gain significatif mais aucun test de non-régression | `/cli-audit-test` | D6/D7 : le gain doit être verrouillé en CI |
-| Bench A/B non rejouable (médiane bouge entre runs) | `/cli-audit-wizard` (idempotence du setup) + lire `../../shared/determinism.md` | Le harnais ou l'environnement n'est pas pinné — pas un problème de perf |
+| Bench A/B non rejouable (médiane bouge entre runs) | `/cli-audit-wizard` (idempotence du setup) + lire `../shared/determinism.md` | Le harnais ou l'environnement n'est pas pinné — pas un problème de perf |
 | Cliff de ressource observé (OOM, CPU 100 %, file pleine) | `/cli-forge-resilience` (T4) | Phase transition à documenter dans le runbook, pas seulement à benchmarker |
 | Bench in-house alors qu'un outil natif existe (Criterion, JMH, benchstat, hyperfine) | (interne) Implémente le squelette natif de `references/bench-protocol.md` §Squelettes | Les stats des outils natifs sont rigoureuses, le maison ment |
 | Aucun cache CI / baseline reproductible | `/cli-forge-pipeline` | Sans cache content-hashé, l'A/B mesure aussi le bruit du CI |

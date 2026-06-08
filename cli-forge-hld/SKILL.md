@@ -33,7 +33,7 @@ allowed-tools:
 5. **Diagrams are mandatory** — use Mermaid for all visuals (C4, sequence, deployment)
 6. **Non-goals are as important as goals** — they prevent scope creep (Google design doc tradition)
 7. **KISS** — if a section can be one table instead of three paragraphs, use the table. If a diagram replaces a page of text, use the diagram. Readers scan, they don't read
-8. **Gotchas** — read `../../gotchas.md` before producing output to avoid known mistakes
+8. **Gotchas** — read `../gotchas.md` before producing output to avoid known mistakes
 
 ---
 
@@ -67,7 +67,7 @@ If the user already provided context, use that instead of asking redundant quest
 
 ### Step 3 — Size the document (Mitosis)
 
-S/M/L/XL semantics are canonical in `../../shared/tiering.md` — the tables below specialize them to system complexity and the arc42 section inclusion matrix.
+S/M/L/XL semantics are canonical in `../shared/tiering.md` — the tables below specialize them to system complexity and the arc42 section inclusion matrix.
 
 **Detect the tier from signals:**
 

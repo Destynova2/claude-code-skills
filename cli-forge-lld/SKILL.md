@@ -32,7 +32,7 @@ Translate an HLD's "what" into the "how" — detailed enough that a developer ca
 4. **SOLID by default** — design visible in class diagrams must respect SOLID; flag violations explicitly
 5. **Patterns justified** — only document a pattern when its use is non-obvious from reading the code
 6. **KISS** — one clear diagram beats two pages of prose. One code example beats three paragraphs of explanation. Readers are developers — they scan for interfaces, schemas, and contracts
-7. **Gotchas** — read `../../gotchas.md` before producing output to avoid known mistakes
+7. **Gotchas** — read `../gotchas.md` before producing output to avoid known mistakes
 
 ---
 

@@ -234,7 +234,7 @@ When no CONTRACTS.md exists, the skill switches from audit to generation:
 4. **Check recent changes first.** `git diff` and `git log` on contracted functions are the first place drift appears.
 5. **Invariants > intentions.** A vague intention is hard to audit. A formal invariant is machine-checkable. Prioritize invariant violations.
 6. **Chain awareness.** If `process()` calls `mask()` and `mask()` has drifted, `process()` is also affected. Report the chain.
-7. **Gotchas** — read `../../gotchas.md` before producing output to avoid known mistakes.
+7. **Gotchas** — read `../gotchas.md` before producing output to avoid known mistakes.
 
 ## Integration with other cli-* skills
 
@@ -245,7 +245,7 @@ When no CONTRACTS.md exists, the skill switches from audit to generation:
 | `cli-audit-code` | Scores code quality. cli-audit-drift checks **behavioral conformity** to intentions |
 | `cli-audit-sync` | Checks doc-code coherence. cli-audit-drift checks **contract-code coherence** |
 | `cli-forge-doc` | Can generate documentation. cli-audit-drift generates **CONTRACTS.md** (a different artifact) |
-| `cli-cycle` | Should call cli-audit-drift as part of the full project review; emit `.claude/cli-audit-drift.json` per `../../shared/result-schema.md` for orchestrator aggregation |
+| `cli-cycle` | Should call cli-audit-drift as part of the full project review; emit `.claude/cli-audit-drift.json` per `../shared/result-schema.md` for orchestrator aggregation |
 
 ## What this skill does NOT do
 

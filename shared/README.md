@@ -1,6 +1,11 @@
 # shared/
 
-Cross-skill reference files — the common denominators that several `cli-*` skills point to instead of each re-deriving them. Skills reference these as `../../shared/<file>.md` (same resolution convention as `../../gotchas.md`).
+Cross-skill reference files — the common denominators that several `cli-*` skills point to instead of each re-deriving them.
+
+Path convention:
+
+- From a root `cli-*/SKILL.md`, reference shared files as `../shared/<file>.md` and `../gotchas.md`.
+- From a `cli-*/references/*.md` file, reference shared files as `../../shared/<file>.md` and `../../gotchas.md`.
 
 | File | What it canonicalizes | Consumed by |
 |---|---|---|

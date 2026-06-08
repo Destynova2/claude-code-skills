@@ -166,7 +166,7 @@ Create a **Prod-Parity Matrix**. Compare **Observed Dev/Staging** vs **Expected 
 
 ### Step 4 — Derive the test ladder
 
-Read `references/test-ladder.md` for the full ladder, examples, and escalation rules. The rung **semantics** are shared across skills (oci, pipeline, audit-test) in `../../shared/gate-ladder.md`; this skill's biology names map onto those rungs. Reproducibility/idempotency techniques (T3 reruns, mutation baselines) are shared in `../../shared/determinism.md`.
+Read `references/test-ladder.md` for the full ladder, examples, and escalation rules. The rung **semantics** are shared across skills (oci, pipeline, audit-test) in `../shared/gate-ladder.md`; this skill's biology names map onto those rungs. Reproducibility/idempotency techniques (T3 reruns, mutation baselines) are shared in `../shared/determinism.md`.
 
 Use this ladder:
 
@@ -236,7 +236,7 @@ If they do not exist, generate starter templates for:
 
 ### Step 8 — Score resilience
 
-Read `references/scoring.md` for the detailed 15-dimension framework. The score (≥ 45/60 + mutation tests pass) is this skill's post-verification gate — the 3-phase definition-of-done structure (pre → during → post) is canonical in `../../shared/done-gate.md`.
+Read `references/scoring.md` for the detailed 15-dimension framework. The score (≥ 45/60 + mutation tests pass) is this skill's post-verification gate — the 3-phase definition-of-done structure (pre → during → post) is canonical in `../shared/done-gate.md`.
 
 Score each dimension **0–4**:
 
@@ -262,7 +262,7 @@ Score each dimension **0–4**:
 
 ### Step 9 — Produce a prioritized action plan
 
-Use 3 tiers (tier semantics are canonical in `../../shared/triage.md` — Tier 3 = critical / Tier 2 = major / Tier 1 = minor, independent of GRADE confidence):
+Use 3 tiers (tier semantics are canonical in `../shared/triage.md` — Tier 3 = critical / Tier 2 = major / Tier 1 = minor, independent of GRADE confidence):
 
 - **Tier 3 — Critical:** false green in CI, missing runtime proof, data-loss risk, auth drift, secret drift, deploy non-idempotency, hidden path mismatch
 - **Tier 2 — Major:** parity gaps, weak observability, missing degraded-mode tests, incomplete runbook, backup/restore not proven
@@ -333,7 +333,7 @@ Each item must include:
 5. **Every fix must end in a durable guardrail**: a test, a gate, a runbook delta, or a blackbox entry.
 6. **Do not hide parity gaps.** List them explicitly, even if the answer is "accepted risk".
 7. **A working happy path is not enough.** Include at least one negative or degraded-mode test per critical surface.
-8. **If a `../../gotchas.md` file exists, read it before producing output** to avoid repeating known mistakes.
+8. **If a `../gotchas.md` file exists, read it before producing output** to avoid repeating known mistakes.
 
 ## Dynamic Handoffs
 
@@ -345,6 +345,6 @@ Each item must include:
 | Risk comes from component-level contracts or DB/API design | `/cli-forge-lld` | Tighten low-level contracts |
 | Infra/deploy complexity dominates the issue | `/cli-forge-infra` | Simplify and harden delivery path |
 | Docs, wrappers, and code disagree | `/cli-audit-sync` | Catch doc-code drift |
-| Stress / phase-transition surfaces detected but no perf budget or A/B harness | `/cli-forge-perf` | T4 stress-strain becomes measurable: bench protocol + roofline + reproducible A/B (`../../shared/determinism.md`) |
+| Stress / phase-transition surfaces detected but no perf budget or A/B harness | `/cli-forge-perf` | T4 stress-strain becomes measurable: bench protocol + roofline + reproducible A/B (`../shared/determinism.md`) |
 
 **Rule:** recommend handoffs, do not auto-execute them unless the user explicitly asks.

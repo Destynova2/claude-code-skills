@@ -29,7 +29,7 @@ allowed-tools:
 
 > **Language rule:** Skill instructions are written in English. When generating user-facing output, detect the project's primary language (from README, comments, docs, commit messages) and produce the output in that language. If the project is bilingual, ask the user which language to use before proceeding.
 
-> **Gotchas:** Read `../../gotchas.md` before producing output to avoid known mistakes.
+> **Gotchas:** Read `../gotchas.md` before producing output to avoid known mistakes.
 
 # CLI Forge GitHub — Repository Health Auditor & Fixer
 

@@ -60,7 +60,7 @@ Read `references/tiers.md` for the three tiers:
 
 ### Step 1 — Reconnaissance
 
-Read the project. Build a mental model of: what it does, who it's for, what problem it solves, what makes it different. Use the shared reconnaissance brief — read `../../shared/recon.md` (the same model readme and demo use, so all three tell one story).
+Read the project. Build a mental model of: what it does, who it's for, what problem it solves, what makes it different. Use the shared reconnaissance brief — read `../shared/recon.md` (the same model readme and demo use, so all three tell one story).
 
 ### Step 2 — Choose narrative framework
 
@@ -122,7 +122,7 @@ Read `references/anti-patterns.md` for the 11 named anti-patterns to detect and 
 3. **One idea per slide, one idea per talk (lightning).** A lightning talk with two ideas is two bad talks.
 4. **Speaker notes are the real content.** The slides are visual anchors. The notes are what the speaker actually says.
 5. **Dark theme by default.** Conference projectors in bright rooms render dark backgrounds with light text better than the inverse.
-6. **Gotchas** — read `../../gotchas.md` before producing output to avoid known mistakes.
+6. **Gotchas** — read `../gotchas.md` before producing output to avoid known mistakes.
 
 ## Integration with other cli-* skills
 

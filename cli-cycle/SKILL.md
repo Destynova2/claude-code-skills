@@ -34,7 +34,7 @@ Run every applicable `cli-*` skill on the current project, collect results, deli
 4. **Autonomous convergence.** When invoked with `--converge`, run the entire loop in an isolated worktree, then present a single unified plan. Read `references/convergence.md` for the full algorithm.
 5. **Flow graph.** Skills form a DAG: audit detects → forge corrects → git commits → re-audit verifies. No cycles allowed. Read `references/skill-flow.md` for the complete trigger graph, deduplication rules, and cycle detection.
 
-**Gotchas** — read `../../gotchas.md` before producing output to avoid known mistakes.
+**Gotchas** — read `../gotchas.md` before producing output to avoid known mistakes.
 
 ## Workflow
 
@@ -75,7 +75,12 @@ Run every applicable `cli-*` skill on the current project, collect results, deli
 ### Step 1 — Discover available skills
 
 ```
-Glob: ~/.claude/skills/cli-*/SKILL.md
+Resolve SKILLS_ROOT:
+  1. $CODEX_HOME/skills if set and exists
+  2. ~/.codex/skills if it exists and contains cli-*/SKILL.md
+  3. ~/.claude/skills if it exists and contains cli-*/SKILL.md
+
+Glob: $SKILLS_ROOT/cli-*/SKILL.md
 ```
 
 Parse each SKILL.md frontmatter to extract: `name`, `description`, `argument-hint`.
@@ -152,7 +157,7 @@ Phoenix — Which tier should we tackle?
 
 ### Step 6b — Correction pipeline (audit → forge → commit → re-audit)
 
-**Convention conservation law (read `../../gotchas.md` section "Convention conservation")**:
+**Convention conservation law (read `../gotchas.md` section "Convention conservation")**:
 
 Before ANY correction that touches a convention (file extension, naming, indentation, quoting, language), verify that a **concrete external force** justifies the change. Otherwise, preserve the project's current state. Consistency, best-practice, and aesthetics are NOT forces.
 

@@ -23,7 +23,7 @@ agent: general-purpose
 3. **Diataxis-aware** — classify each doc by type (tutorial, how-to, reference, explanation) and check mode purity
 4. **Language-specific** — apply each language's idiomatic doc conventions (see `reference.md` for language-specific rules)
 5. **Public API first** — public items are priority. Private items are nice-to-have
-6. **Gotchas** — read `../../gotchas.md` before producing output to avoid known mistakes
+6. **Gotchas** — read `../gotchas.md` before producing output to avoid known mistakes
 
 ## Input
 
@@ -78,7 +78,7 @@ DQI = Σ(wᵢ × sᵢ) / Σ(wᵢ) × 10
 
 ### Step 5 — Generate report
 
-Finding tier and confidence semantics are canonical in `../../shared/triage.md` (Tier 3/2/1 + GRADE + triangulation). D-dimension findings carry tier and confidence so `cli-cycle` can aggregate without re-parsing.
+Finding tier and confidence semantics are canonical in `../shared/triage.md` (Tier 3/2/1 + GRADE + triangulation). D-dimension findings carry tier and confidence so `cli-cycle` can aggregate without re-parsing.
 
 ## Output Format
 
@@ -148,7 +148,7 @@ Both complement each other. Run cli-audit-doc for quality, cli-audit-sync for ac
 | `cli-audit-sync` | Checks doc **accuracy**. cli-audit-doc checks doc **quality** |
 | `cli-audit-code` | Scores code quality. cli-audit-doc scores **doc quality** |
 | `cli-forge-doc` | Generates docs. cli-audit-doc **audits** existing docs |
-| `cli-cycle` | Calls cli-audit-doc as part of full project review; emit `.claude/cli-audit-doc.json` per `../../shared/result-schema.md` for orchestrator aggregation |
+| `cli-cycle` | Calls cli-audit-doc as part of full project review; emit `.claude/cli-audit-doc.json` per `../shared/result-schema.md` for orchestrator aggregation |
 
 ## Reference Sources
 

@@ -24,7 +24,7 @@ Four principles stolen from the best, plus one operational rule:
 2. **Diátaxis framework**: Documentation has four modes — tutorials, how-to guides, reference, explanation. Never mix them.
 3. **One doc, two readers**: Good documentation serves both humans and AI agents. Standard files (architecture.md, CONTRIBUTING.md, TROUBLESHOOTING.md) are naturally consumable by both — no special AI format needed.
 4. **Single source of truth (the spliceosome principle)**: each fact has exactly one canonical home. Other documents that need to mention the fact must link to it, transclude from it, or be generated from it — never duplicate it by hand. A eukaryotic gene is transcribed once and the spliceosome cuts the relevant exons for each context; documentation should work the same way. One source, many splicings (README, CONTRIBUTING, --help, slide deck), zero hand-maintained copies. Duplicated Truth is the #1 cause of doc rot — every parallel copy drifts.
-5. **Gotchas** — read `../../gotchas.md` before producing output to avoid known mistakes
+5. **Gotchas** — read `../gotchas.md` before producing output to avoid known mistakes
 
 ## Input
 
@@ -183,7 +183,7 @@ After generation, run the doc-audit framework on the result. See `reference.md` 
 
 ### Quick Audit Checklist
 
-This checklist + the Doc Debt threshold form this skill's post-verification gate before publishing; the 3-phase definition-of-done structure (pre → during → post) is canonical in `../../shared/done-gate.md`.
+This checklist + the Doc Debt threshold form this skill's post-verification gate before publishing; the 3-phase definition-of-done structure (pre → during → post) is canonical in `../shared/done-gate.md`.
 
 For each generated file, verify:
 

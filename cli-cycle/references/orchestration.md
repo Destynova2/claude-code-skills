@@ -166,13 +166,29 @@ head -20 README.md     # doc language
 
 The detected language is **injected into every sub-agent prompt**. This prevents skills from outputting English on a French project.
 
+### Skills root resolution
+
+Before launching sub-agents, resolve `SKILLS_ROOT` once:
+
+```bash
+if [ -n "${CODEX_HOME:-}" ] && [ -d "$CODEX_HOME/skills" ]; then
+  SKILLS_ROOT="$CODEX_HOME/skills"
+elif [ -d "$HOME/.codex/skills" ] && find "$HOME/.codex/skills" -maxdepth 2 -name SKILL.md | grep -q .; then
+  SKILLS_ROOT="$HOME/.codex/skills"
+else
+  SKILLS_ROOT="$HOME/.claude/skills"
+fi
+```
+
+Use the resolved `SKILLS_ROOT` in every prompt. Do not hardcode `~/.claude/skills` in Codex runs.
+
 ### Sub-agent prompt template
 
 For each applicable skill, launch a sub-agent with:
 
 ```
-Read the skill instructions from ~/.claude/skills/{skill-name}/SKILL.md
-Read ~/.claude/skills/gotchas.md for known mistakes to avoid.
+Read the skill instructions from {SKILLS_ROOT}/{skill-name}/SKILL.md
+Read {SKILLS_ROOT}/gotchas.md for known mistakes to avoid.
 
 Then execute that skill on the project at {project-path}.
 
@@ -193,7 +209,7 @@ Important:
   3. Top 3 things done well
   4. Full detailed report
 - ALSO emit a machine-readable envelope at `.claude/{skill-name}.json` following
-  `~/.claude/skills/shared/result-schema.md` (score, findings[], strengths[], handoffs[]).
+  `{SKILLS_ROOT}/shared/result-schema.md` (score, findings[], strengths[], handoffs[]).
   cli-cycle aggregates these directly instead of re-parsing your prose.
 
 Target: {project-path}

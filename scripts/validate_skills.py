@@ -1,0 +1,178 @@
+#!/usr/bin/env python3
+"""Validate repository-level invariants for cli-code-skills."""
+
+from __future__ import annotations
+
+import re
+import sys
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def fail(message: str) -> None:
+    print(f"FAIL: {message}")
+    raise SystemExit(1)
+
+
+def read(path: str) -> str:
+    return (ROOT / path).read_text(encoding="utf-8")
+
+
+def skill_dirs() -> list[Path]:
+    return sorted(
+        p for p in ROOT.glob("cli-*") if p.is_dir() and (p / "SKILL.md").is_file()
+    )
+
+
+def frontmatter(text: str, path: Path) -> str:
+    match = re.match(r"\A---\n(.*?)\n---\n", text, re.DOTALL)
+    if not match:
+        fail(f"{path} has no YAML frontmatter")
+    return match.group(1)
+
+
+def frontmatter_has_key(fm: str, key: str) -> bool:
+    return bool(re.search(rf"^{re.escape(key)}:\s*.+", fm, re.MULTILINE))
+
+
+def check_frontmatter(skills: list[Path]) -> None:
+    seen: set[str] = set()
+    for skill in skills:
+        path = skill / "SKILL.md"
+        text = path.read_text(encoding="utf-8")
+        fm = frontmatter(text, path)
+        for key in ("name", "description"):
+            if not frontmatter_has_key(fm, key):
+                fail(f"{path} missing frontmatter key: {key}")
+        name = re.search(r"^name:\s*(.+)$", fm, re.MULTILINE).group(1).strip()
+        if name != skill.name:
+            fail(f"{path} name={name!r} does not match directory {skill.name!r}")
+        if name in seen:
+            fail(f"duplicate skill name: {name}")
+        seen.add(name)
+
+
+def check_readme(skills: list[Path]) -> None:
+    readme = read("README.md")
+    expected_count = len(skills)
+
+    badge = re.search(r"skills-(\d+)-green\.svg", readme)
+    if not badge:
+        fail("README.md has no skills badge")
+    if int(badge.group(1)) != expected_count:
+        fail(f"README.md badge says {badge.group(1)} skills, found {expected_count}")
+
+    for skill in skills:
+        if f"/{skill.name}" not in readme and f"{skill.name}/" not in readme:
+            fail(f"README.md does not mention {skill.name}")
+
+    required = [
+        "scripts/install_skills.sh",
+        "--claude",
+        "--codex",
+        "shared",
+        "gotchas.md",
+    ]
+    for needle in required:
+        if needle not in readme:
+            fail(f"README.md installation docs missing {needle}")
+
+
+def check_claude(skills: list[Path]) -> None:
+    claude = read("CLAUDE.md")
+    expected_count = len(skills)
+    match = re.search(r"Current skills \((\d+)\)", claude)
+    if not match:
+        fail("CLAUDE.md has no Current skills count")
+    if int(match.group(1)) != expected_count:
+        fail(f"CLAUDE.md says {match.group(1)} skills, found {expected_count}")
+
+    current = claude.split("## Current skills", 1)[1].split("## Git identity", 1)[0]
+    for skill in skills:
+        if skill.name not in current:
+            fail(f"CLAUDE.md Current skills does not mention {skill.name}")
+
+    for needle in (
+        "scripts/install_skills.sh",
+        "~/.claude/skills",
+        "~/.codex/skills",
+        "shared",
+        "gotchas.md",
+    ):
+        if needle not in claude:
+            fail(f"CLAUDE.md installation docs missing {needle}")
+
+
+def check_installer() -> None:
+    installer = read("scripts/install_skills.sh")
+    for needle in (
+        "$HOME/.claude/skills",
+        "$HOME/.codex/skills",
+        "gotchas.md",
+        "shared",
+        "rm -rf",
+    ):
+        if needle not in installer:
+            fail(f"scripts/install_skills.sh missing {needle}")
+
+
+def check_shared_paths(skills: list[Path]) -> None:
+    for skill in skills:
+        text = (skill / "SKILL.md").read_text(encoding="utf-8")
+        if "../../shared/" in text:
+            fail(f"{skill}/SKILL.md uses ../../shared from root skill file")
+        if "../../gotchas.md" in text:
+            fail(f"{skill}/SKILL.md uses ../../gotchas.md from root skill file")
+
+    shared_readme = read("shared/README.md")
+    if "../shared/<file>.md" not in shared_readme:
+        fail("shared/README.md does not document root SKILL.md shared path")
+    if "../../shared/<file>.md" not in shared_readme:
+        fail("shared/README.md does not document references/ shared path")
+
+
+def check_cycle_runtime_neutrality() -> None:
+    skill = read("cli-cycle/SKILL.md")
+    orchestration = read("cli-cycle/references/orchestration.md")
+
+    if "SKILLS_ROOT" not in skill:
+        fail("cli-cycle/SKILL.md does not describe SKILLS_ROOT resolution")
+    if "SKILLS_ROOT" not in orchestration:
+        fail("cli-cycle orchestration does not use SKILLS_ROOT")
+    forbidden = [
+        "Read the skill instructions from ~/.claude/skills",
+        "Read ~/.claude/skills/gotchas.md",
+        "`~/.claude/skills/shared/result-schema.md`",
+    ]
+    for needle in forbidden:
+        if needle in orchestration:
+            fail(f"cli-cycle orchestration still hardcodes Claude path: {needle}")
+
+
+def check_ci() -> None:
+    workflow = read(".github/workflows/validate.yml")
+    if "scripts/validate_skills.py" not in workflow:
+        fail(".github/workflows/validate.yml does not run the skill validator")
+
+
+def main() -> int:
+    skills = skill_dirs()
+    if not skills:
+        fail("no cli-* skills found")
+
+    check_frontmatter(skills)
+    check_readme(skills)
+    check_claude(skills)
+    check_installer()
+    check_shared_paths(skills)
+    check_cycle_runtime_neutrality()
+    check_ci()
+
+    print(f"OK: {len(skills)} skills validated")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

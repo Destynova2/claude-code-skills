@@ -18,7 +18,7 @@ Visualize, audit, or scaffold project directory structures with **human-readable
 
 ## Core Principles
 
-- **Read `../../gotchas.md`** before producing output to avoid known pitfalls.
+- **Read `../gotchas.md`** before producing output to avoid known pitfalls.
 
 ## Core Conventions (Summary)
 

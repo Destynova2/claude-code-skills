@@ -23,7 +23,7 @@ agent: general-purpose
 3. **Language-aware** — detect the project language and apply its idiomatic patterns, not Java/C# defaults
 4. **Named anti-patterns** — use Fowler/Mantyla taxonomy names (Feature Envy, Shotgun Surgery) in findings
 5. **Positive reinforcement** — always highlight good practices found, not just violations
-6. **Gotchas** — read `../../gotchas.md` before producing output to avoid known mistakes
+6. **Gotchas** — read `../gotchas.md` before producing output to avoid known mistakes
 
 ## Input
 
@@ -86,7 +86,7 @@ CQI = Σ(wᵢ × sᵢ) / Σ(wᵢ) × 10
 
 ### Step 5 — Generate report
 
-Finding tier and confidence semantics are canonical in `../../shared/triage.md` (Tier 3/2/1 + GRADE + triangulation). Emit each finding with its tier and confidence so `cli-cycle` can aggregate without re-parsing.
+Finding tier and confidence semantics are canonical in `../shared/triage.md` (Tier 3/2/1 + GRADE + triangulation). Emit each finding with its tier and confidence so `cli-cycle` can aggregate without re-parsing.
 
 ## Output Format
 
@@ -142,7 +142,7 @@ Finding tier and confidence semantics are canonical in `../../shared/triage.md` 
 | `cli-audit-test` | Scores test strategy. cli-audit-code checks **test code quality** (C8) |
 | `cli-forge-lld` | Validates implementation matches the LLD design |
 | `cli-forge-perf` | Detects static perf anti-patterns (alloc in hot path, quadratic complexity, hidden-cost abstractions). `cli-forge-perf` verifies they are **dynamically** costly via profiling + bench |
-| `cli-cycle` | Calls cli-audit-code as part of full project review; emit `.claude/cli-audit-code.json` per `../../shared/result-schema.md` for orchestrator aggregation |
+| `cli-cycle` | Calls cli-audit-code as part of full project review; emit `.claude/cli-audit-code.json` per `../shared/result-schema.md` for orchestrator aggregation |
 
 ## Dynamic Handoffs
 

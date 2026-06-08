@@ -29,7 +29,7 @@ Generate professional, GitHub-compatible Mermaid diagrams that are **readable fi
 3. **GitHub-first** — every diagram must render on GitHub without errors. No FontAwesome, no click events, no exotic features
 4. **UX ergonomics** — treat diagrams like UI: if a user needs more than 5 seconds to understand the flow, redesign it
 5. **Truth over aspiration** — a diagram must reflect what EXISTS in the code, not what someone hopes to build. Stale diagrams are worse than no diagrams
-6. **Gotchas** — read `../../gotchas.md` before producing output to avoid known mistakes
+6. **Gotchas** — read `../gotchas.md` before producing output to avoid known mistakes
 
 ---
 

@@ -36,7 +36,7 @@ agent: general-purpose
 4. **Named anti-patterns** — use the anti-pattern names from `references/anti-patterns.md` in findings
 5. **Positive reinforcement** — always highlight good practices found
 6. **Complexity-adapted tooling** — simple problems deserve simple tools (sed), complex problems deserve proper tools (kustomize). Read `references/tooling-ladder.md`
-7. **Gotchas** — read `../../gotchas.md` before producing output to avoid known mistakes
+7. **Gotchas** — read `../gotchas.md` before producing output to avoid known mistakes
 
 ## Input
 
@@ -60,7 +60,7 @@ Score each dimension **0.0-1.0**, then compute a weighted SQI. Read `references/
 | S6 | Quoting & Expansion | 8% | `"${var}"` not `$var`? Arrays for lists? `"$@"` not `$*`? |
 | S7 | Control Flow & Structure | 8% | `main()` pattern? Functions near top? Early returns? Max depth 3? |
 | S8 | Naming Conventions | 5% | `lower_snake_case` functions? `UPPER_CASE` constants? `::` for packages? |
-| S9 | CLI Ergonomics | 10% | `getopts`/`getopt` for options? `--help`? Single entry point vs N scripts? S9 follows the canonical surface mapping in `../../shared/cli-ergonomics.md` (Laws 1-3 applied to shell). |
+| S9 | CLI Ergonomics | 10% | `getopts`/`getopt` for options? `--help`? Single entry point vs N scripts? S9 follows the canonical surface mapping in `../shared/cli-ergonomics.md` (Laws 1-3 applied to shell). |
 | S10 | Idempotency & Safety | 10% | Check-before-create? No destructive assumptions? `readonly` for constants? |
 | S11 | Namespace & Env Hygiene | 7% | Env vars prefixed by project? No global pollution? `local` everywhere? |
 | S12 | Security & Injection | 5% | No `eval`? No unquoted user input in commands? No shell injection in env blocks? |
@@ -111,7 +111,7 @@ Read `references/scoring.md` for the SQI formula, severity classification, and b
 SQI = Sigma(wi x si) / Sigma(wi) x 10
 ```
 
-Finding tier and confidence semantics are canonical in `../../shared/triage.md` (Tier 3/2/1 + GRADE + triangulation). S-dimension findings carry tier and confidence so `cli-cycle` can aggregate without re-parsing.
+Finding tier and confidence semantics are canonical in `../shared/triage.md` (Tier 3/2/1 + GRADE + triangulation). S-dimension findings carry tier and confidence so `cli-cycle` can aggregate without re-parsing.
 
 ## Output Format
 
@@ -171,7 +171,7 @@ Finding tier and confidence semantics are canonical in `../../shared/triage.md` 
 | `cli-forge-infra` | Audits infra config and ops patterns. cli-audit-shell audits the **scripts themselves** |
 | `cli-audit-tangle` | Detects structural coupling. cli-audit-shell detects **bash-specific** structural issues |
 | `cli-forge-pipeline` | Optimizes CI/CD pipelines. cli-audit-shell audits **shell scripts used in CI** |
-| `cli-cycle` | Should call cli-audit-shell as part of full project review when shell scripts exist; emit `.claude/cli-audit-shell.json` per `../../shared/result-schema.md` for orchestrator aggregation |
+| `cli-cycle` | Should call cli-audit-shell as part of full project review when shell scripts exist; emit `.claude/cli-audit-shell.json` per `../shared/result-schema.md` for orchestrator aggregation |
 
 ## Dynamic Handoffs
 

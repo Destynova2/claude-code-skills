@@ -45,10 +45,10 @@ A live demo is a **staged performance**, not an improvisation. Eight mappings ca
 | Stage craft | What it means for the demo |
 |---|---|
 | **The script & blocking** | `DEMO.md` — exact lines (what you say) and exact marks (the precise commands). No improvisation on stage. |
-| **Same show every night** | Fixed seed: state, data, **clock**, and environment are pinned so the run is deterministic. Reality is seeded like a PRNG. The canonical reproducibility toolkit is `../../shared/determinism.md` (consumed by `cli-forge-pipeline`, `cli-forge-resilience`, `cli-forge-perf`, `cli-audit-wizard`, `cli-forge-oci-rootless`) — demo is the *visible* twin of that contract. |
+| **Same show every night** | Fixed seed: state, data, **clock**, and environment are pinned so the run is deterministic. Reality is seeded like a PRNG. The canonical reproducibility toolkit is `../shared/determinism.md` (consumed by `cli-forge-pipeline`, `cli-forge-resilience`, `cli-forge-perf`, `cli-audit-wizard`, `cli-forge-oci-rootless`) — demo is the *visible* twin of that contract. |
 | **Reset the stage** | Returning to `s0` is **idempotent** and fast (`reset ∘ reset = reset`) so you can run the demo back-to-back. |
 | **Open with the showstopper** | Do the last thing first — front-load the payoff (Great Demo!'s "Do It"), then peel back how. |
-| **Hit your marks** | Golden path / vertical slice only. Every beat earns its place; deviation is where demos die. The golden path is **the T2-T3 rung** of `../../shared/gate-ladder.md` made visible — what a demo *shows* is exactly what a fresh deploy + first operation *proves*. |
+| **Hit your marks** | Golden path / vertical slice only. Every beat earns its place; deviation is where demos die. The golden path is **the T2-T3 rung** of `../shared/gate-ladder.md` made visible — what a demo *shows* is exactly what a fresh deploy + first operation *proves*. |
 | **No scene runs long** | No uninterrupted segment over ~76 seconds (Gong data). Segment, checkpoint, interact. |
 | **The understudy** | A pre-recorded backup (GIF / asciinema cast) and an offline mode. Never debug live > 45 s. |
 | **The matinée** | The self-guided version the audience can re-run alone (interactive walkthrough). |
@@ -91,7 +91,7 @@ Announce the pick like: *"CLI tool + README → I'll generate a VHS gif demo (fo
 
 ### Step 1 — Reconnaissance
 
-Read the project. Find the **one golden path** worth demoing: the headline capability, end to end, happy path only. Use the shared reconnaissance brief — read `../../shared/recon.md` (same model readme and prez use, so all three tell one story). If several candidates, pick the one with the strongest "showstopper" and note the rest as out of scope.
+Read the project. Find the **one golden path** worth demoing: the headline capability, end to end, happy path only. Use the shared reconnaissance brief — read `../shared/recon.md` (same model readme and prez use, so all three tell one story). If several candidates, pick the one with the strongest "showstopper" and note the rest as out of scope.
 
 First check the **Upstream inputs** table below: if `cli-forge-resilience` already mapped the golden path, or `cli-audit-test` named the nominal scenario, reuse it instead of re-deriving.
 
@@ -136,7 +136,7 @@ Always emit a short pre-flight in `DEMO.md` (read `references/staging.md` for th
 
 ### Step 6 — Quality gate
 
-The 8 boxes below are this skill's post-verification gate; the 3-phase definition-of-done structure (pre → during → post) is canonical in `../../shared/done-gate.md`. Before delivering, verify:
+The 8 boxes below are this skill's post-verification gate; the 3-phase definition-of-done structure (pre → during → post) is canonical in `../shared/done-gate.md`. Before delivering, verify:
 
 - [ ] **Same show every night** — seed + clock pinned; two consecutive dry-runs produce identical output
 - [ ] **Reset is idempotent** — running it twice lands on the same `s0`
@@ -173,7 +173,7 @@ Read `references/anti-patterns.md` for the 12 named anti-patterns (Demo Gods, Fe
 4. **Pin the seed and the clock.** Non-deterministic data is the most common silent demo killer.
 5. **Always ship an understudy.** Every kit includes a backup recording and an offline plan.
 6. **Recommend the support, let the user force it.** State the pick and the reason; honour `--support`.
-7. **Gotchas** — read `../../gotchas.md` before producing output to avoid known mistakes.
+7. **Gotchas** — read `../gotchas.md` before producing output to avoid known mistakes.
 
 ## Output
 

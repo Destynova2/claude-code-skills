@@ -50,7 +50,7 @@ Evaluate a test plan or test suite against ISTQB standards, TMMi maturity model,
 
 Score each dimension **0-4**, then compute a weighted final score. Read `references/dimensions.md` for detailed scoring criteria, evidence patterns, and per-dimension guidance.
 
-> A test plan's reach can be read against the shared **T0-T4/M0 ladder** (`../../shared/gate-ladder.md`): how far up the rungs (static contract → component → fresh deploy → day-2 ops → stress) does the suite actually go? Most plans stall at T1-T2.
+> A test plan's reach can be read against the shared **T0-T4/M0 ladder** (`../shared/gate-ladder.md`): how far up the rungs (static contract → component → fresh deploy → day-2 ops → stress) does the suite actually go? Most plans stall at T1-T2.
 
 | # | Dimension | Weight | Key question |
 |---|-----------|--------|-------------|
@@ -96,7 +96,7 @@ Normalize to 0-100 scale. Read `references/scoring-framework.md` for TMMi mappin
 
 ### Step 6 — Generate report
 
-Use the output format below. Finding tier and confidence semantics are canonical in `../../shared/triage.md` (Tier 3/2/1 + GRADE + triangulation). D-dimension findings carry tier and confidence so `cli-cycle` can aggregate without re-parsing.
+Use the output format below. Finding tier and confidence semantics are canonical in `../shared/triage.md` (Tier 3/2/1 + GRADE + triangulation). D-dimension findings carry tier and confidence so `cli-cycle` can aggregate without re-parsing.
 
 ## Output Format
 
@@ -155,7 +155,7 @@ Use the output format below. Finding tier and confidence semantics are canonical
 5. **Score honestly**: 100/100 means world-class. 70/100 is genuinely good. 50/100 is typical.
 6. **Anti-patterns > missing features**: Detecting an ice cream cone is more valuable than noting a missing charter.
 7. **Actionable output**: Every gap must come with a concrete, sized recommendation.
-8. **Gotchas** — read `../../gotchas.md` before producing output to avoid known mistakes.
+8. **Gotchas** — read `../gotchas.md` before producing output to avoid known mistakes.
 
 ## Integration with other cli-* skills
 
@@ -168,7 +168,7 @@ Use the output format below. Finding tier and confidence semantics are canonical
 | `cli-audit-sync` | Verifies doc-code coherence. cli-audit-test verifies **test-requirement coherence** |
 | `cli-forge-schema` | Can visualize test plan as diagrams (pyramid, state machines) |
 | `cli-forge-perf` | D6 (NFR) and D7 (risk) cover perf as *intent*; `cli-forge-perf` provides the executable bench harness (A/B, distribution, permutation test) that turns the intent into a non-regression gate |
-| `cli-cycle` | Calls cli-audit-test as part of the full project review; emit `.claude/cli-audit-test.json` per `../../shared/result-schema.md` for orchestrator aggregation |
+| `cli-cycle` | Calls cli-audit-test as part of the full project review; emit `.claude/cli-audit-test.json` per `../shared/result-schema.md` for orchestrator aggregation |
 
 ## Dynamic Handoffs
 

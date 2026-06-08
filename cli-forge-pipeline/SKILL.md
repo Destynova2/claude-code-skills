@@ -45,7 +45,7 @@ Read `references/patterns.md` for detailed explanations, biology, and dual GitLa
 | 3 | **Army ants** (Eciton) | Fan-out / Fan-in + Ephemeral Runners | Maximum parallelism, disposable runners |
 | 4 | **Honeybees** (Apis) | Autoscaling + Priority-based Runner Tagging | Resources proportional to load |
 | 5 | **Mycelium** | Multi-Registry Fallback + Distributed Cache | Zero SPOF, waterfall cache |
-| 6 | **Mitosis** | Workflow Fission | Pipeline too big → split into independent workflows (S/M/L/XL semantics canonical in `../../shared/tiering.md`) |
+| 6 | **Mitosis** | Workflow Fission | Pipeline too big → split into independent workflows (S/M/L/XL semantics canonical in `../shared/tiering.md`) |
 | 7 | **Immune system** (VDJ) | Combinatorial Fuzzing + Property-Based Testing | Explore the input space, not just the known cases |
 | 8 | **Fungal spores** | Full Combinatorial Matrix | OS × arch × version × features, fail-fast: false |
 | 9 | **Tardigrade** | Chaos Engineering / Fault Injection | Inject failures to prove survival |
@@ -59,7 +59,7 @@ Draw the actual dependencies. Identify sequential jobs that could run in paralle
 Does each job do ONE thing? Are artifacts properly defined (stigmergy)? Are there generalist jobs that should be split?
 
 ### Step 3 — Slime mold audit (Physarum)
-Are there jobs running without any relevant change? Are cache keys based on content? Are retries selective? Content-hashed keys and reproducibility are shared in `../../shared/determinism.md`. CI stages map onto the shared T0-T4 rungs (`../../shared/gate-ladder.md`): the **release gate fails at the lowest red rung**.
+Are there jobs running without any relevant change? Are cache keys based on content? Are retries selective? Content-hashed keys and reproducibility are shared in `../shared/determinism.md`. CI stages map onto the shared T0-T4 rungs (`../shared/gate-ladder.md`): the **release gate fails at the lowest red rung**.
 
 ### Step 4 — Army ants audit
 Which slow jobs can be fanned out in parallel? Are runners ephemeral? Are fan-ins happening too early?
@@ -96,7 +96,7 @@ Are there tests under degraded network conditions? Tests under resource pressure
 
 ### Gotchas
 
-Read `../../gotchas.md` before producing output to avoid known mistakes.
+Read `../gotchas.md` before producing output to avoid known mistakes.
 
 ---
 
@@ -172,7 +172,7 @@ For each scenario: what mitigation ALREADY exists? If none → accepted risk, do
 
 ## Pipeline Mutation Testing
 
-The mutation set + scorecard threshold is this skill's post-verification gate; the 3-phase definition-of-done structure (pre → during → post) is canonical in `../../shared/done-gate.md`.
+The mutation set + scorecard threshold is this skill's post-verification gate; the 3-phase definition-of-done structure (pre → during → post) is canonical in `../shared/done-gate.md`.
 
 | Mutation | Expected | If it passes = bug |
 |----------|----------|-------------------|
@@ -214,5 +214,5 @@ If > 2 mutations pass silently, the pipeline has holes.
 |-------|-------------|
 | `cli-audit-test` | D13 covers drift detection within tests. cli-forge-pipeline covers the **CI that executes** those tests |
 | `cli-audit-code` | Audits code quality. cli-forge-pipeline audits **pipeline quality** |
-| `cli-forge-perf` | Pipeline is the natural home of the perf gate: content-hashed cache (`../../shared/determinism.md`) makes baselines reproducible; A/B bench jobs run on every PR; lowest red rung of `../../shared/gate-ladder.md` includes T4 perf stress |
+| `cli-forge-perf` | Pipeline is the natural home of the perf gate: content-hashed cache (`../shared/determinism.md`) makes baselines reproducible; A/B bench jobs run on every PR; lowest red rung of `../shared/gate-ladder.md` includes T4 perf stress |
 | `cli-cycle` | Calls cli-forge-pipeline as part of the full review |

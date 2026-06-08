@@ -55,7 +55,7 @@ Core rule:
 
 ## Mitosis — Scale Analysis to Scope
 
-Reference `../../shared/tiering.md` for canonical S/M/L/XL semantics.
+Reference `../shared/tiering.md` for canonical S/M/L/XL semantics.
 
 | Scope | Tier | Behavior |
 |---|---|---|
@@ -72,10 +72,10 @@ Bias down when unsure. A noisy X-Ray report is worse than a narrow one with stro
 
 Before producing findings:
 
-1. Read `../../gotchas.md` if it exists.
-2. Read `../../shared/optimization-card.md` for the canonical card contract.
-3. Read `../../shared/triage.md` for tier/confidence semantics.
-4. Read `../../shared/done-gate.md` and `../../shared/gate-ladder.md` when a candidate requires proof or benchmark.
+1. Read `../gotchas.md` if it exists.
+2. Read `../shared/optimization-card.md` for the canonical card contract.
+3. Read `../shared/triage.md` for tier/confidence semantics.
+4. Read `../shared/done-gate.md` and `../shared/gate-ladder.md` when a candidate requires proof or benchmark.
 5. If present, read `.claude/tangle-partition.json` to focus on god functions, cycles, and boundary functions.
 6. If present, read `CONTRACTS.md` before proposing rewrites that depend on behavior or invariants.
 
@@ -130,7 +130,7 @@ Use `references/risk-rules.md` for floating point, side effects, concurrency, an
 
 ### Step 5 — Report and Emit Envelope
 
-Produce a Markdown report and, when running under `cli-cycle` or when writing files is allowed, emit `.claude/cli-audit-xray.json` following `../../shared/result-schema.md`.
+Produce a Markdown report and, when running under `cli-cycle` or when writing files is allowed, emit `.claude/cli-audit-xray.json` following `../shared/result-schema.md`.
 
 ## Output Format
 
@@ -156,7 +156,7 @@ Produce a Markdown report and, when running under `cli-cycle` or when writing fi
 | Invariant | Evidence | Missing? | Downstream use |
 
 ## Optimization Candidates
-{optimization cards using ../../shared/optimization-card.md}
+{optimization cards using ../shared/optimization-card.md}
 
 ## Handoffs
 | Target skill | Scope | Reason |

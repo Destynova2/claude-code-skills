@@ -29,7 +29,7 @@ allowed-tools:
 
 > **Language rule:** Skill instructions are written in English. When generating user-facing files (prompts, shared-state, tmuxinator comments, reports), detect the project's primary language (from README, comments, docs, commit messages) and produce those files in that language. If the project is bilingual, ask the user which language to use before proceeding. The Brigade vocabulary (Menu, Commis, Sous-Chef, Chef, Plat, Mise en place, etc.) stays in French regardless — it's the pattern's canonical terminology, not prose.
 
-> **Gotchas:** Read `../../gotchas.md` AND `references/gotchas-chef.md` before producing output.
+> **Gotchas:** Read `../gotchas.md` AND `references/gotchas-chef.md` before producing output.
 
 # CLI Forge Boss — Brigade de Cuisine
 
@@ -474,7 +474,7 @@ When multiple commis are done:
 
 ### 0.4 — Choose model and brigade size (Mitosis)
 
-Read `references/simplified-model.md`. Two models exist — pick based on tier. The S/M/L/XL semantics are canonical in `../../shared/tiering.md` — this skill's tier table specializes them to brigade composition (1 commis → full XL brigade w/ sous-chef clusters).
+Read `references/simplified-model.md`. Two models exist — pick based on tier. The S/M/L/XL semantics are canonical in `../shared/tiering.md` — this skill's tier table specializes them to brigade composition (1 commis → full XL brigade w/ sous-chef clusters).
 
 | Signal | Tier | Model | Agents | Quality gates |
 |--------|------|--------|--------|---------------|
@@ -667,7 +667,7 @@ The Chef:
 Each votes independently: APPROVE / DENY+solution / CONCERN+solution.
 Resolution rounds if no consensus. Human escalation < 2%.
 
-Prompts are CLI surfaces — ask once, default sensibly, recap before action, ship as committable files. The canonical 4 Laws + surface mapping is `../../shared/cli-ergonomics.md`.
+Prompts are CLI surfaces — ask once, default sensibly, recap before action, ship as committable files. The canonical 4 Laws + surface mapping is `../shared/cli-ergonomics.md`.
 
 ### 2.4 — The Sous-Chef (MANDATORY — embedded in the Chef prompt)
 
@@ -776,7 +776,7 @@ The contre-chef-inter is a **Haiku-powered team member** in its own tmux window 
 
 **Why different from ccheck:** ccheck sends `tmux send-keys Enter` (keyboard); contre-chef-inter sends `SendMessage` (team protocol). They handle **orthogonal** permission pathways. Both are needed at tier ≥ M.
 
-**Note on `tmux send-keys` as rung 5:** keyboard injection into a UI is **rung 5 of `../../shared/escalation-ladder.md`** — used here only because the underlying Claude Code UI exposes no programmatic permission-grant API (rungs 1-4 don't exist for this specific flow). It is gated on the ccheck's read-the-diff decision and logged for audit. Never extend this pattern to operations that have a real API.
+**Note on `tmux send-keys` as rung 5:** keyboard injection into a UI is **rung 5 of `../shared/escalation-ladder.md`** — used here only because the underlying Claude Code UI exposes no programmatic permission-grant API (rungs 1-4 don't exist for this specific flow). It is gated on the ccheck's read-the-diff decision and logged for audit. Never extend this pattern to operations that have a real API.
 
 ### 2.7 — Permissions (one `settings.local.json` per worktree)
 
@@ -823,7 +823,7 @@ every other role; the apply quorum protocol gates the apply pane itself.
 
 ## Phase 3 — Check before service
 
-The 8+ hard gates below are this phase's post-verification step; the 3-phase definition-of-done structure (pre → during → post) is canonical in `../../shared/done-gate.md`.
+The 8+ hard gates below are this phase's post-verification step; the 3-phase definition-of-done structure (pre → during → post) is canonical in `../shared/done-gate.md`.
 
 1. Check tmuxinator syntax: `tmuxinator doctor`
 2. Verify all paths exist

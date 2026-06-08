@@ -2,36 +2,48 @@
 
 ## Skills installation
 
-Skills are installed as **copies** in `~/.claude/skills/` (global, available in all projects).
+Skills are installed as **copies** in `~/.claude/skills/` for Claude Code and
+`~/.codex/skills/` for Codex (global, available in all projects).
 Source of truth is this repo (`~/workspace/cli-code-skills/`).
 
-**After modifying a skill in this repo, copy it to `~/.claude/skills/` :**
+**After modifying a skill in this repo, copy it to both runtimes:**
 ```bash
-rm -rf ~/.claude/skills/cli-audit-wizard && cp -r cli-audit-wizard ~/.claude/skills/cli-audit-wizard
+scripts/install_skills.sh
 ```
 
-Or copy all skills at once:
+Or install only one runtime:
 ```bash
-for d in cli-*/; do n="${d%/}"; rm -rf ~/.claude/skills/"$n" && cp -r "$n" ~/.claude/skills/"$n"; done
+scripts/install_skills.sh --claude
+scripts/install_skills.sh --codex
 ```
 
-The `rm -rf` before each copy is required: `cp -r src dest` nests `src` inside `dest`
-when `dest` already exists (creating `dest/src`) instead of replacing it.
+The installer removes each destination skill before copying it. That avoids stale
+files when a reference is renamed or deleted.
 
-**Shared files** (`gotchas.md` and `shared/`) are referenced by skills as `../../<name>`
-and must also be installed at the skills root:
-```bash
-cp gotchas.md ~/.claude/skills/gotchas.md
-rm -rf ~/.claude/skills/shared && cp -r shared ~/.claude/skills/shared
-```
+**Shared files** (`gotchas.md` and `shared/`) are referenced by root `SKILL.md`
+files as `../<name>` and by `references/` files as `../../<name>`.
+The installer copies them to the skills root for both runtimes.
 
 Do NOT use symlinks — use real copies.
 
-## Current skills (28)
+## Validation
 
-**Audit (9):** cli-audit-code, cli-audit-doc, cli-audit-drift, cli-audit-shell, cli-audit-sync, cli-audit-tangle, cli-audit-test, cli-audit-wizard, cli-cycle
+Before committing or installing changes, run:
 
-**Forge (17):** cli-forge-arch, cli-forge-chef, cli-forge-demo, cli-forge-doc, cli-forge-github, cli-forge-hld, cli-forge-infra, cli-forge-lld, cli-forge-oci-rootless, cli-forge-perf, cli-forge-pipeline, cli-forge-prez, cli-forge-quorum, cli-forge-readme, cli-forge-resilience, cli-forge-schema, cli-forge-tree
+```bash
+python3 scripts/validate_skills.py
+```
+
+The validator checks frontmatter, skill counts, README/CLAUDE inventories,
+shared-file paths, and Claude/Codex-neutral `cli-cycle` orchestration.
+
+## Current skills (30)
+
+**Audit (9):** cli-audit-code, cli-audit-doc, cli-audit-drift, cli-audit-shell, cli-audit-sync, cli-audit-tangle, cli-audit-test, cli-audit-wizard, cli-audit-xray
+
+**Cycle (1):** cli-cycle
+
+**Forge (18):** cli-forge-arch, cli-forge-chef, cli-forge-choice-ux, cli-forge-demo, cli-forge-doc, cli-forge-github, cli-forge-hld, cli-forge-infra, cli-forge-lld, cli-forge-oci-rootless, cli-forge-perf, cli-forge-pipeline, cli-forge-prez, cli-forge-quorum, cli-forge-readme, cli-forge-resilience, cli-forge-schema, cli-forge-tree
 
 **Git (1):** cli-git-conventional
 

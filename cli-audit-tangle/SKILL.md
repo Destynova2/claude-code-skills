@@ -61,7 +61,7 @@ Read `references/analysis-methods.md` for detailed algorithms and interpretation
 
 ## Mitosis — Scale analysis to project size
 
-S/M/L/XL semantics are canonical in `../../shared/tiering.md` — the table below specializes them to function-count thresholds and analysis depth.
+S/M/L/XL semantics are canonical in `../shared/tiering.md` — the table below specializes them to function-count thresholds and analysis depth.
 
 | Signal | Tier | Analysis depth |
 |--------|------|---------------|
@@ -414,7 +414,7 @@ tangle_score = 100
 3. **Entry points are not god functions.** `main()`, test functions, and public API endpoints naturally have high degree — exclude them from god function analysis.
 4. **Cycles between modules ≠ cycles within modules.** Inter-module cycles are Type II (restructure). Intra-module cycles are often fine (mutual recursion).
 5. **Dead code needs confirmation.** In-degree = 0 might mean: called via macro, reflection, FFI, or dynamic dispatch. Flag but don't assert.
-6. **Gotchas** — read `../../gotchas.md` before producing output to avoid known mistakes.
+6. **Gotchas** — read `../gotchas.md` before producing output to avoid known mistakes.
 
 ## Integration with other cli-* skills
 
