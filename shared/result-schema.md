@@ -26,7 +26,8 @@
       "line": 42,
       "description": "Hardcoded secret in token signer",
       "confidence": "high",
-      "effort": "low"
+      "effort": "low",
+      "metadata": {}
     }
   ],
   "strengths": [
@@ -47,6 +48,7 @@
 | `scope` | directory/file scanned, or `null` for whole project |
 | `score.value/scale/label` | the skill's headline score and its name (CQI, DQI, SQI, WQI, tangle_score…); omit if the skill produces no score |
 | `findings[]` | one entry per issue: `tier` (1 minor / 2 major / 3 critical, per `cli-cycle` triage), `dimension`, `file`, `line`, `description`, `confidence` (low/medium/high), `effort` (low/medium/high) |
+| `findings[].metadata` | optional skill-specific extension. Consumers that do not understand it must ignore it. Example: `cli-audit-xray` stores optimization-card status, invariants, validation, and next owner |
 | `strengths[]` | what's done well (feeds the cycle "Strengths" section) |
 | `handoffs[]` | structured version of the skill's Dynamic Handoffs: `target` skill, `scope`, `reason` |
 

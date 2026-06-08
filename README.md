@@ -5,7 +5,7 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
-  <img src="https://img.shields.io/badge/skills-14-green.svg" alt="14 Skills">
+  <img src="https://img.shields.io/badge/skills-32-green.svg" alt="32 Skills">
   <img src="https://img.shields.io/badge/claude--code-skills-8A2BE2" alt="Claude Code Skills">
   <img src="https://img.shields.io/badge/cursor-compatible-F7DF1E" alt="Cursor Compatible">
   <a href="https://github.com/Destynova2/cli-code-skills/stargazers"><img src="https://img.shields.io/github/stars/Destynova2/cli-code-skills?style=flat" alt="Stars"></a>
@@ -28,6 +28,7 @@ Type `/cli-` in Claude Code, hit tab, pick a skill:
 
 ```
 /cli-audit-code src/          → Clean Code score with per-category breakdown
+/cli-audit-xray src/core/     → Semantic optimization cards with invariants and validation
 /cli-audit-test tests/        → Test plan quality score (ISTQB/TMMi, 12 dimensions)
 /cli-forge-hld "payment API"  → HLD with C4 L1-L2, capacity estimation, ADRs
 /cli-forge-lld "order service" → LLD with class/sequence diagrams, API specs, DB schemas
@@ -48,6 +49,7 @@ Type `/cli-` in Claude Code, hit tab, pick a skill:
 | Skill | What it does |
 |-------|-------------|
 | `/cli-audit-code [path]` | Scores code against Clean Code principles — 10 categories: naming, functions, DRY, error handling, cognitive load. Works with any language |
+| `/cli-audit-xray [path]` | Reveals hidden semantic, mathematical, dataflow, and resource-flow structure; produces optimization cards with invariants, risk, and validation |
 | `/cli-audit-doc [path]` | Scores documentation quality against RFC 1574, Diataxis, Microsoft M-DOC — 6 categories, any language |
 | `/cli-audit-sync [path]` | Verifies doc-code coherence: stale references, broken links, terminology drift, outdated diagrams, non-working examples. 3 layers: structural, semantic, executable |
 | `/cli-audit-test [path]` | Scores test plan quality against ISTQB/TMMi — 12 dimensions: techniques (BVA, pairwise, decision table...), pyramid balance, negative testing, NFR, CI integration. Anti-pattern detection |
@@ -111,6 +113,8 @@ cli-code-skills/
 ├── cli-cycle/             # /cli-cycle — orchestrator
 ├── cli-audit-code/        # /cli-audit-code — Clean Code scoring (CQI)
 │   └── references/        #   12 categories, scoring framework, anti-patterns
+├── cli-audit-xray/        # /cli-audit-xray — semantic optimization scanner
+│   └── references/        #   SOG, optimization families, examples, risk rules
 ├── cli-audit-doc/         # /cli-audit-doc — documentation quality (DQI)
 │   └── references/        #   12 categories, scoring framework, anti-patterns
 ├── cli-audit-sync/        # /cli-audit-sync — doc-code coherence

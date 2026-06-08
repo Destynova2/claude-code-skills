@@ -161,6 +161,7 @@ Use the output format below. Finding tier and confidence semantics are canonical
 
 | Skill | Relationship |
 |-------|-------------|
+| `cli-audit-xray` | Produces optimization cards whose validation methods become concrete unit, property, benchmark, or trace-comparison test requirements |
 | `cli-audit-code` | Scores code quality. cli-audit-test scores **test quality** |
 | `cli-audit-doc` | Scores doc quality. cli-audit-test checks **test documentation** |
 | `cli-audit-drift` | Checks behavioral conformity via contracts. cli-audit-test checks **test-level** drift detection (D13) |
@@ -173,6 +174,7 @@ Use the output format below. Finding tier and confidence semantics are canonical
 
 | Condition detected | Recommend | Why |
 |-------------------|-----------|-----|
+| Tests cover performance intent but no concrete code path or rewrite candidate is identified | `/cli-audit-xray` | Find the semantic hot path and produce validation-ready optimization cards |
 | No negative tests for security features | `/cli-audit-code` on security modules | Verify C9 coverage |
 | Test pyramid inverted (too many E2E, few unit) | `/cli-audit-tangle` | Find god functions that resist unit testing |
 | Missing drift detection in tests (D13 low) | `/cli-audit-drift` | Bootstrap CONTRACTS.md |

@@ -57,6 +57,7 @@ Run every applicable `cli-*` skill on the current project, collect results, deli
 | Skill | Scoped? | Why |
 |---|---|---|
 | `cli-audit-code` | ✅ | Scans only the slice's code |
+| `cli-audit-xray` | ✅ if scope has source code and optimization/dataflow signals | Scans semantic/resource-flow candidates within the slice |
 | `cli-audit-doc` | ✅ | Scans only the slice's docs |
 | `cli-audit-test` | ✅ | Scans only the slice's tests |
 | `cli-audit-tangle` | ✅ | Analyzes call graph within the slice |

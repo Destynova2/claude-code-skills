@@ -420,6 +420,7 @@ tangle_score = 100
 
 | Skill | Relationship |
 |-------|-------------|
+| `cli-audit-xray` | Adds semantic/dataflow/resource-flow meaning to tangled regions so structural cut points can be prioritized by real operational cost |
 | `cli-audit-code` | Scores code **quality** (naming, DRY). tangle scores code **topology** |
 | `cli-audit-drift` | Checks behavioral conformity. tangle checks **structural** conformity |
 | `cli-forge-schema` | Can visualize the call graph as a Mermaid diagram |
@@ -434,6 +435,7 @@ After your analysis, recommend these skills if conditions are met:
 
 | Condition detected | Recommend | Why |
 |-------------------|-----------|-----|
+| Boundary function or god function mixes parsing, validation, I/O, allocation-heavy transforms, or policy decisions | `/cli-audit-xray` | Identify which semantic flows should be split or optimized first |
 | CI/CD deadlocks or bottleneck jobs | `/cli-forge-pipeline` | Pipeline optimization with parallelism patterns |
 | Call graph worth visualizing (> 20 nodes) | `/cli-forge-schema` | Generate Mermaid diagram of the topology |
 | God functions with low code quality (LOC > 100, deep nesting) | `/cli-audit-code` on those files | Deep quality check on the most critical code |

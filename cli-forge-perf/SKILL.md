@@ -270,6 +270,7 @@ Avant de profiler/bencher, vérifie si ces skills ont déjà produit du matérie
 | Source skill | Quoi récupérer | Où ça atterrit |
 |---|---|---|
 | `cli-audit-tangle` | `.claude/tangle-partition.json` : god functions, cluster Fiedler, boundary functions | les **god functions sont les premiers candidats au profiling** — fan-in × LoC × call count = priorité du diagnostic |
+| `cli-audit-xray` | Optimization Cards (`../../shared/optimization-card.md`) : hypothèses, invariants, validation attendue | transforme une intuition sémantique en bench ciblé ; le GATE perf prouve ou rejette la carte |
 | `cli-forge-resilience` | Le **stress-strain** (rung T4) et les **resource cliffs / phase transitions** | les cliffs de ressource (CPU 80 %, mémoire OOM, disque plein) sont des **bornes Amdahl** déjà documentées |
 | `cli-audit-test` | La nominale du plan de test et D6 (NFR perf) | les benchs deviennent des **tests de non-régression** ; le test plan documente le SLO cible |
 | `cli-audit-drift` | `CONTRACTS.md` : invariants comportementaux. Si un invariant *de perf* y a été ajouté (« p95 < 100 ms »), le GATE doit le rejouer ; sinon, le budget perf vient du plan de test (`cli-audit-test` D6/NFR) ou d'un SLO externe | un gain qui viole un invariant existant n'est pas un gain, c'est une régression à chasser |
@@ -280,6 +281,7 @@ Avant de profiler/bencher, vérifie si ces skills ont déjà produit du matérie
 
 | Skill | Relation |
 |-------|----------|
+| `cli-audit-xray` | Produit les hypothèses d'optimisation et les invariants manquants ; ce skill mesure les candidats `benchmarkable` avec le protocole natif |
 | `cli-audit-tangle` | Topologie du code → la god function est presque toujours le hot path ; ce skill fournit le diagnostic structurel, `cli-forge-perf` fournit la mesure dynamique |
 | `cli-forge-resilience` | T4 stress-strain est le terrain commun ; ce skill cartographie *où ça casse*, `cli-forge-perf` mesure *combien ça coûte avant de casser* |
 | `cli-audit-test` | D6 (NFR) et D7 (risque) couvrent la perf en *intention* ; ce skill fournit le harnais d'**exécution** de cette intention |
@@ -294,6 +296,7 @@ Avant de profiler/bencher, vérifie si ces skills ont déjà produit du matérie
 
 | Condition détectée | Recommande | Pourquoi |
 |---|---|---|
+| Profil plat ou coût réparti entre transformations sans rewrite évident | `/cli-audit-xray` | Extraire dataflow/resource-flow et générer des Optimization Cards avant de micro-optimiser |
 | Hot path = god function (fan-in × LoC élevé) | `/cli-audit-tangle` | Diagnostic topologique avant de mesurer ; le refactor structurel précède l'optim |
 | Gain significatif mais aucun test de non-régression | `/cli-audit-test` | D6/D7 : le gain doit être verrouillé en CI |
 | Bench A/B non rejouable (médiane bouge entre runs) | `/cli-audit-wizard` (idempotence du setup) + lire `../../shared/determinism.md` | Le harnais ou l'environnement n'est pas pinné — pas un problème de perf |

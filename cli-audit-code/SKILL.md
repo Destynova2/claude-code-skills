@@ -137,6 +137,7 @@ Finding tier and confidence semantics are canonical in `../../shared/triage.md` 
 
 | Skill | Relationship |
 |-------|-------------|
+| `cli-audit-xray` | Turns static hidden-cost smells (repeated work, clones, allocations, bad cache placement) into optimization cards with invariants and validation |
 | `cli-audit-doc` | Scores doc quality. cli-audit-code scores **code quality** |
 | `cli-audit-test` | Scores test strategy. cli-audit-code checks **test code quality** (C8) |
 | `cli-forge-lld` | Validates implementation matches the LLD design |
@@ -149,6 +150,7 @@ After your analysis, recommend these skills if conditions are met:
 
 | Condition detected | Recommend | Why |
 |-------------------|-----------|-----|
+| Repeated computation, allocation/copy churn, cache-before-normalization, or dataflow cost with unclear safety | `/cli-audit-xray` | Build semantic/resource-flow candidates before recommending a rewrite |
 | God class/module (C3 > 500 lines, many responsibilities) | `/cli-audit-tangle` | Topology analysis reveals optimal split points |
 | Hardcoded secrets or `.env` tracked in git (C9) | `/cli-git-conventional --audit-markers` | Check git history for leaked secrets |
 | Shell scripts in the project with quality issues | `/cli-audit-shell` | Deep bash-specific audit beyond C6 idioms |

@@ -218,6 +218,7 @@ When no CONTRACTS.md exists, the skill switches from audit to generation:
 
 | Condition detected | Recommend | Why |
 |-------------------|-----------|-----|
+| Contract or review exposes optimization intent but no semantic candidate has been mapped | `/cli-audit-xray` | X-Ray names candidate rewrites and the invariants they would require |
 | Contracted functions have god-level complexity | `/cli-audit-tangle` | Topology suggests extraction before contract can be enforced |
 | Drift caused by dependency update | `/cli-forge-infra` | Check version compatibility |
 | No tests covering contracted behavior | `/cli-audit-test` | Test the invariants |
@@ -239,6 +240,7 @@ When no CONTRACTS.md exists, the skill switches from audit to generation:
 
 | Skill | Relationship |
 |-------|-------------|
+| `cli-audit-xray` | Extracts missing invariants from optimization candidates. cli-audit-drift verifies or records them as behavioral contracts |
 | `cli-audit-test` | D13 audits whether drift detection **tools** exist. cli-audit-drift **is** the drift detection |
 | `cli-audit-code` | Scores code quality. cli-audit-drift checks **behavioral conformity** to intentions |
 | `cli-audit-sync` | Checks doc-code coherence. cli-audit-drift checks **contract-code coherence** |

@@ -8,6 +8,7 @@ Cross-skill reference files — the common denominators that several `cli-*` ski
 | `gate-ladder.md` | The T0-T4/M0 progressive proof-gate semantics | resilience, oci-rootless, pipeline, audit-test, demo, perf (T4 stress) |
 | `determinism.md` | Reproducibility & idempotence toolkit (seed, clock, env, content-hash) | demo, pipeline, resilience, wizard, oci-rootless, perf (reproducible baselines) |
 | `result-schema.md` | Machine-readable result envelope `.claude/<skill>.json` | cli-cycle (aggregates), all audit/forge skills (emit) |
+| `optimization-card.md` | Canonical optimization hypothesis format: evidence, invariants, validation, risk, owner | audit-xray, perf, audit-drift, audit-test, pipeline |
 | `metaphors.md` | Catalog of shared vs. signature metaphors | all biomimetic skills; cli-cycle (consistent vocabulary) |
 | `escalation-ladder.md` | 5-rung CLI → file → private API → IPC → GUI ladder for "no headless path exists" | perf, infra, audit-wizard, forge-chef, oci-rootless |
 | `cli-ergonomics.md` | The 4 Laws (ask once / defaults / recap / config-as-code) and surface mapping (CLI / TUI / wizard / CI) | audit-wizard, audit-shell, forge-chef, forge-infra |

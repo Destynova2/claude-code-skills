@@ -74,12 +74,14 @@ Each edge fires only if the condition is detected during Wave 1.
 
 ```
 cli-audit-code ──[god modules detected]──────────→ cli-audit-tangle (Wave 2)
+cli-audit-code ──[hidden semantic cost]──────────→ cli-audit-xray (Wave 2)
 cli-audit-code ──[C9 security issues in .sh]─────→ cli-audit-shell (already Wave 1, inject reason)
 cli-audit-code ──[C8 test quality low]───────────→ cli-audit-test (already Wave 1, inject reason)
 cli-audit-shell ──[sed on YAML detected]─────────→ cli-forge-infra (Wave 2)
 cli-audit-shell ──[N scripts, no getopts]────────→ cli-audit-wizard (already Wave 1, inject reason)
 cli-audit-shell ──[scripts are CI entrypoints]───→ cli-forge-pipeline (Wave 2)
 cli-audit-tangle ──[CI deadlocks detected]───────→ cli-forge-pipeline (Wave 2)
+cli-audit-tangle ──[god/boundary funcs mix dataflow + resources]→ cli-audit-xray (Wave 2)
 cli-audit-tangle ──[call graph > 20 nodes]───────→ cli-forge-schema (Wave 2)
 cli-audit-doc ──[docs describe dead features]────→ cli-audit-sync (Wave 2)
 cli-audit-doc ──[README score low]───────────────→ cli-forge-readme (already Wave 1, inject reason)
@@ -93,9 +95,13 @@ cli-audit-test ──[CI has no test stage]──────────→ cli
 cli-audit-sync ──[shell commands in docs broken]──→ cli-audit-shell (if not run in Wave 1)
 cli-audit-sync ──[stale diagrams]──────────────────→ cli-forge-schema (inject reason)
 cli-audit-drift ──[god-level contracted funcs]─────→ cli-audit-tangle (inject reason)
+cli-audit-xray ──[benchmarkable candidate]─────────→ cli-forge-perf (if not run)
+cli-audit-xray ──[semantic graph worth visualizing]→ cli-forge-schema (inject reason)
 cli-forge-pipeline ──[shell entrypoints in CI]─────→ cli-audit-shell (if not run)
 cli-forge-infra ──[complex deployment, no HLD]─────→ REPORT ONLY (forge-hld is Skip)
 ```
+
+`cli-audit-xray` may recommend `cli-audit-drift`, `cli-audit-test`, or `cli-audit-tangle` in its human report when an optimization needs invariants, equivalence tests, or structural isolation. Under `cli-cycle`, those are report-only recommendations if the target audit already ran in an earlier wave; do not create a backward automatic edge.
 
 ### Triage → Correction (Forge trigger edges)
 

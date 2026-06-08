@@ -9,6 +9,7 @@
 | Skill | Run if... |
 |-------|----------|
 | `cli-audit-code` | Source code files exist |
+| `cli-audit-xray` | Source code exists AND one of: perf/dataflow concern, complex pipeline, AI/runtime code, god functions, repeated-work hints, or handoff from another skill |
 | `cli-audit-doc` | Documentation files exist (`.md`, doc comments) |
 | `cli-audit-sync` | Both source code AND documentation exist (verifies coherence between them) |
 | `cli-audit-test` | Test files or test directory exists |
@@ -62,6 +63,7 @@ These skills benefit from Wave 1 results or cross-reference multiple concerns.
 
 | Skill | Why it needs Wave 1 | What it uses |
 |-------|-------------------|-------------|
+| `cli-audit-xray` | Benefits from code quality, topology, and test/drift signals before choosing candidate zones | Static smells, tangle partitions, contracts, NFR/test gaps |
 | `cli-audit-sync` | Compares docs against code — needs to know what code and docs exist | Code index from audit-code context, doc inventory from audit-doc |
 | `cli-audit-drift` | Scans code against contracts — benefits from knowing the code structure | Code structure awareness |
 | `cli-forge-pipeline` | Audits CI — benefits from knowing test structure and quality | Test pyramid shape from audit-test, test techniques detected |
@@ -220,6 +222,7 @@ Context from prior audits (use to enrich your analysis, do not re-scan):
 | Area | Score | Status | Skill |
 |------|-------|--------|-------|
 | Code Quality | 7/10 | Needs work | cli-audit-code |
+| Semantic X-Ray | N/A | 3 optimization candidates | cli-audit-xray |
 | Shell Quality | 6/10 | Dead fallbacks, missing getopts | cli-audit-shell |
 | Doc-Code Sync | 6/10 | Drift detected | cli-audit-sync |
 | Documentation | 8/10 | Good | cli-audit-doc |
