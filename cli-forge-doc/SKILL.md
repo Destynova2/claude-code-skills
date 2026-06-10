@@ -119,6 +119,53 @@ All project knowledge is distributed into **standard documentation files**. No A
 
 **OPSEC rationale:** Files named `AGENTS.md`, `CLAUDE.md`, or `llms.txt` score DREAD 8.8/10 — they expose full architecture, credential patterns, and gotchas in files explicitly labeled for AI consumption. During a security audit (CIS, SOC 2, PCI-DSS, ISO 27001, defense contracts), these files signal AI involvement in development, raising accountability and supply chain concerns. Standard documentation files carry the same content with zero signal.
 
+### Self-contained operations pack mode
+
+When the requested documentation is an **operations/exploitation pack** (signals:
+`exploitation`, `operations`, `runbook`, `N1/N2/N3`, `support tiers`,
+`PDF`, `DOCX`, `export`, `livrable documentaire`), generate a
+self-contained dossier rather than a link-only index.
+
+Rules for this mode:
+
+- The directory itself must be usable offline by an operator and suitable as
+  input to an external PDF/DOCX export tool. Do not add repository export
+  scripts, Make targets, Pandoc wrappers, or generated PDF/DOCX artifacts unless
+  the user explicitly asks for export automation.
+- External project docs may remain engineering sources of truth, but the
+  operations dossier must contain the minimum operational facts needed to act:
+  scope, roles, severity, triage, commands, escalation, rollback, closure,
+  request/change flow, known errors, and continual improvement.
+- Prefer **bounded operational duplication** over link-only pages. If a fact is
+  needed for N1/N2/N3 to act, include the usable version directly in the pack.
+  Do not put external source/provenance paths in operator-facing pages by
+  default; they make the pack look dependent on files outside the dossier.
+- Every page must start with `Role:`, `Quand utiliser cette page:`, and `Sortie
+  attendue:` (or project-language equivalents). `Role:` must describe the
+  page's operational function in the dossier, such as `INDEX N1`, `PROCEDURE N2
+  ROLLBACK`, `KEDB N2`, or `RACI EXPLOITATION`; do not use abstract
+  doc-maintenance roles like `CANON`, `MAP`, or `NEW` for operations packs.
+  `Sortie attendue:` must be an actionable operational output, not "open the
+  canonical source".
+- Do not create link-only pages. Each file in the directory must contain enough
+  operational content to be usable on its own within its support level. Keep
+  maintenance provenance outside operator-facing pages unless explicitly asked.
+- Avoid unexplained engineering shorthand in operator-facing pages. Replace test
+  tier codes like `T0/T2/T3/T4` with plain operational labels such as `local
+  quick test`, `integration test`, `target/VM test`, or `release gate` unless
+  the pack defines the shorthand locally.
+- Do not impose a repository-local incident storage convention (for example
+  `.artifacts/incident-*`, `status.txt`, `logs.txt`) when writing N1/N2/N3
+  procedures. Operators usually already have ITSM, monitoring, on-call, or
+  evidence tools. Specify the required information to capture and transmit,
+  not the storage tool or file layout, unless the user explicitly asks for a
+  project-local evidence convention.
+- Do not create a monolithic `LIVRET.md` by default. The directory is the
+  deliverable: `README.md` is the entry point, and each module/procedure file is
+  part of the self-contained pack. Create a linear printable synthesis only if
+  the user explicitly asks for one. Keep export mechanics outside the project
+  unless explicitly requested.
+
 ### Content redistribution map
 
 All project context is placed in standard files. An AI agent reads these files naturally — no special format needed.
