@@ -7,7 +7,7 @@ description: >
   full-directory AI marker audits, and human ghostwriter style on all git/jj operations.
   Zero AI markers. Use on 'commit', 'branch', 'tag', 'release', 'changelog', 'semver',
   'bump version', 'next version', 'CHANGELOG.md', 'audit markers', 'scan AI files',
-  '/ghost', '/gost', 'not an AI', or 'I'm not an AI'. Also trigger proactively when
+  '/ghost', 'not an AI', or 'I'm not an AI'. Also trigger proactively when
   the user shares code changes without mentioning commit.
 context: fork
 agent: general-purpose
@@ -34,8 +34,9 @@ Reference: https://www.conventionalcommits.org/en/v1.0.0/
 
 ## Ghost mode
 
-When the user says `/ghost`, `/gost`, `ghost`, `not an AI`, `I'm not an AI`,
-`pas une IA`, or equivalent, enforce maximum ghostwriter discipline:
+When the user says `/ghost` (the only slash-command spelling), `not an AI`,
+`I'm not an AI`, `pas une IA`, or equivalent natural language, enforce maximum
+ghostwriter discipline:
 
 - Write as the user's quiet maintainer, not as an assistant.
 - Do not mention AI, agents, prompts, models, Claude, Codex, ChatGPT, OpenAI, or
@@ -44,10 +45,9 @@ When the user says `/ghost`, `/gost`, `ghost`, `not an AI`, `I'm not an AI`,
   tools.
 - Prefer direct project vocabulary over meta-process language.
 - If a requested message contains AI markers, rewrite it before committing.
-- Run the full-directory AI marker audit. In ghost mode, marker files are not
-  allowed to remain in the commit unless the repository's product domain is
-  explicitly an AI/agent integration and the file is required by tests or
-  packaging.
+- Run the full-directory AI marker audit. In ghost mode, staged `marker` entries
+  are not allowed to remain unless reclassified as `product-fixture` with a
+  short reason tied to source, tests, packaging, or documented product behavior.
 
 ## Ghostwriter style
 
@@ -129,25 +129,53 @@ BREAKING CHANGE: /api/v1/* routes no longer served. Migrate to /api/v2/*.
 ## AI marker file audit
 
 Use this audit during commit guard and whenever the user asks to audit a full
-directory, remove AI traces, run `/ghost`, `/gost`, or says `not an AI`.
+directory, remove AI traces, run `/ghost`, or says `not an AI`.
 
-Scan the whole target directory, not only the staged diff, for files and
-directories that advertise agent-specific development:
+Scan the whole target directory, not only the staged diff. Detection must be
+agnostic: do not rely only on a fixed allow/deny list. Classify a file or
+directory as an AI/agent marker when its path, name, extension, or content says
+it configures, instructs, stores state for, or exposes context to an assistant,
+agent, LLM, prompt engine, coding copilot, MCP server, or AI IDE.
+
+Minimum detection method:
+
+1. Inventory tracked and untracked files, excluding `.git`, vendored dependency
+   trees, build outputs, binary blobs, and large generated artifacts.
+2. Flag by path/name signals. Examples, not an exhaustive list: `CLAUDE.md`,
+   `GEMINI.md`, `AGENTS.md`, `llms.txt`, `llms-full.txt`, `.cursorrules`,
+   `.cursor/`, `.windsurf/`, `.aider*`, `.continue/`, `.junie/`, `.claude/`,
+   `.github/copilot-*`, `copilot-instructions`, `prompt`, `agent`, `assistant`,
+   `mcp`, `llm`, `rules` when the surrounding path indicates AI tooling.
+3. Flag by content signals even when the filename is neutral: frontmatter or
+   prose mentioning AI-agent instructions, tool-specific configuration,
+   prompt/rule injection, model/provider setup, MCP servers, code-assistant
+   memory, conversation history, or instructions intended for Claude, Codex,
+   Cursor, Copilot, Aider, Gemini, Windsurf, OpenCode, Devin, Jules, Continue,
+   or equivalent tools.
+4. Classify each hit:
+   - `marker`: AI/agent config, memory, instruction, prompt, or history file.
+   - `product-fixture`: legitimate source/test fixture in a repo whose product
+     is AI/agent tooling, skill distribution, or assistant integration.
+   - `documentation-only`: ordinary docs that mention AI as a product topic but
+     do not configure an assistant.
+   - `false-positive`: unrelated use of words like `agent`, `prompt`, or
+     `model`.
+5. Report both staged and full-directory results. The commit guard may proceed
+   only when all staged `marker` entries are removed or reclassified as
+   `product-fixture` with a short reason.
+
+Example shell probes to seed the audit, not to replace judgment:
 
 ```bash
-find . \
-  -name .git -prune -o \
-  -name CLAUDE.md -o -name GEMINI.md -o -name AGENTS.md -o \
-  -name llms.txt -o -name llms-full.txt -o \
-  -name .cursorrules -o -name .cursorignore -o -name .cursorindexignore -o \
-  -name .windsurfrules -o -name .codeiumignore -o \
-  -name .aider.conf.yml -o -name .aider.chat.history.md -o \
-  -name .aider.input.history -o -name .github/copilot-instructions.md -o \
-  -name .github/copilot-setup-steps.yml -print
-find . \
-  -name .git -prune -o \
-  -type d \( -name .claude -o -name .cursor -o -name .windsurf -o \
-            -name .aider -o -name .continue -o -name .junie \) -print
+find . -name .git -prune -o -type f -print \
+  | rg -i '(^|/)(CLAUDE|GEMINI|AGENTS|llms(-full)?|copilot|aider|cursor|windsurf|continue|junie|mcp|prompt|assistant|agent|rules)([./_-]|$)'
+find . -name .git -prune -o -type d -print \
+  | rg -i '(^|/)\.(claude|cursor|windsurf|aider|continue|junie)(/|$)'
+rg -n -i 'claude|codex|chatgpt|openai|anthropic|cursor|copilot|aider|gemini|windsurf|opencode|devin|jules|mcp|llm|prompt injection|assistant instructions' . \
+  --glob '!**/.git/**' \
+  --glob '!**/node_modules/**' \
+  --glob '!**/target/**' \
+  --glob '!**/dist/**'
 ```
 
 Policy:
@@ -163,8 +191,9 @@ Policy:
   instead of silently committing around them.
 - The only exception is a repository whose product domain is explicitly
   AI/agent tooling, skill distribution, or assistant integration. In that case,
-  marker files may be legitimate product fixtures, but the audit result must be
-  stated before commit.
+  marker files may be legitimate `product-fixture` entries only when tied to
+  source, tests, packaging, or documented product behavior, and the audit result
+  plus reason must be stated before commit.
 - Never add new marker files in ghost mode.
 
 ## Commit Guard
@@ -182,10 +211,12 @@ Minimum guard:
    required by the user's request, then inspect again.
 3. Run `git diff --cached --check`. Fix whitespace/conflict-marker failures
    before committing.
-4. Run the **AI marker file audit** on the full target directory. Remove marker
-   files from the staged commit, or stop and report them if removing tracked
+4. Run the **AI marker file audit** on the full target directory. Remove staged
+   entries classified as `marker`, or stop and report them if removing tracked
    files is outside the user's requested scope. In ghost/no-AI cleanup mode,
-   remove marker files 100% unless the repo is explicitly an AI/agent product.
+   staged `marker` entries must be removed 100%; only documented
+   `product-fixture`, `documentation-only`, or `false-positive` entries may
+   remain.
 5. Scan the staged diff and commit message for AI text markers: `Co-authored-by`,
    `Generated-by`, `Generated with`, `AI-assisted`, `Claude`, `Codex`,
    `ChatGPT`, `OpenAI`, `Anthropic`, `Cursor`, `Aider`, `Devin`, `Jules`,
@@ -290,11 +321,17 @@ EOF
 
 ## AI marker audit (history + files cleanup)
 
-When invoked with `--audit-markers`, `/ghost`, `/gost`, `not an AI`, or when the user asks to clean AI traces from a project or audit a full directory:
+When invoked with `--audit-markers`, `/ghost`, `not an AI`, or when the user
+asks to clean AI traces from a project or audit a full directory, apply the
+agnostic **AI marker file audit** above first. The commands below are probes to
+seed the investigation; they are not an exhaustive definition of what counts as
+a marker.
 
 ### Step 1 -- Detect commit trailers
 
-Scan for ALL known AI tool trailers and bot authors:
+Scan history for tool-specific trailers, bot authors, generated notices, and
+assistant URLs. Treat the patterns as examples and add equivalent project-local
+signals when found:
 
 ```bash
 # Trailers (all AI tools)
@@ -324,23 +361,21 @@ git log --all --merges --format="%H %b" | grep -iE "claude.com/claude-code|curso
 | Gemini/Jules | Author: Jules bot |
 | Cursor | `<!-- Cursor -->` in PR descriptions, `cursor-` branch prefixes |
 
-### Step 2 -- Detect AI config files
+### Step 2 -- Detect AI marker files
 
 ```bash
-# Files that signal AI-assisted development
-for f in CLAUDE.md GEMINI.md AGENTS.md llms.txt llms-full.txt \
-         .cursorrules .cursorignore .cursorindexignore \
-         .windsurfrules .codeiumignore \
-         .aider.conf.yml .aider.chat.history.md .aider.input.history ".aider.tags.cache.v3" \
-         .github/copilot-instructions.md .github/copilot-setup-steps.yml; do
-  [ -f "$f" ] && echo "FOUND: $f"
-done
-[ -d .cursor ] && echo "FOUND: .cursor/"
-[ -d .windsurf ] && echo "FOUND: .windsurf/"
-[ -d .claude ] && echo "FOUND: .claude/"
-[ -d .github/agents ] && echo "FOUND: .github/agents/"
-[ -d .continue ] && echo "FOUND: .continue/"
-[ -d .junie ] && echo "FOUND: .junie/"
+# Path/name probe, then classify each hit with the agnostic audit rules.
+find . -name .git -prune -o -type f -print \
+  | rg -i '(^|/)(CLAUDE|GEMINI|AGENTS|llms(-full)?|copilot|aider|cursor|windsurf|continue|junie|mcp|prompt|assistant|agent|rules)([./_-]|$)'
+find . -name .git -prune -o -type d -print \
+  | rg -i '(^|/)\.(claude|cursor|windsurf|aider|continue|junie)(/|$)'
+
+# Content probe for neutral filenames that still carry assistant instructions.
+rg -n -i 'assistant instructions|prompt injection|mcp server|model provider|conversation history|claude|codex|chatgpt|openai|anthropic|cursor|copilot|aider|gemini|windsurf|opencode|devin|jules|llm' . \
+  --glob '!**/.git/**' \
+  --glob '!**/node_modules/**' \
+  --glob '!**/target/**' \
+  --glob '!**/dist/**'
 ```
 
 ### Step 3 -- Detect AI markers in .gitignore
@@ -356,8 +391,8 @@ Check if AI config files are already gitignored. If NOT, recommend adding them.
 | Tool | Count | Branches |
 | ... |
 
-### Files: N AI config files found
-| File | Tool | In .gitignore? |
+### Files: N candidate markers found
+| File | Classification | Reason |
 | ... |
 
 ### Branch names: N AI-prefixed branches
@@ -373,7 +408,7 @@ Check if AI config files are already gitignored. If NOT, recommend adding them.
 | **B. filter-repo** (full history) | High — force push | `git filter-repo --message-callback` with regex removing all AI trailers |
 | **C. Accept and move on** | None | Old commits keep trailers, new commits are clean |
 | **D. Squash into fresh branch** | Medium | New branch with single clean commit, abandon old history |
-| **E. Absorb + delete files** | Low | Move AI file content to standard docs, delete AI files, add to .gitignore |
+| **E. Absorb + delete markers** | Low | Move useful content to standard docs, delete staged `marker` entries, add private tool state to `.gitignore` |
 
 ### Step 6 -- Recommend
 
@@ -386,7 +421,9 @@ Check if AI config files are already gitignored. If NOT, recommend adding them.
 
 ### Step 7 -- Preventive .gitignore
 
-Always recommend adding to `.gitignore`:
+Recommend adding private assistant state, caches, and local IDE integration to
+`.gitignore` when they are not legitimate product fixtures. Do not present this
+as an exhaustive list:
 
 ```gitignore
 # AI tool config (not project documentation)
@@ -403,7 +440,10 @@ Always recommend adding to `.gitignore`:
 .junie/
 ```
 
-Note: `CLAUDE.md`, `GEMINI.md`, `AGENTS.md` are NOT gitignored — they are absorbed into standard docs by `cli-forge-doc` and then deleted.
+Note: root instruction files such as `CLAUDE.md`, `GEMINI.md`, `AGENTS.md`, or
+equivalents are usually absorbed into standard docs by `cli-forge-doc` and then
+deleted. In an AI/agent tooling repository, they may remain only as documented
+`product-fixture` entries.
 
 **Never run filter-repo or force push without explicit user approval.**
 
@@ -419,7 +459,9 @@ Note: `CLAUDE.md`, `GEMINI.md`, `AGENTS.md` are NOT gitignored — they are abso
 
 ## What this skill does NOT do
 
-- **Does not run git commands autonomously** -- it writes messages, the user (or the calling skill) executes
+- **Does not rewrite history autonomously** -- destructive cleanup such as
+  `filter-repo`, force push, or removing unrelated tracked markers needs
+  explicit user approval
 - **Does not enforce commit hooks** -- it provides the message format, not pre-commit validation
 - **Does not manage CI/CD** -- that's cli-forge-pipeline's job
 - **Does not generate changelogs automatically** -- it provides the format, the user generates
