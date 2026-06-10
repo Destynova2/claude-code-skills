@@ -3,10 +3,12 @@ name: cli-git-conventional
 metadata:
   author: clement
 description: >
-  Enforce Conventional Commits v1.0.0, SemVer 2.0.0, branch naming, and human ghostwriter
-  style on all git/jj operations. Zero AI markers. Use on 'commit', 'branch', 'tag',
-  'release', 'changelog', 'semver', 'bump version', 'next version', 'CHANGELOG.md'.
-  Also trigger proactively when the user shares code changes without mentioning commit.
+  Enforce Conventional Commits v1.0.0, SemVer 2.0.0, branch naming, commit guard,
+  full-directory AI marker audits, and human ghostwriter style on all git/jj operations.
+  Zero AI markers. Use on 'commit', 'branch', 'tag', 'release', 'changelog', 'semver',
+  'bump version', 'next version', 'CHANGELOG.md', 'audit markers', 'scan AI files',
+  '/ghost', '/gost', 'not an AI', or 'I'm not an AI'. Also trigger proactively when
+  the user shares code changes without mentioning commit.
 context: fork
 agent: general-purpose
 allowed-tools:
@@ -29,6 +31,23 @@ Reference: https://www.conventionalcommits.org/en/v1.0.0/
 ## Rule zero: Authorship
 
 **NEVER add `Co-authored-by: Claude` or any AI trailer.** The commit belongs entirely to the person who asked. No `Co-authored-by`, `Generated-by`, `AI-assisted`, or equivalent trailers. Ever.
+
+## Ghost mode
+
+When the user says `/ghost`, `/gost`, `ghost`, `not an AI`, `I'm not an AI`,
+`pas une IA`, or equivalent, enforce maximum ghostwriter discipline:
+
+- Write as the user's quiet maintainer, not as an assistant.
+- Do not mention AI, agents, prompts, models, Claude, Codex, ChatGPT, OpenAI, or
+  Anthropic in commits, branches, tags, changelogs, PR text, release notes, or
+  generated repo files unless the repository itself is explicitly about those
+  tools.
+- Prefer direct project vocabulary over meta-process language.
+- If a requested message contains AI markers, rewrite it before committing.
+- Run the full-directory AI marker audit. In ghost mode, marker files are not
+  allowed to remain in the commit unless the repository's product domain is
+  explicitly an AI/agent integration and the file is required by tests or
+  packaging.
 
 ## Ghostwriter style
 
@@ -107,15 +126,91 @@ feat(api)!: remove legacy v1 endpoints
 BREAKING CHANGE: /api/v1/* routes no longer served. Migrate to /api/v2/*.
 ```
 
+## AI marker file audit
+
+Use this audit during commit guard and whenever the user asks to audit a full
+directory, remove AI traces, run `/ghost`, `/gost`, or says `not an AI`.
+
+Scan the whole target directory, not only the staged diff, for files and
+directories that advertise agent-specific development:
+
+```bash
+find . \
+  -name .git -prune -o \
+  -name CLAUDE.md -o -name GEMINI.md -o -name AGENTS.md -o \
+  -name llms.txt -o -name llms-full.txt -o \
+  -name .cursorrules -o -name .cursorignore -o -name .cursorindexignore -o \
+  -name .windsurfrules -o -name .codeiumignore -o \
+  -name .aider.conf.yml -o -name .aider.chat.history.md -o \
+  -name .aider.input.history -o -name .github/copilot-instructions.md -o \
+  -name .github/copilot-setup-steps.yml -print
+find . \
+  -name .git -prune -o \
+  -type d \( -name .claude -o -name .cursor -o -name .windsurf -o \
+            -name .aider -o -name .continue -o -name .junie \) -print
+```
+
+Policy:
+
+- For ordinary product repos, remove marker files from the commit 100%. If the
+  content is useful, move it first into standard docs such as `CONTRIBUTING.md`,
+  `docs/architecture.md`, `docs/index.md`, or repo-specific operator docs, then
+  delete the marker file.
+- If marker files are already tracked, treat their removal as part of the guard
+  when the user asked for ghost/no-AI cleanup or full-directory audit.
+- If a marker file is unrelated to the user's requested commit and deleting it
+  would be a destructive scope expansion, stop and report the exact marker paths
+  instead of silently committing around them.
+- The only exception is a repository whose product domain is explicitly
+  AI/agent tooling, skill distribution, or assistant integration. In that case,
+  marker files may be legitimate product fixtures, but the audit result must be
+  stated before commit.
+- Never add new marker files in ghost mode.
+
+## Commit Guard
+
+Before every `git commit` performed by the agent, run a guard phase after the
+final staging decision and before writing the commit object. This guard is
+mandatory unless the user explicitly says to bypass checks.
+
+Minimum guard:
+
+1. Inspect worktree ownership with `git status --short`. Do not stage or revert
+   unrelated user changes.
+2. Inspect exactly what will be committed with `git diff --cached --name-status`
+   and `git diff --cached --stat`. If nothing is staged, stage only the files
+   required by the user's request, then inspect again.
+3. Run `git diff --cached --check`. Fix whitespace/conflict-marker failures
+   before committing.
+4. Run the **AI marker file audit** on the full target directory. Remove marker
+   files from the staged commit, or stop and report them if removing tracked
+   files is outside the user's requested scope. In ghost/no-AI cleanup mode,
+   remove marker files 100% unless the repo is explicitly an AI/agent product.
+5. Scan the staged diff and commit message for AI text markers: `Co-authored-by`,
+   `Generated-by`, `Generated with`, `AI-assisted`, `Claude`, `Codex`,
+   `ChatGPT`, `OpenAI`, `Anthropic`, `Cursor`, `Aider`, `Devin`, `Jules`,
+   `Windsurf`. If a marker is not part of the product domain, remove it.
+6. Run the repo's established fast validation when it is discoverable and
+   relevant. Examples: `python3 scripts/validate_skills.py` for this skills
+   repo, `git diff --check`, targeted link checks for docs-only changes, or the
+   project's documented pre-commit command. Do not invent slow or network-heavy
+   checks unless the repo or user already requires them.
+7. If any guard step fails, do not commit. Fix the issue or report the blocker
+   with the exact failing command.
+
+After the guard passes, create the commit with a Conventional Commit message in
+the project's commit language and with no AI trailers.
+
 ## Workflow
 
 ### Step 1 -- Analyze the diff and detect language
 
 Before writing a commit message:
-1. Read `git diff --staged` (or the changes the user shared)
-2. Read `git log --oneline -10` for context, style, AND **language**
-3. **Detect commit language**: if existing commits are in French → write in French. If English → English. If mixed → follow the majority. **NEVER switch language** — a developer who wrote 14 commits in French doesn't suddenly switch to English
-4. Identify: is this one logical change or multiple? If multiple, suggest splitting
+1. Complete the **Commit Guard** above.
+2. Read `git diff --staged` (or the changes the user shared).
+3. Read `git log --oneline -10` for context, style, AND **language**.
+4. **Detect commit language**: if existing commits are in French → write in French. If English → English. If mixed → follow the majority. **NEVER switch language** — a developer who wrote 14 commits in French doesn't suddenly switch to English.
+5. Identify: is this one logical change or multiple? If multiple, suggest splitting.
 
 **Language examples:**
 ```bash
@@ -195,7 +290,7 @@ EOF
 
 ## AI marker audit (history + files cleanup)
 
-When invoked with `--audit-markers` or when the user asks to clean AI traces from a project:
+When invoked with `--audit-markers`, `/ghost`, `/gost`, `not an AI`, or when the user asks to clean AI traces from a project or audit a full directory:
 
 ### Step 1 -- Detect commit trailers
 
