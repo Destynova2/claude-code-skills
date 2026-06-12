@@ -31,6 +31,12 @@ allowed-tools:
 
 When generating user-facing output (reports, files, documentation), detect the project's primary language (from README, comments, docs, commit messages) and produce the output in that language. If the project is bilingual, ask the user which language to use before proceeding.
 
+> **Diacritics rule:** When the chosen output language uses diacritics (French, Spanish, Portuguese, etc.), render them correctly — including on capitals (É, À, Ç, Ô…). Never strip accents to ASCII: write "sécurité" not "securite", "Rôle" not "Role". ASCII-flattened French is a defect, not a style.
+
+> **Writing style:** Favor clarity — short sentences, one idea per sentence, plain words. A metaphor only when it clarifies. Keep one consistent register (impersonal/infinitive for operational docs). Separate narrative prose, meant to make the reader understand, from telegraphic content (tables, commands, checklists) which stays terse for action.
+
+> **Memorability (rule of three):** For short lists an operator must internalize (incident reflexes, level missions, checklists), add a three-part memory hook above the list (e.g. "Capture → Stay on the rails → Verify"), keeping the detailed items underneath. Use sparingly — only where recall matters under stress, never on reference tables.
+
 # Forge Resilience — Prod-Parity, Failure Biology & Runbooks
 
 > *"A system survives production when it keeps homeostasis under stress, not when it merely passes happy-path tests."*

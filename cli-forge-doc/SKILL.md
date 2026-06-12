@@ -12,6 +12,10 @@ agent: general-purpose
 
 > **Language rule:** Skill instructions are written in English. When generating user-facing output, detect the project's primary language (from README, comments, docs, commit messages) and produce the documentation in that language. If the project is bilingual, ask the user which language to use before proceeding.
 
+> **Diacritics rule:** When the chosen output language uses diacritics (French, Spanish, Portuguese, etc.), render them correctly — including on capitals (É, À, Ç, Ô…). Never strip accents to ASCII: write "sécurité" not "securite", "Rôle" not "Role". ASCII-flattened French is a defect, not a style.
+
+> **Writing style:** Favor clarity — short sentences, one idea per sentence, plain words. A metaphor only when it clarifies. Keep one consistent register (impersonal/infinitive for operational docs). Separate narrative prose, meant to make the reader understand, from telegraphic content (tables, commands, checklists) which stays terse for action.
+
 # Doc Forge — Dual Documentation Generator & Auditor
 
 Generate production-grade documentation for any Git project, optimized for both AI agents and human readers.
