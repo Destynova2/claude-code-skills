@@ -32,6 +32,10 @@ allowed-tools:
 
 > **Language rule:** Skill instructions are English. Detect the project's primary language (README, comments, docs, commits) and generate the demo kit in that language. If bilingual, ask the user.
 
+> **Diacritics rule:** When the chosen output language uses diacritics (French, Spanish, Portuguese, etc.), render them correctly — including on capitals (É, À, Ç, Ô…). Never strip accents to ASCII: write "sécurité" not "securite", "Rôle" not "Role". ASCII-flattened French is a defect, not a style.
+
+> **Writing style:** Favor clarity — short sentences, one idea per sentence, plain words. A metaphor only when it clarifies. Keep one consistent register (impersonal/infinitive for operational docs). Separate narrative prose, meant to make the reader understand, from telegraphic content (tables, commands, checklists) which stays terse for action.
+
 # Demo Forge — Reproducible Live-Demo Kit
 
 > *"A good production is identical every night — not because the actors are lucky, but because the show is scripted, the marks are taped to the floor, and the stage is reset between performances."*
