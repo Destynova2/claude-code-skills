@@ -24,6 +24,8 @@ allowed-tools:
 
 > **Writing style:** Favor clarity — short sentences, one idea per sentence, plain words. A metaphor only when it clarifies. Keep one consistent register (impersonal/infinitive for operational docs). Separate narrative prose, meant to make the reader understand, from telegraphic content (tables, commands, checklists) which stays terse for action.
 
+> **No fabricated output:** Never invent command output, console captures, API responses, metrics, or logs. When real output is needed, emit a clearly-marked placeholder (🚧 "replace with a real capture"), never plausible-but-fake text presented as real.
+
 # Forge LLD — Low-Level / Detailed Design
 
 Translate an HLD's "what" into the "how" — detailed enough that a developer can implement without ambiguity. *(Robert C. Martin, Clean Architecture)*

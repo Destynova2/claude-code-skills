@@ -35,6 +35,8 @@ When generating user-facing output (reports, files, documentation), detect the p
 
 > **Writing style:** Favor clarity — short sentences, one idea per sentence, plain words. A metaphor only when it clarifies. Keep one consistent register (impersonal/infinitive for operational docs). Separate narrative prose, meant to make the reader understand, from telegraphic content (tables, commands, checklists) which stays terse for action.
 
+> **No fabricated output:** Never invent command output, console captures, API responses, metrics, or logs. When real output is needed, emit a clearly-marked placeholder (🚧 "replace with a real capture"), never plausible-but-fake text presented as real.
+
 > **Memorability (rule of three):** For short lists an operator must internalize (incident reflexes, level missions, checklists), add a three-part memory hook above the list (e.g. "Capture → Stay on the rails → Verify"), keeping the detailed items underneath. Use sparingly — only where recall matters under stress, never on reference tables.
 
 # Forge Resilience — Prod-Parity, Failure Biology & Runbooks

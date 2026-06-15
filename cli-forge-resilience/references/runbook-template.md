@@ -35,7 +35,11 @@
 ## 3. Capture before correction
 | Surface | Evidence to save | Why |
 
+Run the SAME check before and after the fix, to a timestamped file — the diff is the proof:
+`<check> > before-$TS.txt 2>&1`, apply the bounded action, then `<check> > after-$TS.txt 2>&1`, then `diff before-$TS.txt after-$TS.txt`.
+
 ## 4. Fast triage
+_Each step below = one concrete command + its expected output (OK) and failing output (KO), not a bare verb._
 1. Verify current revision / version / image ref
 2. Check service status
 3. Check health
@@ -145,3 +149,5 @@
 3. Name the **source of truth corrected** explicitly.
 4. Attach at least one durable guardrail.
 5. If the same confusion is likely to recur, update both runbook and blackbox.
+6. Every diagnostic step gives **both** the concrete, copy-pasteable command (explicit `<placeholders>` — never a vague verb like "check the backend") **and** its expected result: what a healthy output (OK) and a failing output (KO) look like. A command without its expected result is half a step.
+7. **Never fabricate command output.** When a real capture is required, emit a clearly-marked placeholder (🚧 "replace with real output / capture"), never invented text that looks authoritative.

@@ -36,6 +36,8 @@ allowed-tools:
 
 > **Writing style:** Favor clarity — short sentences, one idea per sentence, plain words. A metaphor only when it clarifies. Keep one consistent register (impersonal/infinitive for operational docs). Separate narrative prose, meant to make the reader understand, from telegraphic content (tables, commands, checklists) which stays terse for action.
 
+> **No fabricated output:** Never invent command output, console captures, API responses, metrics, or logs. When real output is needed, emit a clearly-marked placeholder (🚧 "replace with a real capture"), never plausible-but-fake text presented as real.
+
 # Demo Forge — Reproducible Live-Demo Kit
 
 > *"A good production is identical every night — not because the actors are lucky, but because the show is scripted, the marks are taped to the floor, and the stage is reset between performances."*
