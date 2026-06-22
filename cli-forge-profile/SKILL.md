@@ -63,8 +63,9 @@ If installed alongside `cli-code-skills`, the shared reconnaissance model in `..
 5. For CV/LinkedIn work, extract 8-12 target keywords from the role or mission brief and place them naturally in the profile and relevant proof bullets.
 6. Rewrite with platform constraints.
 7. Run the publication gate before final output.
-8. Add a short publication checklist when the output is a `.md` working file.
-9. Flag uncertain claims with `NEEDS-REVIEW` instead of smoothing them over.
+8. Remove AI-assistant process markers from publishable profile files: no GPT/Claude mentions, model scores, "validated by AI", generation notes, or generic AI-like filler. Preserve factual AI product names only when they are part of the user's real work, a quoted public artifact, or a technical keyword.
+9. Add a short publication checklist when the output is a `.md` working file.
+10. Flag uncertain claims with `NEEDS-REVIEW` instead of smoothing them over.
 
 ## Read References On Demand
 
@@ -116,6 +117,7 @@ Use this when editing or creating `.md` files that are working documents.
 - [ ] Sensitive clients/sectors/metrics anonymized or approved
 - [ ] Keywords present without stuffing
 - [ ] CTA present
+- [ ] AI-assistant process markers removed from publishable fields
 - [ ] Source-of-truth updated if this is not canonical
 
 ## Notes editoriales
@@ -164,6 +166,7 @@ Before delivering final copy, check:
 - **Pre-conditions:** target reader, target surface, language, geography, and forbidden claims are known.
 - **During:** one positioning direction is edited at a time; keep variants separate instead of blending them.
 - **Post-verification:** character limits fit, first screen passes the 10-second test, claims map to evidence, confidentiality is preserved, keywords are present without stuffing, CTA is clear, and canonical facts were updated when required.
+- **Publishability:** public fields and ready-to-copy files contain no AI-assistant process markers such as GPT/Claude notes, model scores, "validated by AI", generation comments, or meta-rationale intended only for the working document.
 
 If a gate fails, provide the best safe draft plus a `Points a verifier` section. Do not hide factual gaps by making the copy more generic.
 
@@ -178,6 +181,7 @@ If a gate fails, provide the best safe draft plus a `Points a verifier` section.
 - Keep jargon only when it is either searchable or immediately proven.
 - Replace "I am passionate about" with delivered work, constraint, or result.
 - Replace vague words like "governance", "souverainete", "control layer", or "transformation" with concrete mechanisms when possible: DLP, audit logs, air-gapped deployment, CI/CD policy, IAM, runbook, SLO, migration, cost reduction.
+- Remove AI-assistant process markers from publishable copy: no GPT/Claude mentions, model scores, "AI validated" claims, generation notes, or generic AI-like filler. Keep factual AI product names only when they are part of the user's real work, a quoted artifact, or a technical keyword.
 - Avoid vanity adjectives: excellent, innovative, cutting-edge, world-class, passionate.
 - Preserve confidentiality: anonymize clients, sectors, numbers, personal contact details, proprietary architectures, abandoned/private repositories, testimonials without consent, and protected personal characteristics when needed.
 
