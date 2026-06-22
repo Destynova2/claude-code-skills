@@ -42,6 +42,7 @@ A finding is **HIGH confidence only if detected by ≥2 independent methods**.
 | `cli-forge-resilience` | Step 9 action plan in the same 3 tiers, specialized to resilience surfaces (false green, parity gaps, observability). |
 | `cli-audit-code` | Findings tagged with tier + dimension + confidence; emitted in the `result-schema.md` envelope as `findings[].tier ∈ {1,2,3}` and `findings[].confidence ∈ {low,medium,high}`. |
 | `cli-audit-shell` | Same envelope; S-dimension findings (S1-S12) tagged by tier. |
+| `cli-audit-review` | Same envelope; R-dimension MR/PR gate findings tagged by tier, confidence, and expected proof. |
 | `cli-audit-doc` | Same envelope; D-dimension findings (Diataxis, freshness) tagged by tier. |
 | `cli-audit-test` | Same envelope; D-dimension findings (coverage, NFR, pyramid) tagged by tier. |
 | `cli-audit-wizard` | Same envelope; Law violations are Tier 3 by default, lifecycle gaps Tier 2. |

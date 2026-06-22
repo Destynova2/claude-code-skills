@@ -37,9 +37,9 @@ python3 scripts/validate_skills.py
 The validator checks frontmatter, skill counts, README/CLAUDE inventories,
 shared-file paths, and Claude/Codex-neutral `cli-cycle` orchestration.
 
-## Current skills (30)
+## Current skills (31)
 
-**Audit (9):** cli-audit-code, cli-audit-doc, cli-audit-drift, cli-audit-shell, cli-audit-sync, cli-audit-tangle, cli-audit-test, cli-audit-wizard, cli-audit-xray
+**Audit (10):** cli-audit-code, cli-audit-doc, cli-audit-drift, cli-audit-review, cli-audit-shell, cli-audit-sync, cli-audit-tangle, cli-audit-test, cli-audit-wizard, cli-audit-xray
 
 **Cycle (1):** cli-cycle
 

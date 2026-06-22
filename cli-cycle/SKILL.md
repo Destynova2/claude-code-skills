@@ -62,6 +62,7 @@ Run every applicable `cli-*` skill on the current project, collect results, deli
 | `cli-audit-test` | ✅ | Scans only the slice's tests |
 | `cli-audit-tangle` | ✅ | Analyzes call graph within the slice |
 | `cli-audit-drift` | ✅ if scope has CONTRACTS.md entries | Checks contracts for functions in the slice |
+| `cli-audit-review` | ✅ if scope contains an active diff or MR/PR review context | Reviews changed behavior as a merge gate |
 | `cli-audit-sync` | ✅ | Checks doc-code coherence within the slice |
 | `cli-audit-shell` | ✅ if scope has .sh files | Audits shell scripts in the slice |
 | `cli-forge-readme` | ❌ | README is project-wide |
@@ -106,7 +107,7 @@ Read `references/orchestration.md` for the full applicability matrix. Key rule: 
 Read `references/orchestration.md` for execution order, prompt patterns, and wave rules.
 
 **Wave 1 (foundation, parallel):** code, doc, test, tangle, tree, readme, shell, wizard — independent scans
-**Wave 2 (cross-cutting + handoffs, parallel):** sync, drift, pipeline, schema, infra + skills recommended by Wave 1 handoffs
+**Wave 2 (cross-cutting + handoffs, parallel):** review, sync, drift, pipeline, schema, infra + skills recommended by Wave 1 handoffs
 **Wave 3 (adaptive, if needed):** skills recommended by Wave 2 handoffs that haven't run yet
 
 Wave 2 skills get Wave 1 summaries injected. Handoff-recommended skills get the caller's reason injected. Deduplication prevents duplicate runs (same skill + same scope = run once). See `references/orchestration.md` for the full adaptive handoff algorithm.

@@ -5,7 +5,7 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
-  <img src="https://img.shields.io/badge/skills-30-green.svg" alt="30 Skills">
+  <img src="https://img.shields.io/badge/skills-31-green.svg" alt="31 Skills">
   <img src="https://img.shields.io/badge/claude--code-skills-8A2BE2" alt="Claude Code Skills">
   <img src="https://img.shields.io/badge/cursor-compatible-F7DF1E" alt="Cursor Compatible">
   <a href="https://github.com/Destynova2/cli-code-skills/stargazers"><img src="https://img.shields.io/github/stars/Destynova2/cli-code-skills?style=flat" alt="Stars"></a>
@@ -51,6 +51,7 @@ Type `/cli-` in Claude Code or Codex, hit tab, pick a skill:
 | `/cli-audit-code [path]` | Scores code against Clean Code principles — 10 categories: naming, functions, DRY, error handling, cognitive load. Works with any language |
 | `/cli-audit-doc [path]` | Scores documentation quality against RFC 1574, Diataxis, Microsoft M-DOC — 6 categories, any language |
 | `/cli-audit-drift [path]` | Detects silent semantic drift between CONTRACTS.md intentions and implementation behavior |
+| `/cli-audit-review [path-or-diff]` | Performs strict MR/PR review with RMI scoring, gate decisions, contract validation, idempotence, proof, CI/release safety, and actionable reviewer comments |
 | `/cli-audit-shell [path]` | Audits shell scripts against Google Shell Style Guide and operational safety patterns |
 | `/cli-audit-sync [path]` | Verifies doc-code coherence: stale references, broken links, terminology drift, outdated diagrams, non-working examples. 3 layers: structural, semantic, executable |
 | `/cli-audit-tangle [path]` | Detects god functions, dependency cycles, dead nodes, and tangled call graph topology |
@@ -158,6 +159,8 @@ cli-code-skills/
 │   └── references/        #   12 categories, scoring framework, anti-patterns
 ├── cli-audit-drift/       # /cli-audit-drift — semantic drift against contracts
 │   └── references/        #   contract templates and drift detection rules
+├── cli-audit-review/      # /cli-audit-review — strict MR/PR review scoring
+│   └── references/        #   RMI scoring, conventions, comments, and methodology
 ├── cli-audit-shell/       # /cli-audit-shell — shell quality and safety
 │   └── references/        #   shell categories, scoring, anti-patterns
 ├── cli-audit-sync/        # /cli-audit-sync — doc-code coherence

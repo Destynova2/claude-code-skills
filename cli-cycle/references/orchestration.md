@@ -14,6 +14,7 @@
 | `cli-audit-sync` | Both source code AND documentation exist (verifies coherence between them) |
 | `cli-audit-test` | Test files or test directory exists |
 | `cli-audit-drift` | CONTRACTS.md exists (or bootstrap if critical functions detected and no contracts) |
+| `cli-audit-review` | Active diff/MR/PR review context exists: user requested review, branch has changed files vs base, `git diff --stat` is non-empty, or a patch file is passed |
 | `cli-audit-tangle` | Source code files exist (analyzes call graph topology) |
 | `cli-forge-readme` | `README.md` exists (audit mode: compare current vs ideal) |
 | `cli-forge-tree` | Always (audit current structure) |
@@ -66,6 +67,7 @@ These skills benefit from Wave 1 results or cross-reference multiple concerns.
 | `cli-audit-xray` | Benefits from code quality, topology, and test/drift signals before choosing candidate zones | Static smells, tangle partitions, contracts, NFR/test gaps |
 | `cli-audit-sync` | Compares docs against code — needs to know what code and docs exist | Code index from audit-code context, doc inventory from audit-doc |
 | `cli-audit-drift` | Scans code against contracts — benefits from knowing the code structure | Code structure awareness |
+| `cli-audit-review` | Reviews the active change as a merge gate after foundation context exists | Code/doc/test/shell findings, changed-file inventory, proof gaps |
 | `cli-forge-pipeline` | Audits CI — benefits from knowing test structure and quality | Test pyramid shape from audit-test, test techniques detected |
 | `cli-forge-schema` | Audits diagrams against code — needs to know module structure | Module structure from audit-code |
 | `cli-forge-infra` | Audits infra files — independent but lower priority | — |
@@ -245,6 +247,7 @@ Context from prior audits (use to enrich your analysis, do not re-scan):
 | Test Quality | 5/10 | Gaps | cli-audit-test |
 | Code Topology | 7/10 | 2 god functions | cli-audit-tangle |
 | Semantic Drift | N/A | No CONTRACTS.md | cli-audit-drift |
+| Merge Review | 7/10 | Missing proof for changed behavior | cli-audit-review |
 | README | 6/10 | Outdated | cli-forge-readme |
 | Project Structure | 9/10 | Excellent | cli-forge-tree |
 | Diagrams | 4/10 | Missing | cli-forge-schema |
