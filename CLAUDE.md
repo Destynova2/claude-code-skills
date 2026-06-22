@@ -37,13 +37,13 @@ python3 scripts/validate_skills.py
 The validator checks frontmatter, skill counts, README/CLAUDE inventories,
 shared-file paths, and Claude/Codex-neutral `cli-cycle` orchestration.
 
-## Current skills (31)
+## Current skills (32)
 
 **Audit (10):** cli-audit-code, cli-audit-doc, cli-audit-drift, cli-audit-review, cli-audit-shell, cli-audit-sync, cli-audit-tangle, cli-audit-test, cli-audit-wizard, cli-audit-xray
 
 **Cycle (1):** cli-cycle
 
-**Forge (18):** cli-forge-arch, cli-forge-chef, cli-forge-choice-ux, cli-forge-demo, cli-forge-doc, cli-forge-github, cli-forge-hld, cli-forge-infra, cli-forge-lld, cli-forge-oci-rootless, cli-forge-perf, cli-forge-pipeline, cli-forge-prez, cli-forge-quorum, cli-forge-readme, cli-forge-resilience, cli-forge-schema, cli-forge-tree
+**Forge (19):** cli-forge-arch, cli-forge-chef, cli-forge-choice-ux, cli-forge-demo, cli-forge-doc, cli-forge-github, cli-forge-hld, cli-forge-infra, cli-forge-lld, cli-forge-oci-rootless, cli-forge-perf, cli-forge-pipeline, cli-forge-prez, cli-forge-profile, cli-forge-quorum, cli-forge-readme, cli-forge-resilience, cli-forge-schema, cli-forge-tree
 
 **Git (1):** cli-git-conventional
 

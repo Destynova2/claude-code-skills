@@ -1,0 +1,4 @@
+interface:
+  display_name: "Profile Forge"
+  short_description: "CV, LinkedIn, Reddit, and profile writing"
+  default_prompt: "Use $cli-forge-profile to rewrite my LinkedIn profile for a clearer recruiter-facing narrative."
