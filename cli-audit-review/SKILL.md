@@ -1,6 +1,7 @@
 ---
 name: cli-audit-review
 metadata:
+  author: ThomasD343
   version: "3.0.0"
 description: "Scored MR/PR/diff review skill calibrated for strict infrastructure and automation changes. Use for merge-request reviews, pull-request reviews, scored reviewer gates, convention compliance, Ansible roles/collections, Molecule, GitLab CI, semantic-release, packaging, Go/Cobra CLIs, PowerShell, shell/Python helpers, Kubernetes/containers, Terraform/OpenTofu, and operator documentation reviewed through a contract -> validation -> execution -> proof -> docs/release methodology. Produces RMI scoring, gate decisions, and reviewer-style actionable comments. For generic code quality, code smells, clean-code compliance, or tech debt audits, use cli-audit-code instead."
 argument-hint: "[file-or-directory-or-diff]"
