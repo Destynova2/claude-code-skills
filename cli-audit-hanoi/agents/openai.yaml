@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hanoi Audit"
+  short_description: "Ordering audit: install/config/build step layering and blast radius"
+  default_prompt: "Use $cli-audit-hanoi to audit the install and config ordering in this repo, measure the blast radius per typical change, and propose reordered stacks."
