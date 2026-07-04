@@ -426,6 +426,7 @@ tangle_score = 100
 | `cli-forge-schema` | Can visualize the call graph as a Mermaid diagram |
 | `cargo-machete` | Finds unused **dependencies**. tangle finds unused **functions** |
 | `cli-forge-pipeline` | Generates CI/CD pipelines. tangle audits their **dependency topology** |
+| `cli-audit-hanoi` | tangle audits **call-graph** topology; hanoi audits **execution ordering** — layer cache, task order, apply order, crate layering blast radius |
 | `cli-forge-perf` | tangle finds god functions **structurally**; `cli-forge-perf` confirms they are the **dynamic** hot path via profiling + bench. Pipeline: tangle exports `tangle-partition.json` → perf reads it to prioritize the diagnostic |
 | `cli-cycle` | Should call cli-audit-tangle as part of the full project review |
 

@@ -72,6 +72,7 @@ Run every applicable `cli-*` skill on the current project, collect results, deli
 | `cli-forge-infra` | ❌ | Infra is project-wide |
 | `cli-forge-github` | ❌ | Repo config is project-wide |
 | `cli-audit-wizard` | ❌ | Wizard UX is project-wide |
+| `cli-audit-hanoi` | ✅ if scope has ordering-sensitive artifacts (Dockerfile, playbooks, manifests, workspace members) | Audits step ordering and blast radius within the slice |
 
 ### Step 1 — Discover available skills
 

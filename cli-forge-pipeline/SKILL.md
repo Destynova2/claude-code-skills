@@ -205,6 +205,7 @@ If > 2 mutations pass silently, the pipeline has holes.
 | Pipeline builds containers | `/cli-forge-infra` | Container/image audit |
 | Pipeline has > 10 jobs with complex dependencies | `/cli-audit-tangle` | CI dependency topology |
 | Pipeline lacks a perf budget gate, or A/B benches are not reproducible | `/cli-forge-perf` | Native bench protocol (Criterion/benchstat/hyperfine) + content-hashed cache → reproducible perf gate |
+| Jobs rebuild far more than the change (image layers or caches invalidated on every run) | `/cli-audit-hanoi` | Ordering/layering audit of build steps and image stacks |
 
 **Rule:** Recommend, don't auto-execute.
 

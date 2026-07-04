@@ -48,6 +48,8 @@ ghostwriter discipline:
 - Run the full-directory AI marker audit. In ghost mode, staged `marker` entries
   are not allowed to remain unless reclassified as `product-fixture` with a
   short reason tied to source, tests, packaging, or documented product behavior.
+- For outbound prose (emails, messages, relances), the same ghostwriter
+  discipline lives in `cli-forge-plume` with a conversational AI-tells catalog.
 
 ## Ghostwriter style
 

@@ -120,6 +120,7 @@ These strategies are detailed in `references/patterns.md`. Read it when applying
 | Pipeline config present | `/cli-forge-pipeline` | Optimize CI/CD |
 | Multiple config files to manage | `/cli-forge-tree` | Project structure audit |
 | Sizing / capacity decision pending (instances × W × €/year) or hardware profile drives runtime latency | `/cli-forge-perf` | Cost-accounting model (€/kWh/CO₂) + roofline-aware bench calibrated on the target hardware |
+| Rebuild storms, restart storms, or the same wait/retry logic in several layers | `/cli-audit-hanoi` | Ordering and displacement audit across Dockerfile/kube/Ansible |
 
 **Rule:** Recommend, don't auto-execute.
 

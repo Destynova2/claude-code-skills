@@ -35,6 +35,11 @@
 | `cli-forge-prez` | Skip (presentation generation — triggered explicitly) |
 | `cli-forge-demo` | Skip (demo-kit generation — triggered explicitly). A **stale demo** (commands in `docs/demos/**/DEMO.md` no longer match the code) is detected by `cli-audit-sync`, not by running this skill |
 | `cli-forge-perf` | Skip (perf optimization workflow — triggered explicitly). Wave 2 handoff target: `cli-audit-tangle` (god functions = candidate hot paths) and `cli-audit-test` (D6 NFR low) both recommend it |
+| `cli-audit-hanoi` | Ordering-sensitive artifacts exist: `Dockerfile`/`Containerfile`, Ansible playbooks/roles, k8s manifests, Cargo workspace, CI YAML. Audits step ordering, layer cache, and cross-layer displacement |
+| `cli-forge-plume` | Skip (message/exchange ghostwriting — operates on messages, not repo artifacts) |
+| `cli-forge-profile` | Skip (personal identity content — not a project artifact) |
+| `cli-forge-choice-ux` | Skip (choice-flow UX design — triggered explicitly) |
+| `cli-forge-resilience` | Skip (resilience blueprint generation — triggered explicitly) |
 | `cli-watermark` | Skip (steganographic watermarking — triggered explicitly) |
 
 ---
@@ -57,6 +62,7 @@ These skills scan the codebase independently. Launch all in parallel.
 | `cli-forge-readme` | README completeness audit (RCI) |
 | `cli-audit-shell` | Shell quality score (SQI), bash anti-patterns, tooling fitness |
 | `cli-audit-wizard` | Setup UX quality, config lifecycle, scriptability |
+| `cli-audit-hanoi` | Ordering/layering scores, inversions, blast radius, displaced responsibilities |
 
 ### Wave 2 — Cross-cutting (parallel, after Wave 1)
 

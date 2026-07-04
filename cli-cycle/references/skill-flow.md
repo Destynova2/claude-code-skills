@@ -87,6 +87,8 @@ cli-audit-doc ──[docs describe dead features]────→ cli-audit-sync 
 cli-audit-doc ──[README score low]───────────────→ cli-forge-readme (already Wave 1, inject reason)
 cli-audit-test ──[no drift detection D13]────────→ cli-audit-drift (Wave 2)
 cli-audit-test ──[CI has no test stage]──────────→ cli-forge-pipeline (Wave 2)
+cli-audit-hanoi ──[displaced responsibilities across layers]→ cli-forge-infra (Wave 2)
+cli-audit-shell ──[wait-for/sleep/sed hacks in entrypoints]→ cli-audit-hanoi (already Wave 1, inject reason)
 ```
 
 ### Wave 2 → Wave 3 (Adaptive handoff edges)
