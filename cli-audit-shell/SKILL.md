@@ -182,6 +182,7 @@ Finding tier and confidence semantics are canonical in `../shared/triage.md` (Ti
 | Shell injection risk in env blocks (AP9) | `/cli-audit-code` on the consuming code | Verify the sourcing code validates inputs |
 | Scripts are CI/CD entrypoints | `/cli-forge-pipeline` | Pipeline-level optimization |
 | Script > 100 lines with god functions | `/cli-audit-tangle` | Topology analysis for split points |
+| Entrypoints with wait-for/sleep/`nc -z` loops or `sed` on app config | `/cli-audit-hanoi` | Displacement audit: trace the hack to the missing app capability |
 
 **Rule:** Recommend, don't auto-execute.
 

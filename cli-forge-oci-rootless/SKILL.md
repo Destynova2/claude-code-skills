@@ -188,6 +188,7 @@ handoff exists.
 
 | Trigger | Prefer handoff | What this skill still owns |
 |---|---|---|
+| Legacy stack pays compensations (wait loops, chown chains, run-once guards) across layers | `/cli-audit-hanoi` | Displacement catalog: what to fix at source in the target alloy vs consolidate in one layer |
 | Complex shell wrappers or unsafe scripts | `/cli-audit-shell` | Classify contract vs legacy; decide adapter/removal |
 | Podman/systemd/host bootstrap design details | `/cli-forge-infra` | Rootless migration verdict and bedrock preservation |
 | Prod-parity/runbook/failure-injection needed | `/cli-forge-resilience` | Migration-specific fault map and acceptance gates |

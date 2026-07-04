@@ -559,6 +559,7 @@ done
 | Branch structure suggests architecture issues | `/cli-audit-tangle` | Module coupling analysis |
 | Release flow involves shell scripts | `/cli-audit-shell` | Audit the release scripts |
 | CONTRIBUTING.md references old branch protection | `/cli-audit-sync` | Doc-code coherence check |
+| Stale PR waits on a silent human reviewer | `/cli-forge-plume` | Reviewer nudge message: relance ladder, calibrated humor |
 
 **Rule:** Recommend, don't auto-execute.
 

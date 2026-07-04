@@ -32,6 +32,8 @@
 | `cli-forge-quorum` | Byzantine consensus + Petri nets | distributed systems |
 | `cli-forge-perf` | Knuth's roofline (Amdahl's law, latency hierarchy, hot path / cold path) | computer architecture + applied statistics |
 | `cli-watermark` | adversary evolution (Gen 0-5), honey-tokens, paper town | security / cartography |
+| `cli-audit-hanoi` | Tower of Hanoi: disk size = stability × redo cost, wasted moves vs the 2^n − 1 minimum, stacked towers = responsibility displaced across layers | recreational mathematics |
+| `cli-forge-plume` | la plume (the ghostwriter's pen), coffee-machine test (humor calibration) | writing craft |
 
 ## Rule
 

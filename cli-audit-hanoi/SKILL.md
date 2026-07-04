@@ -73,7 +73,10 @@ by aesthetics.
    sketch, expected win (build time, cache-hit rate, image size, restart
    count, first-apply success). Mark semantic risks explicitly — some
    orders encode real constraints; a reorder must be behavior-preserving
-   or flagged `NEEDS-REVIEW`.
+   or flagged `NEEDS-REVIEW`. A non-trivial reorder is a hypothesis
+   until measured: shape it as an optimization card
+   (`../shared/optimization-card.md`) — evidence, invariants, validation
+   method, risk, owner.
 
 ## Scoring
 
@@ -85,6 +88,9 @@ Score each artifact 0-10 per law:
 | Legality | prerequisite violations, races, retry-based ordering |
 | Economy | wasted moves per typical change: restarts, invalidations, re-downloads, recompiles |
 | Displacement (repo-level) | responsibilities compensated above their natural layer, weighted by how many layers pay for the same gap |
+
+Findings carry tier and confidence per `../shared/triage.md` so
+`cli-cycle` can aggregate them without re-parsing prose.
 
 Report shape — findings first:
 
@@ -146,6 +152,7 @@ stable part can sink.
 | Benchmarking the claimed speed-up | `cli-forge-perf` |
 | Migrating the deployment itself | `cli-forge-oci-rootless`, `cli-forge-infra` |
 | Ordering information in an outbound message | `cli-forge-plume` |
+| Run under the full project review | `cli-cycle` — emit `.claude/cli-audit-hanoi.json` per `../shared/result-schema.md` for orchestrator aggregation |
 
 Recommend, do not auto-run.
 
