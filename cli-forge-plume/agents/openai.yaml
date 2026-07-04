@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plume Forge"
+  short_description: "Ghostwritten emails, messages, and relances with zero AI tells"
+  default_prompt: "Use $cli-forge-plume to rewrite this message in my voice, put the ask first, and strip every AI marker."

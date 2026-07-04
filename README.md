@@ -5,7 +5,7 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
-  <img src="https://img.shields.io/badge/skills-32-green.svg" alt="32 Skills">
+  <img src="https://img.shields.io/badge/skills-33-green.svg" alt="33 Skills">
   <img src="https://img.shields.io/badge/claude--code-skills-8A2BE2" alt="Claude Code Skills">
   <img src="https://img.shields.io/badge/cursor-compatible-F7DF1E" alt="Cursor Compatible">
   <a href="https://github.com/Destynova2/cli-code-skills/stargazers"><img src="https://img.shields.io/github/stars/Destynova2/cli-code-skills?style=flat" alt="Stars"></a>
@@ -75,6 +75,7 @@ Type `/cli-` in Claude Code or Codex, hit tab, pick a skill:
 | `/cli-forge-oci-rootless [service]` | Designs migrations from legacy/systemd/bare-metal deployments to rootless OCI operations |
 | `/cli-forge-perf [scope]` | Builds performance diagnostics, native benchmark protocols, and optimization validation plans |
 | `/cli-forge-pipeline [yaml]` | CI/CD pipeline optimizer using biomimetic patterns (ants, slime mold, bees, mycelium). Works with GitLab CI, GitHub Actions, and any CI system |
+| `/cli-forge-plume [message]` | Ghostwrites everyday exchanges — emails, chat, DMs, relances — in the user's voice, zero AI tells, with calibrated humor for follow-ups |
 | `/cli-forge-prez [topic]` | Generates technical presentation decks in Marp Markdown |
 | `/cli-forge-profile [profile]` | Creates, rewrites, audits, and maintains professional identity content: CV, LinkedIn, GitHub profiles, bios, portfolios, and freelance positioning |
 | `/cli-forge-quorum [sprint]` | Generates Byzantine-fault-tolerant REC-Quorum multi-agent orchestration |
@@ -196,6 +197,8 @@ cli-code-skills/
 │   └── references/        #   profiling, benchmarks, domains, examples
 ├── cli-forge-pipeline/    # /cli-forge-pipeline — CI/CD pipeline optimizer (biomimetic)
 │   └── references/        #   pipeline templates, scoring, cache strategy
+├── cli-forge-plume/       # /cli-forge-plume — ghostwritten exchanges and relances
+│   └── references/        #   AI-tells catalog, relance ladder, humor bank
 ├── cli-forge-prez/        # /cli-forge-prez — technical slide decks
 │   └── references/        #   slide structure and presentation patterns
 ├── cli-forge-profile/     # /cli-forge-profile — professional identity profiles

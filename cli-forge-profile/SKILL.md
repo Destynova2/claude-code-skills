@@ -29,6 +29,7 @@ Use this skill as the personal-identity layer. Recommend, do not auto-run:
 
 | Situation | Better handoff |
 |---|---|
+| Outreach message, recruiter reply, relance, everyday email/DM | `cli-forge-plume` |
 | Public repo README or product README | `cli-forge-readme` |
 | Full project documentation, onboarding, architecture docs | `cli-forge-doc` |
 | Speaker deck, meetup talk, pitch slides | `cli-forge-prez` |
