@@ -20,6 +20,22 @@ scripts/install_skills.sh --codex
 The installer removes each destination skill before copying it. That avoids stale
 files when a reference is renamed or deleted.
 
+The safe direction is repo → runtime. If a runtime copy was edited in place and
+that edit is not yet in the repo, the installer **refuses** to overwrite it
+(exit 3) rather than destroy it. It tracks this with a `.skills-manifest` written
+into each runtime skills root at install time.
+
+```bash
+scripts/install_skills.sh --check          # report divergence, change nothing
+scripts/install_skills.sh --pull-claude    # copy Claude in-place edits back into the repo
+scripts/install_skills.sh --pull-codex     # copy Codex in-place edits back into the repo
+scripts/install_skills.sh --force          # overwrite even runtime-ahead edits
+```
+
+If you (or a session) edited a skill directly in `~/.claude/skills/`, run
+`--pull-claude` to bring it back into the repo, review `git diff`, validate, and
+commit — then a normal install re-syncs both runtimes.
+
 **Shared files** (`gotchas.md` and `shared/`) are referenced by root `SKILL.md`
 files as `../<name>` and by `references/` files as `../../<name>`.
 The installer copies them to the skills root for both runtimes.
