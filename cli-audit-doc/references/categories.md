@@ -73,6 +73,7 @@ Check for:
 - **Tautological summaries**: restating the name ("Gets the name" on `get_name()`)
 - Function summaries not starting with third-person verb ("Returns", "Creates")
 - Type summaries not starting with a noun phrase ("A thread-safe...", "An iterator over...")
+- **Register miscalibration (literary drift)**: prose above the expected reader's level — in operational docs (runbooks, how-tos, dev guides), flag em-dash asides, narrative scene-setting, subordinate clauses before the command, and metaphors inside procedures. The practitioner reader wants command first, the why in one short line, imperative mood. Reverse check for general-audience docs: undefined jargon and missing motivation are the miscalibration there
 
 ## C5: STRUCTURE & FINDABILITY (8%)
 

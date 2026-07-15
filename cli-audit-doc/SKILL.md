@@ -44,7 +44,7 @@ Score each dimension **0.0-1.0**, then compute a weighted DQI. Read `references/
 | C1 | Diataxis Coverage | 10% | All 4 doc types present? Mode purity? |
 | C2 | Completeness | 12% | Public API items documented? Coverage > 80%? |
 | C3 | Freshness & Accuracy | 10% | Docs match current code? No stale references? |
-| C4 | Readability & Prose Quality | 10% | No weasel words, condescension, passive voice? |
+| C4 | Readability & Prose Quality | 10% | No weasel words, condescension, passive voice? Register calibrated to the expected reader? |
 | C5 | Structure & Findability | 8% | Heading hierarchy? Scannable? No orphan pages? |
 | C6 | Standard Sections | 8% | Errors, params, returns, examples documented? |
 | C7 | Code Examples | 10% | Working, copy-pasteable, no `unwrap()`? |

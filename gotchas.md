@@ -84,3 +84,4 @@
 ## General
 
 - [2026-03-26] all skills — SKILL.md files grew to 700-800 lines. Everything loaded into context = token waste. Split: lean SKILL.md (~150 lines workflow) + references/ (loaded on-demand).
+- [2026-07-15] cli-forge-doc/resilience — Generated doc prose drifted literary (em-dash asides, narrative intros, subordinate clause before the command). Calibrate the register to the expected reader (Singh principle): practitioner docs = command/fact first, why in one short line, imperative, zero voice. Literary register only fits general-audience explanation docs.

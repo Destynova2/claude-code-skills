@@ -16,6 +16,8 @@ agent: general-purpose
 
 > **Writing style:** Favor clarity — short sentences, one idea per sentence, plain words. A metaphor only when it clarifies. Keep one consistent register (impersonal/infinitive for operational docs). Separate narrative prose, meant to make the reader understand, from telegraphic content (tables, commands, checklists) which stays terse for action.
 
+> **Reader calibration (the Singh rule):** Before writing, name the expected reader and their situation (operator mid-incident, dev at setup, curious newcomer). Match their level — vulgarization means calibrating to the reader, not adding literary polish. For a general audience (Simon Singh's method): a concrete story motivates each concept, one strong analogy per hard idea, worked examples the reader can redo, hard details moved to an appendix. For practitioners (runbooks, how-tos, dev guides) the right level is the opposite of literary: command or fact first, the why in one short line after, imperative mood, no em-dash asides, no narrative voice, no scene-setting intro. If a sentence would read well in a magazine, it is miscalibrated for a runbook.
+
 > **No fabricated output:** Never invent command output, console captures, API responses, metrics, or logs. When real output is needed, emit a clearly-marked placeholder (🚧 "replace with a real capture"), never plausible-but-fake text presented as real.
 
 # Doc Forge — Dual Documentation Generator & Auditor

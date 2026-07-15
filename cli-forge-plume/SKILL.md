@@ -29,6 +29,11 @@ Read `../gotchas.md` before producing output.
 4. **Target-language quality.** Proofread in the output language: French
    diacritics and agreements, natural idiom, no anglicism where a plain native
    word exists.
+5. **Recipient calibration (the Singh rule).** Write at the recipient's level,
+   not above it: no jargon they don't share, no acronym they'd have to look up,
+   no literary flourish where a plain sentence does the job. A detail the
+   recipient can't act on leaves the message. Explaining to a non-expert means
+   one concrete example or analogy, not a lecture.
 
 ## Workflow
 
