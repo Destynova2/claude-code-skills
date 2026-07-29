@@ -87,6 +87,8 @@ cli-audit-doc ──[docs describe dead features]────→ cli-audit-sync 
 cli-audit-doc ──[README score low]───────────────→ cli-forge-readme (already Wave 1, inject reason)
 cli-audit-test ──[no drift detection D13]────────→ cli-audit-drift (Wave 2)
 cli-audit-test ──[CI has no test stage]──────────→ cli-forge-pipeline (Wave 2)
+cli-audit-code ──[SQLx transaction/data red flags]→ cli-audit-data (Wave 2)
+cli-audit-test ──[PostgreSQL proof gaps]──────────→ cli-audit-data (Wave 2)
 cli-audit-hanoi ──[displaced responsibilities across layers]→ cli-forge-infra (Wave 2)
 cli-audit-shell ──[wait-for/sleep/sed hacks in entrypoints]→ cli-audit-hanoi (already Wave 1, inject reason)
 ```
@@ -101,6 +103,7 @@ cli-audit-xray ──[benchmarkable candidate]─────────→ cli
 cli-audit-xray ──[semantic graph worth visualizing]→ cli-forge-schema (inject reason)
 cli-forge-pipeline ──[shell entrypoints in CI]─────→ cli-audit-shell (if not run)
 cli-forge-infra ──[complex deployment, no HLD]─────→ REPORT ONLY (forge-hld is Skip)
+cli-audit-data ──[unsafe DB design needs correction]→ REPORT ONLY (forge-data is correction-only)
 ```
 
 `cli-audit-xray` may recommend `cli-audit-drift`, `cli-audit-test`, or `cli-audit-tangle` in its human report when an optimization needs invariants, equivalence tests, or structural isolation. Under `cli-cycle`, those are report-only recommendations if the target audit already ran in an earlier wave; do not create a backward automatic edge.
@@ -114,6 +117,7 @@ Finding: "missing CONTRIBUTING.md" ────→ cli-forge-doc
 Finding: "missing/outdated README" ────→ cli-forge-readme
 Finding: "missing diagrams" ───────────→ cli-forge-schema
 Finding: "CI missing stages" ──────────→ cli-forge-pipeline (generation mode)
+Finding: "unsafe PostgreSQL/SQLx design" ─→ cli-forge-data
 Finding: "code/config issue" ──────────→ Direct edit (no forge skill needed)
 ALL corrections ───────────────────────→ cli-git-conventional (ALWAYS)
 ```
@@ -201,4 +205,5 @@ Skills that operate in both modes:
 
 Skills that operate in correction mode only:
 - `cli-forge-doc` — generates CONTRIBUTING.md, architecture docs, troubleshooting
+- `cli-forge-data` — designs and implements corrections for database-safety findings
 - `cli-git-conventional` — formats all commits (always active during correction)

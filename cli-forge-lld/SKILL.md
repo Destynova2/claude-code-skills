@@ -207,6 +207,7 @@ Read `references/anti-patterns.md` for the 9 anti-patterns table with descriptio
 | LLD reveals security threats (STRIDE) | `/cli-audit-code` on affected components | C9 security check |
 | API contracts defined | `/cli-audit-drift` | Bootstrap CONTRACTS.md from the LLD |
 | Component has complex state machine | `/cli-forge-schema` | Generate state diagram |
+| PostgreSQL/SQLx schema, transactions, or brownfield migration carry business invariants | `/cli-forge-data` | Produce the database decision, concurrency proof, and safe migration plan |
 
 **Rule:** Recommend, don't auto-execute.
 
@@ -219,6 +220,7 @@ Read `references/anti-patterns.md` for the 9 anti-patterns table with descriptio
 | `cli-audit-code` | Validates the implementation matches the LLD design |
 | `cli-audit-test` | Validates test coverage matches the testability design |
 | `cli-cycle` | Calls cli-forge-lld as part of full project review |
+| `cli-forge-data` | Deepens sections 6, 8, 10, and 16 for PostgreSQL/SQLx persistence |
 
 ---
 

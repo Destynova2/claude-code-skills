@@ -15,6 +15,10 @@
 
 A tier is rarely a single number — each skill weights the axes differently.
 
+`cli-audit-data` and `cli-forge-data` also use L0-L3 **data criticality** from
+`data-invariants.md`. It is orthogonal to scope tiering: S/M/L/XL controls breadth and output depth;
+L0-L3 controls proof depth and safety consequence.
+
 | Axis | Question | Drives... |
 |---|---|---|
 | **Tasks / scope** | how many independent work items? | brigade size (chef), section count (hld) |
@@ -33,6 +37,7 @@ Each skill keeps its own tier table (signals → tier), specialized to its domai
 | `cli-forge-hld` | system complexity | document section inclusion matrix (S = 6 sections, XL = full arc42) | section "Step 3 — Size the document (Mitosis)" |
 | `cli-audit-sync` | doc file count | audit layers covered (Layer 1 only → all 3 + terminology map) | section "Mitosis — Scale to doc volume" |
 | `cli-forge-pipeline` | pipeline size | workflow fission decision (1 mega-pipeline → event-driven mesh) | Patterns table, row 6 "Mitosis" |
+| `cli-audit-data` / `cli-forge-data` | files/models/services touched | audit/design breadth; L0-L3 separately selects database proof depth | `shared/data-invariants.md` |
 
 ## Why Mitosis (the rule)
 

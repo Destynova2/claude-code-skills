@@ -169,6 +169,7 @@ Use the output format below. Finding tier and confidence semantics are canonical
 | `cli-forge-schema` | Can visualize test plan as diagrams (pyramid, state machines) |
 | `cli-forge-perf` | D6 (NFR) and D7 (risk) cover perf as *intent*; `cli-forge-perf` provides the executable bench harness (A/B, distribution, permutation test) that turns the intent into a non-regression gate |
 | `cli-cycle` | Calls cli-audit-test as part of the full project review; emit `.claude/cli-audit-test.json` per `../shared/result-schema.md` for orchestrator aggregation |
+| `cli-audit-data` | Defines PostgreSQL-specific proof cases; this skill scores their place in the overall test strategy |
 
 ## Dynamic Handoffs
 
@@ -180,6 +181,7 @@ Use the output format below. Finding tier and confidence semantics are canonical
 | Missing drift detection in tests (D13 low) | `/cli-audit-drift` | Bootstrap CONTRACTS.md |
 | CI has no test stage | `/cli-forge-pipeline` | Add test jobs to pipeline |
 | D6 (perf/NFR) low or no perf budget gate | `/cli-forge-perf` | Catalogue + harnais A/B exécutable pour transformer le SLO en test de non-régression |
+| PostgreSQL/SQLx tests use only mocks/SQLite or omit synchronized concurrency and N-1 migrations | `/cli-audit-data` | Derive the required database proof from criticality and invariants |
 
 **Rule:** Recommend, don't auto-execute.
 

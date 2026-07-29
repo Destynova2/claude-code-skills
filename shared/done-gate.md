@@ -29,6 +29,7 @@
 | `cli-forge-demo` | Step 6 quality gate (8 boxes: same show, idempotent reset, showstopper, golden path, no scene > 76 s, understudy, show-don't-tell, runner-native) | Step 6 — Quality gate |
 | `cli-forge-chef` | Phase 3 — Check before service (8+ hard gates: tmuxinator doctor, paths, branches, permissions, setup script, ccheck, contre-chef prompt) | Phase 3 — Check before service |
 | `cli-forge-doc` | DCI completeness score + Diataxis coverage before publishing | DCI-REPORT.md section |
+| `cli-forge-data` | database decision + reversible migration/implementation + reproducible PostgreSQL proof | Workflow step 10 |
 
 ## Rule
 

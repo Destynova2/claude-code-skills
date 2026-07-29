@@ -158,6 +158,7 @@ After your analysis, recommend these skills if conditions are met:
 | Test quality issues (C8 low) | `/cli-audit-test` | Full test strategy audit |
 | CI/CD config present but not audited | `/cli-forge-pipeline` | Pipeline optimization |
 | Static perf anti-pattern detected (alloc in loop, O(n²), N+1) on a hot service | `/cli-forge-perf` | Confirm the dynamic cost and lock the fix with an A/B bench gate |
+| PostgreSQL/SQLx flow has read-before-write, split transactions, ignored zero-row writes, or tenant-key gaps | `/cli-audit-data` | Prove database invariants and concurrent executions |
 
 **Rule:** Recommend, don't auto-execute. Phrase as: "Consider running `/cli-audit-tangle` — 3 god modules detected that need topology analysis."
 

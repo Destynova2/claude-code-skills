@@ -51,6 +51,10 @@ The goal is not to produce generic lint feedback. The goal is to review like a s
 
 Primary fit: infrastructure automation repositories. Secondary fit: application code, CLIs, scripts, documentation, and release tooling when they affect deployable behavior.
 
+When a diff contains PostgreSQL migrations, SQLx queries, repository transaction changes, or
+durable business-state transitions, recommend `/cli-audit-data` for the database-specific
+invariant and concurrency gate.
+
 ## Mandatory Reference Loading
 
 | Target situation | Read |
@@ -230,3 +234,4 @@ Recommend, do not auto-run:
 | CI/CD design is central | `/cli-forge-pipeline` |
 | Architecture/design is ambiguous | `/cli-forge-hld` or `/cli-forge-lld` |
 | Ansible role structure is tangled | `/cli-audit-tangle` |
+| Diff changes PostgreSQL/SQLx schema, transactions, migrations, or durable state | `/cli-audit-data` |

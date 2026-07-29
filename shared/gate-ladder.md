@@ -29,3 +29,4 @@
 | `cli-forge-pipeline` | maps rungs onto CI stages; release gate = lowest red rung |
 | `cli-audit-test` | scores how far up the ladder the test plan actually reaches |
 | `cli-forge-demo` | shows the T2-T3 golden path as the live demo |
+| `cli-audit-data` / `cli-forge-data` | maps T0-T4/M0 to SQLx prepare, PostgreSQL tests, migrations, day-2 repair, concurrency/failure, and incident memory |

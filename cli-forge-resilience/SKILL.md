@@ -356,5 +356,6 @@ Each item must include:
 | Infra/deploy complexity dominates the issue | `/cli-forge-infra` | Simplify and harden delivery path |
 | Docs, wrappers, and code disagree | `/cli-audit-sync` | Catch doc-code drift |
 | Stress / phase-transition surfaces detected but no perf budget or A/B harness | `/cli-forge-perf` | T4 stress-strain becomes measurable: bench protocol + roofline + reproducible A/B (`../shared/determinism.md`) |
+| Data-loss, invariant drift, migration, queue, or transaction failure dominates | `/cli-audit-data` | Apply the PostgreSQL/SQLx safety and repair gate |
 
 **Rule:** recommend handoffs, do not auto-execute them unless the user explicitly asks.

@@ -121,6 +121,7 @@ These strategies are detailed in `references/patterns.md`. Read it when applying
 | Multiple config files to manage | `/cli-forge-tree` | Project structure audit |
 | Sizing / capacity decision pending (instances × W × €/year) or hardware profile drives runtime latency | `/cli-forge-perf` | Cost-accounting model (€/kWh/CO₂) + roofline-aware bench calibrated on the target hardware |
 | Rebuild storms, restart storms, or the same wait/retry logic in several layers | `/cli-audit-hanoi` | Ordering and displacement audit across Dockerfile/kube/Ansible |
+| PostgreSQL lifecycle, migration runner, pool, replica, backup, or restore semantics are part of the change | `/cli-audit-data` | Verify database invariants against the real deployment topology |
 
 **Rule:** Recommend, don't auto-execute.
 

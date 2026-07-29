@@ -20,5 +20,8 @@ Path convention:
 | `triage.md` | Phoenix 3-2-1 tiers, GRADE confidence, multi-method triangulation | cli-cycle (full Phoenix), forge-resilience (Step 9), all audit-* skills (finding tier × confidence) |
 | `tiering.md` | Mitosis S/M/L/XL — scale depth of output to size of input | forge-chef (brigade size), audit-tangle (analysis depth), forge-hld (doc sections), audit-sync (audit layers), forge-pipeline (workflow fission) |
 | `done-gate.md` | 3-phase definition-of-done (pre-conditions → during → post-verification) | forge-perf (GATE), forge-resilience (Step 8 score), forge-pipeline (mutation testing), forge-oci-rootless (Step 6 proof), forge-demo (Step 6 quality gate), forge-chef (Phase 3 hard gates), forge-doc (DCI completeness) |
+| `data-invariants.md` | Database sources of truth, L0-L3 criticality, invariants, conservation, interleavings, proof ladder, runtime uncertainty | audit-data, forge-data, audit-drift, audit-test, audit-review, forge-lld |
+| `data-invariant-catalog.md` | Detailed question catalog for discovering persistent business invariants | audit-data, forge-data |
+| `postgres-sqlx-patterns.md` | PostgreSQL and SQLx implementation patterns | audit-data, forge-data |
 
 These ship to `~/.claude/skills/shared/` alongside `~/.claude/skills/gotchas.md`.

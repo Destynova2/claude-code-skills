@@ -15,6 +15,7 @@
 | `cli-audit-test` | Test files or test directory exists |
 | `cli-audit-drift` | CONTRACTS.md exists (or bootstrap if critical functions detected and no contracts) |
 | `cli-audit-review` | Active diff/MR/PR review context exists: user requested review, branch has changed files vs base, `git diff --stat` is non-empty, or a patch file is passed |
+| `cli-audit-data` | PostgreSQL/SQLx signals exist: `sqlx` dependency or macros, migration directories, PostgreSQL-specific SQL/types, repositories with transactions, or a database-safety handoff |
 | `cli-audit-tangle` | Source code files exist (analyzes call graph topology) |
 | `cli-forge-readme` | `README.md` exists (audit mode: compare current vs ideal) |
 | `cli-forge-tree` | Always (audit current structure) |
@@ -24,6 +25,7 @@
 | `cli-forge-arch` | Skip (triggered only on explicit user request) |
 | `cli-forge-hld` | Skip (triggered only on explicit user request) |
 | `cli-forge-lld` | Skip (triggered only on explicit user request) |
+| `cli-forge-data` | Skip (triggered by explicit database design/implementation requests or correction of `cli-audit-data` findings) |
 | `cli-audit-shell` | Shell scripts exist (`.sh` files or shebanged bash scripts) |
 | `cli-audit-wizard` | Interactive setup/init commands exist (`setup.sh`, `init`, `doctor`, wizard UX) |
 | `cli-forge-infra` | Infra files exist (`Dockerfile`, `*.tf`, `helmfile.yaml`, `k8s/`) |
@@ -74,6 +76,7 @@ These skills benefit from Wave 1 results or cross-reference multiple concerns.
 | `cli-audit-sync` | Compares docs against code — needs to know what code and docs exist | Code index from audit-code context, doc inventory from audit-doc |
 | `cli-audit-drift` | Scans code against contracts — benefits from knowing the code structure | Code structure awareness |
 | `cli-audit-review` | Reviews the active change as a merge gate after foundation context exists | Code/doc/test/shell findings, changed-file inventory, proof gaps |
+| `cli-audit-data` | Needs code, test, and migration context before selecting critical paths | SQLx/repository structure, PostgreSQL tests, active diff, deployment and migration signals |
 | `cli-forge-pipeline` | Audits CI — benefits from knowing test structure and quality | Test pyramid shape from audit-test, test techniques detected |
 | `cli-forge-schema` | Audits diagrams against code — needs to know module structure | Module structure from audit-code |
 | `cli-forge-infra` | Audits infra files — independent but lower priority | — |
@@ -254,6 +257,7 @@ Context from prior audits (use to enrich your analysis, do not re-scan):
 | Code Topology | 7/10 | 2 god functions | cli-audit-tangle |
 | Semantic Drift | N/A | No CONTRACTS.md | cli-audit-drift |
 | Merge Review | 7/10 | Missing proof for changed behavior | cli-audit-review |
+| Database Safety | N/A | 2 unproven invariants | cli-audit-data |
 | README | 6/10 | Outdated | cli-forge-readme |
 | Project Structure | 9/10 | Excellent | cli-forge-tree |
 | Diagrams | 4/10 | Missing | cli-forge-schema |

@@ -58,6 +58,7 @@ Run every applicable `cli-*` skill on the current project, collect results, deli
 |---|---|---|
 | `cli-audit-code` | ✅ | Scans only the slice's code |
 | `cli-audit-xray` | ✅ if scope has source code and optimization/dataflow signals | Scans semantic/resource-flow candidates within the slice |
+| `cli-audit-data` | ✅ if scope has SQLx/PostgreSQL code or migrations | Audits persistent invariants, transactions, concurrency, and schema evolution |
 | `cli-audit-doc` | ✅ | Scans only the slice's docs |
 | `cli-audit-test` | ✅ | Scans only the slice's tests |
 | `cli-audit-tangle` | ✅ | Analyzes call graph within the slice |
@@ -70,6 +71,7 @@ Run every applicable `cli-*` skill on the current project, collect results, deli
 | `cli-forge-pipeline` | ❌ | CI is project-wide |
 | `cli-forge-schema` | ✅ | Audits diagrams referencing the slice |
 | `cli-forge-infra` | ❌ | Infra is project-wide |
+| `cli-forge-data` | ✅ only when explicitly requested or correcting a data-safety finding | Designs or implements the scoped database correction |
 | `cli-forge-github` | ❌ | Repo config is project-wide |
 | `cli-audit-wizard` | ❌ | Wizard UX is project-wide |
 | `cli-audit-hanoi` | ✅ if scope has ordering-sensitive artifacts (Dockerfile, playbooks, manifests, workspace members) | Audits step ordering and blast radius within the slice |
@@ -98,6 +100,8 @@ Parse each SKILL.md frontmatter to extract: `name`, `description`, `argument-hin
 7. Check for contracts: `CONTRACTS.md`
 8. Check for CI: `.github/workflows/`, `.gitlab-ci.yml`
 9. Get project size: file count, primary language(s)
+10. Detect database signals: SQLx dependencies/macros, PostgreSQL URLs/types, migration directories,
+    `.sql` files, repositories, transaction boundaries, and schema tools
 
 ### Step 3 — Decide which skills to run
 
@@ -108,7 +112,7 @@ Read `references/orchestration.md` for the full applicability matrix. Key rule: 
 Read `references/orchestration.md` for execution order, prompt patterns, and wave rules.
 
 **Wave 1 (foundation, parallel):** code, doc, test, tangle, tree, readme, shell, wizard — independent scans
-**Wave 2 (cross-cutting + handoffs, parallel):** review, sync, drift, pipeline, schema, infra + skills recommended by Wave 1 handoffs
+**Wave 2 (cross-cutting + handoffs, parallel):** review, data, sync, drift, pipeline, schema, infra + skills recommended by Wave 1 handoffs
 **Wave 3 (adaptive, if needed):** skills recommended by Wave 2 handoffs that haven't run yet
 
 Wave 2 skills get Wave 1 summaries injected. Handoff-recommended skills get the caller's reason injected. Deduplication prevents duplicate runs (same skill + same scope = run once). See `references/orchestration.md` for the full adaptive handoff algorithm.

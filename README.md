@@ -5,7 +5,7 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
-  <img src="https://img.shields.io/badge/skills-34-green.svg" alt="34 Skills">
+  <img src="https://img.shields.io/badge/skills-36-green.svg" alt="36 Skills">
   <img src="https://img.shields.io/badge/claude--code-skills-8A2BE2" alt="Claude Code Skills">
   <img src="https://img.shields.io/badge/cursor-compatible-F7DF1E" alt="Cursor Compatible">
   <a href="https://github.com/Destynova2/cli-code-skills/stargazers"><img src="https://img.shields.io/github/stars/Destynova2/cli-code-skills?style=flat" alt="Stars"></a>
@@ -49,6 +49,7 @@ Type `/cli-` in Claude Code or Codex, hit tab, pick a skill:
 | Skill | What it does |
 |-------|-------------|
 | `/cli-audit-code [path]` | Scores code against Clean Code principles — 10 categories: naming, functions, DRY, error handling, cognitive load. Works with any language |
+| `/cli-audit-data [path]` | Audits PostgreSQL/SQLx invariants, transactions, concurrency, idempotency, migrations, and repair proof |
 | `/cli-audit-doc [path]` | Scores documentation quality against RFC 1574, Diataxis, Microsoft M-DOC — 6 categories, any language |
 | `/cli-audit-drift [path]` | Detects silent semantic drift between CONTRACTS.md intentions and implementation behavior |
 | `/cli-audit-hanoi [path]` | Audits install/config/build step ordering (Dockerfile layers, Ansible tasks, K8s apply order, Rust crates, docs) — stable at the bottom, volatile on top, minimal rework per change |
@@ -68,6 +69,7 @@ Type `/cli-` in Claude Code or Codex, hit tab, pick a skill:
 | `/cli-forge-chef [sprint]` | Generates a multi-agent Brigade de Cuisine orchestrator with tmux, prompts, worktrees, and gates |
 | `/cli-forge-choice-ux [flow]` | Choice UX — simplifies checkout, signup, pricing, settings, configurators, and guided flows using decision-load, friction, accessibility, and conversion heuristics |
 | `/cli-forge-demo [project]` | Generates a reproducible live-demo kit, reset path, demo script, and delivery support |
+| `/cli-forge-data [change]` | Designs and implements safe PostgreSQL/SQLx schemas, transactions, migrations, and data-state transitions |
 | `/cli-forge-doc [repo]` | Generates dual documentation — AI-optimized (AGENTS.md, llms.txt) + human-readable (Diataxis structure) |
 | `/cli-forge-github [repo]` | Audits GitHub repository health: rulesets, PR lifecycle, CI checks, releases, branches |
 | `/cli-forge-hld [system]` | High-Level Design — C4 L1-L2 diagrams, capacity estimation, ATAM tradeoff analysis, ADRs, deployment architecture. Sources: arc42, Google Design Docs, ByteByteGo |
@@ -156,6 +158,8 @@ cli-code-skills/
 ├── cli-cycle/             # /cli-cycle — orchestrator
 ├── cli-audit-code/        # /cli-audit-code — Clean Code scoring (CQI)
 │   └── references/        #   12 categories, scoring framework, anti-patterns
+├── cli-audit-data/        # /cli-audit-data — PostgreSQL/SQLx invariant and concurrency audit
+│   └── references/        #   review templates and worked example
 ├── cli-audit-xray/        # /cli-audit-xray — semantic optimization scanner
 │   └── references/        #   SOG, optimization families, examples, risk rules
 ├── cli-audit-doc/         # /cli-audit-doc — documentation quality (DQI)
@@ -184,6 +188,7 @@ cli-code-skills/
 │   └── references/        #   principles, scorecard, flow patterns
 ├── cli-forge-demo/        # /cli-forge-demo — reproducible live-demo kit
 │   └── references/        #   staging, dramaturgy, tooling, templates
+├── cli-forge-data/        # /cli-forge-data — safe PostgreSQL/SQLx design and implementation
 ├── cli-forge-github/      # /cli-forge-github — GitHub repository health
 │   └── references/        #   repo health patterns and checks
 ├── cli-forge-hld/         # /cli-forge-hld — High-Level Design
