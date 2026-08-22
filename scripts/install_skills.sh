@@ -1,18 +1,20 @@
 #!/usr/bin/env bash
 set -eu
 
-# Install the repo skills (source of truth) into the Claude and Codex runtimes,
+# Install the repo skills (source of truth) into the Claude, Codex, and Jcode runtimes,
 # as real copies. The repo -> runtime direction is the safe one; this script
 # refuses to overwrite a runtime copy that was edited in place and not yet
 # brought back into the repo, so an in-place edit is never silently destroyed.
 #
 # Usage:
-#   scripts/install_skills.sh                 install into both runtimes
+#   scripts/install_skills.sh                 install into every runtime
 #   scripts/install_skills.sh --claude        install into Claude only
 #   scripts/install_skills.sh --codex         install into Codex only
+#   scripts/install_skills.sh --jcode         install into Jcode only
 #   scripts/install_skills.sh --check         report divergence, change nothing
 #   scripts/install_skills.sh --pull-claude   copy Claude edits back into the repo
 #   scripts/install_skills.sh --pull-codex    copy Codex edits back into the repo
+#   scripts/install_skills.sh --pull-jcode    copy Jcode edits back into the repo
 #   scripts/install_skills.sh --force ...     overwrite even runtime-ahead edits
 
 ROOT="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
@@ -22,8 +24,8 @@ MANIFEST_NAME=".skills-manifest"
 sha() { sha256sum "$1" 2>/dev/null | cut -d' ' -f1; }
 
 usage() {
-  echo "Usage: scripts/install_skills.sh [--claude] [--codex] [--check]" \
-       "[--pull-claude] [--pull-codex] [--force]"
+  echo "Usage: scripts/install_skills.sh [--claude] [--codex] [--jcode] [--check]" \
+       "[--pull-claude] [--pull-codex] [--pull-jcode] [--force]"
 }
 
 # Managed files (paths relative to $1): every cli-*/ dir that carries a
@@ -36,7 +38,7 @@ managed_relpaths() {
     done
     [ -d shared ] && find shared -type f
     [ -f gotchas.md ] && printf 'gotchas.md\n'
-  )
+  ) | grep -v -e '/\.DS_Store$' -e '^\.DS_Store$'
 }
 
 # Recorded sha for a relpath in a manifest (empty if absent).
@@ -144,35 +146,47 @@ check_dest() { # dest label
   [ "$diffs" -eq 0 ] && echo "  in sync"
 }
 
-do_claude=0; do_codex=0; mode=install
+do_claude=0; do_codex=0; do_jcode=0; mode=install
 for a in "$@"; do
   case "$a" in
     --force)       FORCE=1 ;;
     --check)       mode=check ;;
     --claude)      do_claude=1 ;;
     --codex)       do_codex=1 ;;
+    --jcode)       do_jcode=1 ;;
     --pull-claude) mode=pull; do_claude=1 ;;
     --pull-codex)  mode=pull; do_codex=1 ;;
+    --pull-jcode)  mode=pull; do_jcode=1 ;;
     -h|--help)     usage; exit 0 ;;
     *)             usage >&2; exit 2 ;;
   esac
 done
-if [ "$do_claude" -eq 0 ] && [ "$do_codex" -eq 0 ]; then do_claude=1; do_codex=1; fi
+if [ "$do_claude" -eq 0 ] && [ "$do_codex" -eq 0 ] && [ "$do_jcode" -eq 0 ]; then
+  do_claude=1; do_codex=1; do_jcode=1
+fi
 
 CLAUDE="$HOME/.claude/skills"
 CODEX="$HOME/.codex/skills"
+JCODE="$HOME/.jcode/skills"
+
+# Jcode is optional: only touch it when the runtime exists or was asked for
+# explicitly, so a machine without Jcode does not grow a stray skills tree.
+if [ "$do_jcode" -eq 1 ] && [ ! -d "$HOME/.jcode" ]; then do_jcode=0; fi
 
 case "$mode" in
   install)
     [ "$do_claude" -eq 1 ] && install_into "$CLAUDE" claude
     [ "$do_codex"  -eq 1 ] && install_into "$CODEX"  codex
+    [ "$do_jcode"  -eq 1 ] && install_into "$JCODE"  jcode
     ;;
   check)
     [ "$do_claude" -eq 1 ] && check_dest "$CLAUDE" claude
     [ "$do_codex"  -eq 1 ] && check_dest "$CODEX"  codex
+    [ "$do_jcode"  -eq 1 ] && check_dest "$JCODE"  jcode
     ;;
   pull)
     [ "$do_claude" -eq 1 ] && pull_from "$CLAUDE" claude
     [ "$do_codex"  -eq 1 ] && pull_from "$CODEX"  codex
+    [ "$do_jcode"  -eq 1 ] && pull_from "$JCODE"  jcode
     ;;
 esac

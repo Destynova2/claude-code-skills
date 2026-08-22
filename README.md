@@ -120,6 +120,12 @@ git clone https://github.com/Destynova2/cli-code-skills.git
 cli-code-skills/scripts/install_skills.sh --codex
 ```
 
+### Jcode
+
+```bash
+cli-code-skills/scripts/install_skills.sh --jcode
+```
+
 ### Cursor IDE
 
 ```bash

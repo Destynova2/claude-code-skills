@@ -16,6 +16,14 @@ def fail(message: str) -> None:
     raise SystemExit(1)
 
 
+WARNINGS: list[str] = []
+
+
+def warn(message: str) -> None:
+    """Record a non-blocking guidance violation, reported at the end."""
+    WARNINGS.append(message)
+
+
 def read(path: str) -> str:
     return (ROOT / path).read_text(encoding="utf-8")
 
@@ -37,6 +45,29 @@ def frontmatter_has_key(fm: str, key: str) -> bool:
     return bool(re.search(rf"^{re.escape(key)}:\s*.+", fm, re.MULTILINE))
 
 
+# Limits from the Agent Skills spec:
+# https://docs.anthropic.com/en/docs/agents-and-tools/agent-skills/best-practices
+NAME_MAX = 64
+DESCRIPTION_MAX = 1024
+# Anthropic recommends keeping the SKILL.md body under 500 lines so it stays
+# cheap to load once the skill triggers. Warn rather than fail: a few large
+# generators predate the guidance and splitting them is a separate change.
+BODY_MAX_LINES = 500
+
+
+def frontmatter_value(fm: str, key: str) -> str:
+    """Return a frontmatter scalar, joining YAML line folds into one string."""
+    match = re.search(
+        rf"^{re.escape(key)}:\s*(.*?)(?=\n[A-Za-z_-]+:|\Z)", fm, re.DOTALL | re.MULTILINE
+    )
+    if not match:
+        return ""
+    value = " ".join(match.group(1).split())
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
+        value = value[1:-1]
+    return value
+
+
 def check_frontmatter(skills: list[Path]) -> None:
     seen: set[str] = set()
     for skill in skills:
@@ -52,6 +83,22 @@ def check_frontmatter(skills: list[Path]) -> None:
         if name in seen:
             fail(f"duplicate skill name: {name}")
         seen.add(name)
+
+        if len(name) > NAME_MAX:
+            fail(f"{path} name is {len(name)} chars, spec limit is {NAME_MAX}")
+        if not re.fullmatch(r"[a-z0-9-]+", name):
+            fail(f"{path} name {name!r} must be lowercase letters, digits, hyphens")
+
+        description = frontmatter_value(fm, "description")
+        if len(description) > DESCRIPTION_MAX:
+            fail(
+                f"{path} description is {len(description)} chars, "
+                f"spec limit is {DESCRIPTION_MAX}"
+            )
+
+        body_lines = len(text[text.index("\n---\n", 3) + 5 :].splitlines())
+        if body_lines > BODY_MAX_LINES:
+            warn(f"{path} body is {body_lines} lines, guidance is <{BODY_MAX_LINES}")
 
 
 def check_readme(skills: list[Path]) -> None:
@@ -169,6 +216,9 @@ def main() -> int:
     check_shared_paths(skills)
     check_cycle_runtime_neutrality()
     check_ci()
+
+    for message in WARNINGS:
+        print(f"WARN: {message}")
 
     print(f"OK: {len(skills)} skills validated")
     return 0
