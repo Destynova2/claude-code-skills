@@ -1,0 +1,24 @@
+{
+  "id": "audit-code-flawed-order-service",
+  "skills": ["cli-audit-code"],
+  "query": "/cli-audit-code evals/fixtures/flawed-py/order_service.py",
+  "files": ["evals/fixtures/flawed-py/order_service.py"],
+  "notes": "Dimension IDs checked against cli-audit-code/SKILL.md: C1 Naming, C2 Functions & Cognitive Complexity, C4 DRY, C5 Error Handling, C9 Security, C11 Cognitive Load. The fixture is Python, so the run also tests the language-awareness principle: findings should use Python idioms, not Java defaults.",
+  "expected_behavior": [
+    "Reports a Code Quality Index scoring the 12 dimensions C1-C12, with the weights totalling 100%",
+    "C9: flags the f-string SQL built from user input as an injection vector, and recommends parameterised queries",
+    "C9: flags the hardcoded DB_PASSWORD constant",
+    "C5: flags the bare `except: pass` as a swallowed error that hides failures",
+    "C2 or C11: flags process_order as too long and too deeply nested, with a concrete complexity observation",
+    "C4: flags the duplicated tax calculation appearing in two functions",
+    "C1: flags the meaningless names `d`, `tmp`, and the magic number 0.2",
+    "Uses Python idioms in its recommendations, for example context managers or dataclasses, not Java-style getters",
+    "Every finding cites file:line",
+    "Produces a report only. The fixture file is left unmodified"
+  ],
+  "must_not": [
+    "Editing or repairing the fixture: audit skills report, they do not fix",
+    "Reporting a passing or near-perfect score for this file",
+    "Citing a dimension ID outside C1-C12, or inventing a finding with no matching line in the fixture"
+  ]
+}

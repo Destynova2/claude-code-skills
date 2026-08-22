@@ -1,0 +1,25 @@
+{
+  "id": "audit-shell-flawed-deploy",
+  "skills": ["cli-audit-shell"],
+  "query": "/cli-audit-shell evals/fixtures/flawed-cli/deploy.sh",
+  "files": ["evals/fixtures/flawed-cli/deploy.sh"],
+  "notes": "Dimension IDs here were checked against cli-audit-shell/SKILL.md: S1 Strict Mode, S2 Error Surfaces, S5 Variable Discipline, S6 Quoting, S10 Idempotency & Safety, S12 Security & Injection. Each expectation maps to a specific line of the fixture. Missing the unquoted expansions or the piped-curl is a regression whatever score is reported.",
+  "expected_behavior": [
+    "Reports a Shell Quality Index scoring all 12 dimensions S1-S12, with the weights totalling 100%",
+    "S1: flags the absent `set -euo pipefail`, which matters because the script runs rm -rf and cd",
+    "S2: flags that `cd $1` and `tar xzf` return values are never checked, and that the trailing `exit 0` masks every earlier failure",
+    "S6: flags the unquoted expansions `cd $1`, `$TARGET`, `$f`, `$2` as word-splitting and globbing hazards, each with a file:line reference",
+    "S10: flags `rm -rf $TARGET/*` as destructive when TARGET is unset, since it expands to `/*`",
+    "S12: flags `curl ... | sh` as executing unverified remote code over plaintext HTTP, and flags the hardcoded APIKEY",
+    "S12 or S10: flags `chmod 777` as world-writable permissions on a config file",
+    "Flags `for f in `ls *.tar.gz`` as parsing ls output, and recommends a plain glob",
+    "Flags `[ $COUNT == 0 ]`: `==` is a bashism inside `[`, and the unquoted empty COUNT makes it a syntax error",
+    "Every finding cites file:line. No vague findings such as 'error handling could be improved'",
+    "Produces a report only. The fixture file is left unmodified"
+  ],
+  "must_not": [
+    "Editing or repairing the fixture: audit skills report, they do not fix",
+    "Reporting a passing or near-perfect score for this script",
+    "Citing a dimension ID outside S1-S12, or inventing a finding with no matching line in the fixture"
+  ]
+}

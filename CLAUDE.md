@@ -62,6 +62,20 @@ skill is rejected by the API). SKILL.md bodies over 500 lines are reported as
 `WARN`, following Anthropic's progressive-disclosure guidance: move detail into
 `references/` so the body stays cheap to load.
 
+## Evaluations
+
+`evals/` holds one JSON case per scenario plus the deliberately flawed fixtures
+they point at. There is no scored runner: grading a skill run needs a model in
+the loop. What is automated keeps the cases honest.
+
+```bash
+python3 scripts/check_evals.py
+```
+
+It rejects a case whose skill or fixture does not exist, or that cites a
+dimension ID the skill never defines. See `evals/README.md`. Fixtures are
+broken on purpose and must not be repaired.
+
 ## Current skills (36)
 
 **Audit (12):** cli-audit-code, cli-audit-data, cli-audit-doc, cli-audit-drift, cli-audit-hanoi, cli-audit-review, cli-audit-shell, cli-audit-sync, cli-audit-tangle, cli-audit-test, cli-audit-wizard, cli-audit-xray
