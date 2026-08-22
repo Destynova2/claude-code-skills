@@ -204,12 +204,57 @@ def check_ci() -> None:
         fail(".github/workflows/validate.yml does not run the skill validator")
 
 
+# Rows like: | C1 | Naming & Readability | 8% | ... |
+WEIGHT_ROW = re.compile(r"^\|\s*([A-Z]{1,3}\d{1,2})\s*\|[^|]*\|\s*(\d{1,3})%\s*\|", re.M)
+
+
+def weight_table(text: str) -> dict[str, int]:
+    return {i: int(w) for i, w in WEIGHT_ROW.findall(text)}
+
+
+def check_scoring_weights(skills: list[Path]) -> None:
+    """Scoring skills publish weighted dimensions; the weights must total 100%.
+
+    A skill that scores out of 97% or 103% silently produces wrong grades, and
+    the SKILL.md table and its references/scoring.md copy are edited separately,
+    so they drift. Both properties are cheap to check and expensive to notice.
+    """
+    for skill in skills:
+        tables = {}
+        for path in [skill / "SKILL.md", *sorted(skill.glob("references/*.md"))]:
+            if not path.is_file():
+                continue
+            table = weight_table(path.read_text(encoding="utf-8"))
+            # Fewer than 4 rows is prose that happens to look tabular.
+            if len(table) < 4:
+                continue
+            tables[path] = table
+            total = sum(table.values())
+            if total != 100:
+                fail(f"{path} scoring weights sum to {total}%, expected 100%")
+
+        canonical = tables.get(skill / "SKILL.md")
+        if canonical is None:
+            continue
+        for path, table in tables.items():
+            if path.name == "SKILL.md":
+                continue
+            drift = {
+                key: (canonical.get(key), table.get(key))
+                for key in set(canonical) | set(table)
+                if canonical.get(key) != table.get(key)
+            }
+            if drift:
+                fail(f"{path} weights disagree with {skill.name}/SKILL.md: {drift}")
+
+
 def main() -> int:
     skills = skill_dirs()
     if not skills:
         fail("no cli-* skills found")
 
     check_frontmatter(skills)
+    check_scoring_weights(skills)
     check_readme(skills)
     check_claude(skills)
     check_installer()

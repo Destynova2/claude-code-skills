@@ -146,17 +146,17 @@ check_dest() { # dest label
   [ "$diffs" -eq 0 ] && echo "  in sync"
 }
 
-do_claude=0; do_codex=0; do_jcode=0; mode=install
+do_claude=0; do_codex=0; do_jcode=0; explicit_jcode=0; mode=install
 for a in "$@"; do
   case "$a" in
     --force)       FORCE=1 ;;
     --check)       mode=check ;;
     --claude)      do_claude=1 ;;
     --codex)       do_codex=1 ;;
-    --jcode)       do_jcode=1 ;;
+    --jcode)       do_jcode=1; explicit_jcode=1 ;;
     --pull-claude) mode=pull; do_claude=1 ;;
     --pull-codex)  mode=pull; do_codex=1 ;;
-    --pull-jcode)  mode=pull; do_jcode=1 ;;
+    --pull-jcode)  mode=pull; do_jcode=1; explicit_jcode=1 ;;
     -h|--help)     usage; exit 0 ;;
     *)             usage >&2; exit 2 ;;
   esac
@@ -169,24 +169,25 @@ CLAUDE="$HOME/.claude/skills"
 CODEX="$HOME/.codex/skills"
 JCODE="$HOME/.jcode/skills"
 
-# Jcode is optional: only touch it when the runtime exists or was asked for
-# explicitly, so a machine without Jcode does not grow a stray skills tree.
-if [ "$do_jcode" -eq 1 ] && [ ! -d "$HOME/.jcode" ]; then do_jcode=0; fi
+# Jcode is optional: skip it when the runtime is absent, so a machine without
+# Jcode does not grow a stray skills tree. Say so when it was asked for by
+# name, otherwise --jcode would look like it worked while doing nothing.
+if [ "$do_jcode" -eq 1 ] && [ ! -d "$HOME/.jcode" ]; then
+  [ "$explicit_jcode" -eq 1 ] && echo "skipped jcode: $HOME/.jcode does not exist"
+  do_jcode=0
+fi
+
+# Plain `[ cond ] && action` as the last statement of a case branch makes the
+# script exit 1 under `set -e` whenever the condition is false, so use if.
+run_for_each() { # verb
+  verb="$1"
+  if [ "$do_claude" -eq 1 ]; then "$verb" "$CLAUDE" claude; fi
+  if [ "$do_codex"  -eq 1 ]; then "$verb" "$CODEX"  codex;  fi
+  if [ "$do_jcode"  -eq 1 ]; then "$verb" "$JCODE"  jcode;  fi
+}
 
 case "$mode" in
-  install)
-    [ "$do_claude" -eq 1 ] && install_into "$CLAUDE" claude
-    [ "$do_codex"  -eq 1 ] && install_into "$CODEX"  codex
-    [ "$do_jcode"  -eq 1 ] && install_into "$JCODE"  jcode
-    ;;
-  check)
-    [ "$do_claude" -eq 1 ] && check_dest "$CLAUDE" claude
-    [ "$do_codex"  -eq 1 ] && check_dest "$CODEX"  codex
-    [ "$do_jcode"  -eq 1 ] && check_dest "$JCODE"  jcode
-    ;;
-  pull)
-    [ "$do_claude" -eq 1 ] && pull_from "$CLAUDE" claude
-    [ "$do_codex"  -eq 1 ] && pull_from "$CODEX"  codex
-    [ "$do_jcode"  -eq 1 ] && pull_from "$JCODE"  jcode
-    ;;
+  install) run_for_each install_into ;;
+  check)   run_for_each check_dest ;;
+  pull)    run_for_each pull_from ;;
 esac
