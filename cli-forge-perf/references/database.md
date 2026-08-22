@@ -1,5 +1,17 @@
 # Base de données
 
+## Contents
+
+- 1. Indexer — ne jamais full-scan
+- 2. Ne sélectionner que le nécessaire
+- 3. Tuer le N+1 (le piège ORM n°1)
+- 4. Batcher écritures et lectures
+- 5. Connexions & exécution
+- 6. Au-delà de la requête
+- Checklist DB
+
+---
+
 Priorité #2. La DB est presque toujours le bottleneck d'une app. Et la règle des
 latences s'applique : un round-trip réseau vers la DB coûte ~10 000× un accès RAM.
 Le gain vient surtout de **ne pas chercher partout** et de **ne pas multiplier les

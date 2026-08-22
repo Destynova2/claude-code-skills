@@ -4,6 +4,15 @@
 
 ---
 
+## Contents
+
+- Skill applicability matrix
+- Execution order — 2 waves
+- Sub-agent prompt pattern
+- Synthesis — Report templates
+
+---
+
 ## Skill applicability matrix
 
 | Skill | Run if... |

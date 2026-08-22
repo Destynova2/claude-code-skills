@@ -1,5 +1,16 @@
 # Cache Strategy — Slime Mold + Mycelium Combined
 
+## Contents
+
+- Principle: the cache is the colony's nervous system
+- Cache levels (mycelium waterfall)
+- Cache key strategies per ecosystem
+- Physarum strategy: adaptive cache by change profile
+- Common pitfalls
+- Measuring cache effectiveness
+
+---
+
 ## Principle: the cache is the colony's nervous system
 
 Without shared memory, every ant starts from zero.

@@ -4,6 +4,19 @@
 
 ---
 
+## Contents
+
+- The problem: your own devs will kill your watermarks
+- Layer 1: Pre-commit hook — fragile watermark sentinel
+- Layer 2: Hidden CI job — the silent guardian
+- Layer 3: Entangled constants (Collberg/Thomborson technique)
+- Layer 4: Release-time audit
+- Layer 5: Guard network (inspired by Collberg sentinel network)
+- Summary: the 5-layer defense
+- OpSec considerations
+
+---
+
 ## The problem: your own devs will kill your watermarks
 
 The biggest threat to your watermarks is not an adversary — it's your own team:

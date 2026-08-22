@@ -16,6 +16,21 @@
 
 ---
 
+## Contents
+
+- 1. Multi-stage build — build, copy, run
+- 2. Goss / container-structure-test patterns
+- 3. USER non-root — mandatory, not optional
+- 4. HEALTHCHECK — mandatory in every runtime image
+- 5. CVE scan and SBOM — mandatory T1 gate
+- 6. FIPS mode — federal/regulated compliance
+- 7. Strip everything — remove package managers, shells, and unnecessary tools
+- 8. Read-only filesystem — mandatory for rootless runtime
+- 9. Pod YAML + Quadlet .kube + Kustomize — the standard deployment model
+- 10. Checklist — mandatory for every image
+
+---
+
 ## 1. Multi-stage build — build, copy, run
 
 Every image uses at least 2 stages. Never ship build tools in the runtime image.

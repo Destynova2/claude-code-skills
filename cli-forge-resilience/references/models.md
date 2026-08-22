@@ -5,6 +5,19 @@
 
 ---
 
+## Contents
+
+- 1. Genome / DNA — Single source of truth
+- 2. Membrane / Boundary conditions — Prod parity
+- 3. Homeostasis — Steady-state health
+- 4. Immune system — Detect what does not belong
+- 5. Stress–strain — Budgets and fatigue
+- 6. Phase transition — Threshold effects
+- 7. Hysteresis — Dirty state after stress
+- 8. Memory cells — Incidents become guardrails
+
+---
+
 ## 1. Genome / DNA — Single source of truth
 
 **Meaning:** operational facts should have one canonical source, then be rendered downstream.

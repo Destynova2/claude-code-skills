@@ -4,6 +4,15 @@
 
 ---
 
+## Contents
+
+- Directory Structure
+- Writing Rules per Quadrant
+- Design Docs (thinking tool — pre-implementation)
+- Progressive Complexity Funnel
+
+---
+
 ## Directory Structure
 
 ```

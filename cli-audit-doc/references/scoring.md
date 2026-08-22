@@ -4,6 +4,18 @@
 
 ---
 
+## Contents
+
+- DQI Formula
+- Scoring Guide
+- Category Weights
+- DQI Thresholds
+- Derived Metrics
+- Anti-Patterns
+- Sources
+
+---
+
 ## DQI Formula
 
 ```

@@ -1,5 +1,18 @@
 # Frontend & web
 
+## Contents
+
+- 1. Mesurer : Lighthouse & Core Web Vitals
+- 2. Réduire le JavaScript (le plus gros levier sur INP/LCP)
+- 3. Optimiser le chemin critique de rendu
+- 4. Images & médias (souvent le plus gros poids et le LCP)
+- 5. Réseau & caching
+- 6. Rendu & runtime
+- 7. Polices
+- Checklist frontend
+
+---
+
 Axe transverse, piloté par la mesure (Lighthouse / Core Web Vitals). La perf web
 se décompose en : **moins d'octets** (réseau), **plus tôt** (chemin critique),
 **moins de travail sur le main thread** (JS), **pas de saccades** (layout/paint).

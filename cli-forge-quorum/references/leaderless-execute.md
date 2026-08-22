@@ -1,5 +1,19 @@
 # Leaderless Execute — Eliminating the Chef bottleneck via pré-signed tickets
 
+## Contents
+
+- The problem (observed on grob-s5, 2026-04-17)
+- The solution — tickets pré-signés + contre-chef-inter routing
+- Ticket schema
+- Contre-chef-inter: ticket verifier, not approver
+- Budget enforcement
+- Append-only log of ticket events
+- How it changes the Chef prompt
+- Cost of tickets
+- Anti-patterns
+
+---
+
 ## The problem (observed on grob-s5, 2026-04-17)
 
 In Brigade, every commis permission request flows through the Chef:

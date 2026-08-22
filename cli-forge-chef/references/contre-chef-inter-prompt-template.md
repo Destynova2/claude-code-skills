@@ -1,5 +1,16 @@
 # Template — Contre-Chef-Inter Prompt (Inter-Agent Permission Auto-Nudger)
 
+## Contents
+
+- Why this exists (context for designers)
+- When to spawn (in SKILL.md orchestration)
+- Template content
+- Integration with tmuxinator
+- Integration with Chef prompt
+- Why Haiku model for contre-chef-inter
+
+---
+
 Generate at `{project}/.claude/prompts/contre-chef-inter-{session}.md`.
 
 This is the prompt for the **contre-chef-inter** — a dedicated Claude instance in its own tmux window that watches the Chef pane for **inter-agent permission requests** (Agent Teams protocol cards) and nudges the Chef to approve normal-zone requests so the sprint doesn't stall on team-lead approval bottleneck.

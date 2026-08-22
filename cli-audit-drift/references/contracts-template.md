@@ -4,6 +4,16 @@
 
 ---
 
+## Contents
+
+- File header
+- Contract block template
+- Common invariant templates
+- Contract sizing guide
+- Example: complete contract
+
+---
+
 ## File header
 
 ```markdown

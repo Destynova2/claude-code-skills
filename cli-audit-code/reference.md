@@ -1,5 +1,13 @@
 # Clean Code Reference — Full Principles Catalog
 
+## Contents
+
+- Sources
+- Principles Not in the wojteklu Gist
+- Rust-Specific Clean Code Idioms
+
+---
+
 ## Sources
 
 This reference synthesizes principles from multiple authorities, not just Robert C. Martin.

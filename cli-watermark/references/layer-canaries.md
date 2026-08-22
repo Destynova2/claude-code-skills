@@ -4,6 +4,16 @@
 
 ---
 
+## Contents
+
+- Principle
+- Techniques
+- Selection rules
+- Codebook entry
+- Resilience
+
+---
+
 ## Principle
 
 Cartographers insert fictional towns to catch map plagiarists. We insert fictional **design decisions** — code patterns that are:

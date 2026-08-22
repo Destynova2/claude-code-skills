@@ -2,6 +2,22 @@
 
 > Sources: Anthropic C compiler build, Claude Code Agent Teams docs, AlphaCode, MetaGPT, Addy Osmani "Code Agent Orchestra"
 
+## Contents
+
+- Principles
+- Decision tree
+- Sous-Chef protocol (before every merge)
+- Attempt counter
+- Reinforced prevention (Phase 0)
+- File locking via shared-state.md
+- Stigmergy — completion tokens (inspired by leafcutter ants, cli-forge-pipeline)
+- Patch Bankruptcy (inspired by cli-forge-infra)
+- Divergence detection (inspired by Physarum / cli-forge-pipeline)
+- Convergence and early-stop (inspired by cli-cycle Phoenix)
+- Sprint Health Scorecard (inspired by the cli-audit-* scoring frameworks)
+
+---
+
 ## Principles
 
 1. **Prevention > Detection > Resolution.** Invest 80% in prevention, 15% in detection, 5% in resolution.

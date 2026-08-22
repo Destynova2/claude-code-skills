@@ -1,5 +1,16 @@
 # Algorithmique & structures de données
 
+## Contents
+
+- 1. Réduire la complexité (Big-O)
+- 2. Choisir la bonne structure de données
+- 3. Transformations de boucles
+- 4. Éviter le travail inutile
+- 5. Branchless & prédiction de branchement (hot path uniquement)
+- Checklist algorithmique
+
+---
+
 Le levier #1. Un meilleur algorithme bat toujours une micro-optimisation : passer
 de O(n²) à O(n log n) sur 1 M d'éléments, c'est ~50 000× moins d'opérations.
 

@@ -1,5 +1,17 @@
 # Documentation Audit Reference — Standards & Language Conventions
 
+## Contents
+
+- Sources
+- Universal Rules (All Languages)
+- Language-Specific Conventions
+- Documentation Completeness Index (DCI)
+- Coverage Tiers
+- Confidence Protocol
+- Anti-Patterns Checklist
+
+---
+
 ## Sources
 
 ### Standards

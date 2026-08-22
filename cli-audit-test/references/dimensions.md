@@ -4,6 +4,25 @@
 
 ---
 
+## Contents
+
+- Scoring Scale (all dimensions)
+- D1 — Scope & Objectives (8%)
+- D2 — Test Design Techniques (12%)
+- D3 — Test Pyramid Balance (8%)
+- D4 — Coverage & Traceability (12%)
+- D5 — Negative Testing & Security (8%)
+- D6 — Non-Functional Testing (10%)
+- D7 — Risk Analysis & Prioritization (8%)
+- D8 — Automation Strategy (10%)
+- D9 — CI/CD Integration (8%)
+- D10 — Entry/Exit Criteria (6%)
+- D11 — Exploratory & Human Testing (5%)
+- D12 — Environment & Test Data (5%)
+- D13 — Semantic Drift Detection (8%)
+
+---
+
 ## Scoring Scale (all dimensions)
 
 | Score | Label | Meaning |

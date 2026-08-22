@@ -1,5 +1,16 @@
 # Mémoire & cache
 
+## Contents
+
+- 1. RAM plutôt que disque / réseau
+- 2. Mémoïsation & calcul une seule fois
+- 3. Les couches de cache (de la plus proche à la plus loin)
+- 4. Cache locality (CPU) — pour le hot path numérique
+- 5. Allocations
+- Checklist mémoire & cache
+
+---
+
 Priorité #3. Deux idées : (a) **ne pas refaire un travail déjà fait** (cacher le
 résultat) et (b) **garder les données près du CPU** (RAM > disque, et dans la RAM,
 la localité compte). Tout découle des latences (cf. SKILL.md).

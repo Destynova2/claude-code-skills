@@ -4,6 +4,20 @@
 
 ---
 
+## Contents
+
+- SQI Formula
+- Scoring Guide
+- Category Weights (default, before type adjustment)
+- Weight Adjustment by Script Type
+- SQI Thresholds
+- Severity Classification
+- Anti-Pattern Impact on Score
+- Comparative Benchmarks
+- Sources
+
+---
+
 ## SQI Formula
 
 ```

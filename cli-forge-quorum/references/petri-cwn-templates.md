@@ -1,5 +1,19 @@
 # Petri / CWN Templates — Visualizing REC-Quorum
 
+## Contents
+
+- Why Petri nets (not PERT, not BPMN alone)
+- Minimal REC-Quorum Petri net (Mermaid-friendly)
+- Token typing (CWN color set)
+- Guarded transitions
+- Dynamic animation — bpmn-js token simulator
+- Soundness checks (hard gate before launch)
+- Petri cheat sheet
+- Minimal example — one task through all three phases
+- Not covered here (future work)
+
+---
+
 ## Why Petri nets (not PERT, not BPMN alone)
 
 REC-Quorum workflow has loops (retry), concurrency (fan-out quorum), gated transitions (k-of-n threshold), and typed tokens (certificates with signatures). PERT handles none of these. BPMN handles most via gateways but tokens are anemic (no payload type).

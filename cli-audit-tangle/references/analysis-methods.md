@@ -4,6 +4,17 @@
 
 ---
 
+## Contents
+
+- God Function Detection — Fire ants
+- Cycle Detection — Topoisomerase cut sites
+- Module Boundary Analysis — Fiedler vector
+- Network Resistance — God function confirmation
+- Dead Code Detection
+- Comparative Benchmarks
+
+---
+
 ## God Function Detection — Fire ants
 
 ### Algorithm

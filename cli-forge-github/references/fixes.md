@@ -4,6 +4,19 @@
 
 ---
 
+## Contents
+
+- F1 — Ruleset requires skippable checks
+- F2 — Release PR in conflict (release-plz)
+- F3 — Orphan branches
+- F4 — Transient CI failure
+- F5 — Token lacks workflow scope
+- F6 — sync-main conflicts
+- F7 — Stale PRs
+- F8 — Unpinned or deprecated actions
+
+---
+
 ## F1 — Ruleset requires skippable checks
 
 **Detect:**

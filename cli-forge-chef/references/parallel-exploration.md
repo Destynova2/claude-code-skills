@@ -2,6 +2,17 @@
 
 > Sources: AlphaCodium (Qodo), AlphaCode (DeepMind), Cursor Shadow Workspace, Claude Code Competing Hypotheses, ICLR 2025 MAD analysis
 
+## Contents
+
+- When to use this pattern
+- Pattern 1 — Competing Hypotheses (Debug)
+- Debate vs Parallel — When different context helps (and when it doesn't)
+- Pattern 2 — Competing Approaches (Architecture / Refactoring)
+- Pattern 3 — AlphaCodium Flow (Iterative Generation + Selection)
+- Integration with the Chef
+
+---
+
 ## When to use this pattern
 
 | Situation | Standard pattern (1 commis/task) | Parallel exploration (N commis/task) |

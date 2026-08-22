@@ -6,6 +6,48 @@
 
 ---
 
+## Contents
+
+- G1 — Permission UI blocks the Chef (CRITICAL)
+- G2 — Use `--append-system-prompt-file`, NOT `--append-system-prompt "$(cat ...)"`
+- G3 — Claude waits for a first message
+- G4 — Invisible commis without --teammate-mode tmux
+- G5 — shared-state.md outside the worktree = permission
+- G6 — Auto-approve Enter too fast
+- G7 — tmuxinator cannot launch Claude in the background
+- G8 — Commis receive the wrong prompt
+- G9 — Merge without CI = catastrophe
+- G10 — Commis touching the same files
+- G11 — Too many commis = context window
+- G12 — on_project_first_start does not exist in tmuxinator
+- G13 — Worktree on an existing branch
+- G14 — Read access to external repos
+- G15 — Parallel PRs on the same file = conflict
+- G16 — Blind auto-approve = zero safety net
+- G17 — The Chef forgets to update the roadmap
+- G18 — brew upgrade kills commis mid-flight
+- G19 — Agent Teams not enabled = no TeamCreate/SendMessage
+- G20 — The Chef has to send the first message manually
+- G21 — Idle Chef thinks commis are running
+- G22 — Obsidian docs not in permissions scope
+- G23 — No fallback when commis crash
+- G24 — No ccheck window = Chef blocks on every permission (CRITICAL)
+- G25 — .claude/ trust guard survives --dangerously-skip-permissions
+- G26 — Protected branch rejects direct push (CRITICAL)
+- G30 — Commis running `git fetch origin` or `git reset --hard` corrupts the brigade
+- G31 — Chef pane idle because no initial user message (CRITICAL)
+- G32 — Agent Teams teammates inherit the lead's permissions (cannot be isolated per-worktree)
+- G33 — Apply commands need their own standalone pane (NOT a teammate)
+- G34 — Shell-mangling of the prompt via `$(cat ...)` (SOLVED by --append-system-prompt-file)
+- G35 — `git worktree add ... | head -1` under `pipefail` kills git by SIGPIPE
+- G36 — Multiple commis sharing one branch = silent `git worktree add` failures
+- G37 — First-time trust prompt appears even with `bypassPermissions`
+- G38 — Empty bash array + `set -u` on bash 3.2 (OBSOLETE)
+- G39 — Inter-agent `permission_request` deadlock kills sub-agents silently (CRITICAL — RUNTIME BUG)
+- G40 — `Agent` tool with `isolation: worktree` may create empty worktree shells
+
+---
+
 ## G1 — Permission UI blocks the Chef (CRITICAL)
 
 **Problem:** Even with `--dangerously-skip-permissions`, the Chef (team leader) receives interactive UI prompts to approve commis edits. The Chef gets stuck on "Do you want to make this edit?" and waits for a human Enter.

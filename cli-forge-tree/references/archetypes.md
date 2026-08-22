@@ -4,6 +4,25 @@
 
 ---
 
+## Contents
+
+- `rust` (lib or CLI)
+- `go` (lib or CLI)
+- `python` (lib or CLI)
+- `js-ts` (lib, CLI, or app)
+- `terraform`
+- `helm`
+- `app-backend` (Docker Compose based)
+- `monorepo`
+- `oci-container` (Podman / Docker / OCI)
+- `kustomize` / `flux` (GitOps Kubernetes)
+- `ansible` (with optional Molecule)
+- `podman-quadlet` (systemd integration)
+- `shell-scripts` (Bash / POSIX sh)
+- Scaffold Script
+
+---
+
 ## `rust` (lib or CLI)
 
 ```

@@ -4,6 +4,13 @@
 
 ---
 
+## Contents
+
+- Detection by Technique
+- Quick Reference Table
+
+---
+
 ## Detection by Technique
 
 ### Equivalence Partitioning (EP)

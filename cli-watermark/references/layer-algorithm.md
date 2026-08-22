@@ -4,6 +4,16 @@
 
 ---
 
+## Contents
+
+- Principle
+- Techniques
+- Selection criteria
+- Codebook entry
+- Resilience
+
+---
+
 ## Principle
 
 Choose a mathematically defensible but statistically rare algorithmic decision. An AI rewrite preserves the algorithm — it reformulates, it doesn't reinvent.

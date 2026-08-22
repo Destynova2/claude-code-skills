@@ -4,6 +4,14 @@
 
 ---
 
+## Contents
+
+- Imperative Debt Score (IDS)
+- Dependency Health Score (DHS)
+- Infrastructure Health Scorecard
+
+---
+
 ## Imperative Debt Score (IDS)
 
 Count imperative patterns in infra code. Each is a "debt point" — a place where things can silently break, a tool can be missing, or a race condition can occur.

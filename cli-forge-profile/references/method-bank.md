@@ -1,5 +1,13 @@
 # Method Bank
 
+## Contents
+
+- Evidence-Based Principles
+- Copy Frameworks
+- Recommended Learning Shelf
+
+---
+
 Use this file when the user asks for best practices, books, videos, methods, or research-backed optimization.
 
 Sources checked: 2026-06-22.

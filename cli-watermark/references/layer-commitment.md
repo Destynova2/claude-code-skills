@@ -4,6 +4,16 @@
 
 ---
 
+## Contents
+
+- Principle
+- Commitment construction
+- Timestamping options
+- Verification workflow (for a judge/expert)
+- PROOF.md template
+
+---
+
 ## Principle
 
 Before each public release, create a cryptographic commitment that proves:

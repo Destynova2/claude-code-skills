@@ -1,5 +1,21 @@
 # Template — Permissions (multi-role, per-worktree)
 
+## Contents
+
+- Principle
+- Worktree layout
+- Files to generate (one per role)
+- File 1 — Commis (`{project}-wt-commis-N/.claude/settings.local.json`)
+- File 2 — Sous-Chef Merge (`{project}-wt-gate/.claude/settings.local.json`)
+- File 3 — Maître d'hôtel (`{project}-wt-maitre/.claude/settings.local.json`)
+- File 4 — Apply pane (`{project}-wt-apply/.claude/settings.local.json`)
+- File 5 — 3 voting sous-chefs (`{project}-wt-vote-{scope|secu|qualite}/.claude/settings.local.json`)
+- File 6 — Chef root (`{project}/.claude/settings.local.json`)
+- Generator checklist
+- Why one file per worktree beats one global file
+
+---
+
 Generate ONE `settings.local.json` per role, each inside the role's own worktree.
 Claude Code reads `.claude/settings.local.json` from the agent's CWD, so placing
 each agent in its own worktree naturally gives it its own permission set.

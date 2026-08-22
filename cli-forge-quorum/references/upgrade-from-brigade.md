@@ -1,5 +1,17 @@
 # Upgrade Path — From cli-forge-chef (Brigade) to cli-forge-quorum (REC-Q)
 
+## Contents
+
+- Six incremental steps
+- Migration status → skill to run
+- What to keep (shared between Brigade and REC-Q)
+- What changes in REC-Q
+- Anti-patterns during migration
+- What does NOT get solved by the upgrade (G32 persists)
+- Rollback plan
+
+---
+
 A working Brigade is a valid stepping stone. Do not throw it away. Migrate incrementally — each step is independently valuable and testable.
 
 ## Six incremental steps

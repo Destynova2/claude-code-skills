@@ -4,6 +4,20 @@
 > `cli-audit-data`, `cli-forge-data`, `cli-audit-drift`, `cli-audit-test`,
 > `cli-audit-review`, and `cli-forge-lld`.
 
+## Contents
+
+- Two independent scales
+- Mandatory reasoning order
+- Database decision
+- Invariant matrix
+- Conservation and state transitions
+- Interleaving and idempotency proof
+- Proof ladder
+- Runtime uncertainty
+- Completion gate
+
+---
+
 ## Two independent scales
 
 Do not collapse scope and risk into one label:

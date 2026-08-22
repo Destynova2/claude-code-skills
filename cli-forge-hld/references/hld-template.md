@@ -1,5 +1,12 @@
 # HLD Template Reference
 
+## Contents
+
+- Document Structure
+- Section Guidelines
+
+---
+
 Use this template when producing a High-Level Design document. Adapt sections to the project scope — not every section is mandatory for every project, but consider each one.
 
 ---

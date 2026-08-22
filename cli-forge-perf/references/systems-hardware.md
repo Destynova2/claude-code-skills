@@ -1,5 +1,18 @@
 # Systèmes & limites physiques
 
+## Contents
+
+- 1. Identifier la limite physique
+- 2. Rééquilibrer entre proc / RAM / disque (les trade-offs)
+- 3. Syscalls : moins et mieux
+- 4. Exploiter les accélérateurs hardware
+- 5. NUMA & affinité (multi-socket / gros serveurs)
+- 6. Footprint binaire & démarrage
+- 7. Énergie / conso
+- Checklist systèmes/hardware
+
+---
+
 Axe transverse bas niveau : quand on cherche à **taper les limites du hardware**
 et à équilibrer les ressources. L'idée centrale : chaque ressource (calcul, RAM,
 bande passante, I/O) a un **plafond physique** ; l'optimisation consiste à savoir

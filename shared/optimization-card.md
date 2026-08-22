@@ -2,6 +2,16 @@
 
 > **Cross-skill reference.** Canonical candidate format for optimizations that are hypotheses until proven. Reference it as `../../shared/optimization-card.md`. Used by `cli-audit-xray` to report candidates, by `cli-forge-perf` to benchmark them, by `cli-audit-drift` to promote missing invariants into contracts, and by `cli-audit-test` to derive equivalence tests.
 
+## Contents
+
+- Purpose
+- Card Template
+- Status Semantics
+- JSON Shape
+- Rules
+
+---
+
 ## Purpose
 
 An optimization card prevents vague advice. It forces every proposed rewrite to name its evidence, assumptions, validation method, risk, and next owner.

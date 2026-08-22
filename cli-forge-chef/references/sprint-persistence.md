@@ -4,6 +4,20 @@
 
 ---
 
+## Contents
+
+- Concept (inspired by the jj operation log)
+- Checkpoints (automatic saves)
+- Pause (clean stop)
+- Resume (pick up where you left off)
+- Rewind (go back)
+- Fresh restart (start from zero)
+- Sprint history (navigation)
+- Integration with jj and git
+- Safety rules
+
+---
+
 ## Concept (inspired by the jj operation log)
 
 Every sprint leaves **checkpoints** — snapshots of the complete project state at key moments. The Chef can navigate between these checkpoints like `jj undo` or `git reset`.

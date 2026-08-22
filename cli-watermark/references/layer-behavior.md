@@ -4,6 +4,16 @@
 
 ---
 
+## Contents
+
+- Principle
+- Techniques
+- Evidence collection
+- Codebook entry
+- Resilience
+
+---
+
 ## Principle
 
 Encode your fingerprint in externally measurable behavior — not in the code itself. The behavior is what the binary produces when run. Any rewrite in any language that copies your logic copies your behavior.

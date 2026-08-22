@@ -4,6 +4,13 @@
 
 ---
 
+## Contents
+
+- Invariant taxonomy
+- Red flag cheat sheet
+
+---
+
 ## Invariant taxonomy
 
 ### Category 1 — Symmetry invariants

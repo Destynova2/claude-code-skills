@@ -4,6 +4,35 @@
 
 ---
 
+## Contents
+
+- Table → Diagram
+- Kanban → Mermaid
+- PERT → Mermaid
+- Bullet lists / nested hierarchies → Mindmap
+- Numbered steps → Flowchart
+- Changelog / release notes → Timeline
+- Roadmap → Gantt
+- Pros/cons or comparison lists → Quadrant Chart
+- SQL CREATE TABLE → ER Diagram
+- JSON / YAML structures → Class Diagram or Mindmap
+- API endpoint lists → Sequence Diagram
+- Budget / resource allocation → Sankey
+- Git branching strategy → Git Graph
+- RACI / responsibility matrix → Flowchart with subgraphs
+- Cron / schedules → Gantt
+- Todo list / sprint backlog → Kanban
+- Scorecard / multi-dim quality → Radar
+- Time-series / curves → XY Chart
+- Chronological events → Timeline
+- Proportional breakdown (hierarchical) → Treemap
+- Post-mortem / root cause → Ishikawa (via flowchart LR)
+- Cloud topology / service map → Architecture
+- System overview / dashboard → Block
+- Set overlap → Quadrant (not Venn)
+
+---
+
 ## Table → Diagram
 
 | Table type | Convert to |

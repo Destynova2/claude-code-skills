@@ -2,6 +2,16 @@
 
 > **When to read:** Workflow Steps 6 and 7.
 
+## Contents
+
+- Suggested file layout
+- Runbook template
+- Incident blackbox template
+- Recurrent hurdle template
+- Writing rules
+
+---
+
 ## Suggested file layout
 
 - `docs/runbooks/{service}-runbook.md`

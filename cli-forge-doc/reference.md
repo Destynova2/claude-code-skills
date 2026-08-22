@@ -1,5 +1,19 @@
 # Doc Forge Reference — Standards, Metrics & Language Conventions
 
+## Contents
+
+- Sources & Influences
+- Documentation Completeness Index (DCI) — Full Specification
+- Audit Framework (6 Categories)
+- Language-Specific Conventions
+- LLM Documentation Standards
+- Anti-Patterns Checklist (Critical Findings)
+- Audit Report Format
+- Content Strategy Matrix
+- Design Doc Standards
+
+---
+
 ## Sources & Influences
 
 | Source | What we take from it |

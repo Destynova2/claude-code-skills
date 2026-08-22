@@ -1,5 +1,15 @@
 # Pensée latérale : dissoudre les contraintes implicites
 
+## Contents
+
+- 1. Liberté verticale — réécrire à n'importe quel niveau
+- 2. Liberté horizontale — détourner d'autres domaines & équipements
+- 3. Inversion radicale & le « 5e cerveau »
+- Garde-fou final
+- Checklist pensée latérale
+
+---
+
 Extension radicale du mode divergent (`idea-generation.md`). On s'impose presque
 toujours deux murs invisibles sans s'en rendre compte :
 1. **le niveau** auquel on accepte d'écrire le code ;

@@ -2,6 +2,18 @@
 
 > **When to read:** Phase 0.5 of the Chef, right after `cli-audit-tangle` has produced the coupling map and before spawning the commis. The Chef MUST compute the PERT before writing `shared-state.md` — the PERT section is the scheduling contract for the whole sprint.
 
+## Contents
+
+- 1 — Estimate each plat (O, M, P)
+- 2 — Build the dependency DAG
+- 3 — Compute the critical path
+- 4 — Schedule with limited commis (the "don't tangle" rule)
+- 5 — Mandatory Mermaid format for the PERT
+- 6 — When to recompute
+- 7 — Failure modes this prevents
+
+---
+
 The Chef's job is to deliver the maximum number of plats in the minimum wall-clock time **without two commis stepping on the same file at the same time**. That is exactly the problem PERT + list-scheduling solves: compute the critical path to know where time is actually spent, then dispatch commis to critical tasks first while respecting file-level exclusion.
 
 The reaction-diffusion pool in `simplified-model.md` (§4) is the *execution substrate* — this file is the *scheduling policy* that feeds it priorities.

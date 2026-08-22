@@ -4,6 +4,22 @@
 
 ---
 
+## Contents
+
+- Tone
+- Comment Length by Severity
+- Intent Labels
+- Full Finding Shape
+- Compact Line Comment Shapes
+- Question Style
+- “À généraliser” Rule
+- Suggested Fixes
+- Good Practices Section
+- Bad Comment Patterns
+- Ordering
+
+---
+
 ## Tone
 
 Use a direct, concrete, professional tone. In French contexts, concise French comments are preferred. Review the change, not the author.

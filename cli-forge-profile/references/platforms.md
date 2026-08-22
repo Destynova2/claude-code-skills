@@ -1,5 +1,18 @@
 # Platform Rules
 
+## Contents
+
+- LinkedIn
+- CV / Resume
+- Reddit / Community Profile
+- GitHub Profile / Portfolio
+- Portfolio Case Study
+- Freelance Service Profile
+- Recommendation Request
+- Cover Letter / Speaker Bio
+
+---
+
 Use these rules when writing or auditing profile content for a specific surface.
 
 ## LinkedIn

@@ -4,6 +4,23 @@
 
 ---
 
+## Contents
+
+- Review Posture
+- Reading Order
+- Reviewability Checks
+- Core Questions
+- Contract Chain Findings
+- Desired-State Heuristic
+- Proof Expectations
+- Comment Granularity
+- Pattern: “à généraliser”
+- Pattern: Ready-to-Paste Fix
+- Pattern: Clarifying Question
+- Approval Bar
+
+---
+
 ## Review Posture
 
 Review like a production maintainer who cares about what will happen when the change is deployed, rerun, released, and maintained six months later.

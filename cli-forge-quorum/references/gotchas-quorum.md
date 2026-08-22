@@ -1,5 +1,21 @@
 # Gotchas — REC-Quorum orchestration
 
+## Contents
+
+- REC-Q-specific gotchas
+- Q1 — Hash canonicalization is not "pretty-printed JSON"
+- Q2 — View-change racing with a recovering agent
+- Q3 — Append-only log is not atomic across agents
+- Q4 — Ticket scope ≠ settings.local.json permissions
+- Q5 — Apply commands belong in Phase 2, not Phase 1
+- Q6 — Phase 2 validators cloning each other
+- Q7 — Orchestrator prompt still contains classification logic
+- Q8 — Certificates stored in-prompt, not on disk
+- Q9 — Tickets signed once, never rotated
+- Q10 — Petri net "looks OK" but soundness check skipped
+
+---
+
 REC-Q inherits all of Brigade's pitfalls (see `cli-forge-chef/references/gotchas-chef.md`, G1–G38) plus these REC-Q-specific ones. Read this file before `Phase 4 — Hard gates`.
 
 **Inheritance map.** Most Brigade gotchas apply directly:

@@ -1,5 +1,15 @@
 # Protocole de bench (langue-agnostique)
 
+## Contents
+
+- Frontière de mesure & portabilité (avant de choisir un outil)
+- Le protocole (identique quel que soit le langage)
+- Routage : quel outil pour quel cas
+- Squelettes prêts à copier
+- Checklist protocole
+
+---
+
 L'actif réutilisable de la mesure de perf n'est ni un outil ni un langage — c'est la **méthode** (warmup, distribution, A/B interleavé, test de permutation, anti-DCE) et la **règle de verdict** (Δ dans le bruit ⇒ pas de gain). Ce fichier définit le protocole, **route vers l'outil natif** selon le langage/cas, et donne des **squelettes prêts à copier** dans la langue voulue.
 
 ## Frontière de mesure & portabilité (avant de choisir un outil)

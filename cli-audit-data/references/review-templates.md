@@ -1,5 +1,19 @@
 # Data safety review templates / Canevas de travail
 
+## Contents
+
+- A. Décision de conception
+- B. Matrice d'invariants
+- C. Interleaving
+- D. Machine à états
+- E. Compatibilité de migration
+- F. Pré-mortem
+- G. Revue de code
+- H. Homéostasie
+- I. Rapport final
+
+---
+
 ## A. Décision de conception
 
 ```markdown

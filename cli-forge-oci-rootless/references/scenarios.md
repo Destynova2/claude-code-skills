@@ -1,5 +1,20 @@
 # Scenario Playbooks — Lithic OCI Rootless Migration
 
+## Contents
+
+- Scenario A — Ansible stateful service to rootless product
+- Scenario B — Already containerized but not operable
+- Scenario C — Rootless/Quadlet prototype fails after reboot
+- Scenario D — Monitoring / NRPE migration
+- Scenario E — Backup/restore acceptance
+- Scenario F — Legacy CLI / wrapper consolidation
+- Scenario G — Air-gapped or regulated deployment
+- Scenario H — Multi-agent implementation sprint
+- Scenario I — CI gate design for migration proof
+- Scenario J — Incident-driven hardening
+
+---
+
 Use these scenario cards to route analysis, sub-agents, handoffs, and output
 focus. A repository can match several scenarios.
 

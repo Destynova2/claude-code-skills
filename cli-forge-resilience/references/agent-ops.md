@@ -2,6 +2,19 @@
 
 > **When to read:** Workflow Step 6 when the user mentions support levels, N1/N2/N3, L1/L2/L3, agent autonomy, autonomous remediation, MCP tools, regulated operations, or an "ops pack".
 
+## Contents
+
+- Separation rule
+- Support tier model
+- Agent autonomy model
+- Default mapping
+- Capability contract
+- Human-only boundaries
+- Ops pack output
+- Quality gate
+
+---
+
 ## Separation rule
 
 Keep these axes independent:

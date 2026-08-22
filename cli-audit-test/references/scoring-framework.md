@@ -1,5 +1,16 @@
 # Scoring Framework Reference — cli-audit-test
 
+## Contents
+
+- Weight Rationale
+- TMMi Level Mapping
+- Technique Detection Heuristics
+- Anti-Pattern Detection Rules
+- Comparative Benchmarks
+- Sources
+
+---
+
 ## Weight Rationale
 
 | Dimension | Weight | Why this weight |

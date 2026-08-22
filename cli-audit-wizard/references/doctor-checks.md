@@ -4,6 +4,15 @@
 
 ---
 
+## Contents
+
+- Check categories
+- Doctor output format
+- Exit codes
+- Reference implementations
+
+---
+
 ## Check categories
 
 A doctor mode should cover these categories, adapted to the project's domain. Not all categories apply to every project -- but the auditor should verify that applicable ones are implemented.

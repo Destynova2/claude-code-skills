@@ -4,6 +4,14 @@
 
 ---
 
+## Contents
+
+- 8 Structural Anti-Patterns
+- Detection heuristics
+- Pre-mortem: What can go wrong with this analysis
+
+---
+
 ## 8 Structural Anti-Patterns
 
 | # | Anti-Pattern | Biology/Physics | Detection | Severity |

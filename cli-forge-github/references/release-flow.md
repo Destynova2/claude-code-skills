@@ -4,6 +4,15 @@
 
 ---
 
+## Contents
+
+- The ideal flow (github-flow model (default, e.g., grob))
+- Where it breaks (known failure modes)
+- Pre-commit ↔ CI alignment audit
+- Release flow health score
+
+---
+
 ## The ideal flow (github-flow model (default, e.g., grob))
 
 ```

@@ -5,6 +5,14 @@
 
 ---
 
+## Contents
+
+- Universal law of entanglement
+- By anti-pattern
+- Summary table
+
+---
+
 ## Universal law of entanglement
 
 > The longer, thinner, and more flexible a system is, the more entropy pushes it toward entanglement.

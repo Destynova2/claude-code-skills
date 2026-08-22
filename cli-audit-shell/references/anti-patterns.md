@@ -4,6 +4,14 @@
 
 ---
 
+## Contents
+
+- Named Anti-Patterns
+- Detection Heuristics
+- Severity Classification
+
+---
+
 ## Named Anti-Patterns
 
 | # | Name | Severity | What it looks like | Why it's dangerous |

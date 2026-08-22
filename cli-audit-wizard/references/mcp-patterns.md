@@ -6,6 +6,17 @@
 
 ---
 
+## Contents
+
+- Core principle
+- Standard MCP tool set for config wizards
+- Design rules for MCP wizard tools
+- MCP Apps (2026 spec)
+- Audit checklist for MCP surface
+- Reference implementations
+
+---
+
 ## Core principle
 
 The MCP surface calls the same wizard engine as CLI and web. It writes the same TOML config file. JSON is transport only -- never on disk, never user-facing.

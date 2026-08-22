@@ -4,6 +4,19 @@
 
 ---
 
+## Contents
+
+- CI Is Production Behavior
+- CI Variables and Secrets
+- Semantic Release and Commit Messages
+- Packaging and Galaxy-like Artifacts
+- Download and Dependency Sources
+- Pipeline Matrix
+- Release Scripts
+- Documentation and CI Sync
+
+---
+
 ## CI Is Production Behavior
 
 Review CI/CD as code that deploys, releases, publishes, signs, tests, or gates production artifacts.

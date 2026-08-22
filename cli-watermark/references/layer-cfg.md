@@ -4,6 +4,16 @@
 
 ---
 
+## Contents
+
+- Principle (Venkatesan et al., 2001 — still valid)
+- Technique
+- Detection
+- Codebook entry
+- Resilience
+
+---
+
 ## Principle (Venkatesan et al., 2001 — still valid)
 
 The watermark is encoded in the **topology of the control flow graph** (CFG), not in the code. Each basic block is a node, each branch is an edge. The watermark is embedded by adding or rearranging edges in a way that encodes a bitstream.

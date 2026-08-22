@@ -6,6 +6,18 @@
 
 ---
 
+## Contents
+
+- Go -- The Charm Stack (State of the Art)
+- Rust
+- Python
+- Node / TypeScript
+- Shell (any language)
+- Framework comparison matrix
+- Reference implementations (study these)
+
+---
+
 ## Go -- The Charm Stack (State of the Art)
 
 | Layer | Library | Purpose |

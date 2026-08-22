@@ -4,6 +4,22 @@
 
 ---
 
+## Contents
+
+- Public Contract
+- Assertions
+- FQCN Everywhere
+- Idempotence
+- Task Organization
+- Jinja and Facts
+- Windows and PowerShell in Ansible
+- Molecule
+- YAML Formatting
+- Templates
+- Metadata and Collections
+
+---
+
 ## Public Contract
 
 Every public variable should have a complete chain:

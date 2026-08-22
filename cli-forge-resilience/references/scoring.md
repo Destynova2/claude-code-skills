@@ -3,6 +3,28 @@
 > **When to read:** Workflow Step 8.
 > Score each dimension from **0 to 4** using evidence from the repo, docs, scripts, deploy flow, and tests.
 
+## Contents
+
+- D1 — Contract Genome
+- D2 — Boundary Parity
+- D3 — Build Reproducibility
+- D4 — Fresh Deploy Proof
+- D5 — Rerun / Hysteresis
+- D6 — Runtime Homeostasis
+- D7 — Network Path Fidelity
+- D8 — Secrets / Identity / Roles
+- D9 — Data / Storage / Recovery
+- D10 — Observability / First Error
+- D11 — Operability
+- D12 — Immune Tests
+- D13 — Chaos / Degraded Mode
+- D14 — CI / Release Gate Convergence
+- D15 — Memory / Runbook / Blackbox
+- Score interpretation
+- Weighting note
+
+---
+
 ## D1 — Contract Genome
 - **0:** operational facts are scattered or contradictory
 - **2:** some canonical config exists, but drift is still manual or undocumented

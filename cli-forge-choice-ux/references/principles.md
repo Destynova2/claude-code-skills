@@ -1,5 +1,16 @@
 # Choice UX Principles
 
+## Contents
+
+- Scorecard
+- Core Laws
+- Flow Patterns
+- Technical Checklist
+- Visual Math
+- Severity
+
+---
+
 This reference supports `cli-forge-choice-ux`. Load it when a task needs detailed audit criteria, numeric heuristics, or pattern decisions.
 
 ## Scorecard

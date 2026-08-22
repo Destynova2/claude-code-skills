@@ -4,6 +4,19 @@
 
 ---
 
+## Contents
+
+- D1 — Ruleset ↔ CI Alignment (max 15)
+- D2 — Branch Hygiene (max 10)
+- D3 — PR Lifecycle (max 10)
+- D4 — Release Flow (max 15)
+- D5 — CI Health (max 15)
+- D6 — Permissions & Scopes (max 10)
+- D7 — Default Branch Config (max 10)
+- D8 — Workflow Hygiene (max 15)
+
+---
+
 ## D1 — Ruleset ↔ CI Alignment (max 15)
 
 **Check:** For each ruleset, extract required status checks. For each required check, verify it ALWAYS emits a status (even when path pruning skips the job).

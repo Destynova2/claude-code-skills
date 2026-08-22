@@ -4,6 +4,18 @@
 
 ---
 
+## Contents
+
+- Flow philosophy (inspired by cli-audit-tangle)
+- The DAG
+- Trigger edges (who triggers whom)
+- Deduplication matrix
+- Cycle detection (safety)
+- Execution order summary
+- Forge skill modes
+
+---
+
 ## Flow philosophy (inspired by cli-audit-tangle)
 
 The skill ecosystem is a **directed graph**. Each edge represents a trigger condition:

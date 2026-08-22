@@ -5,6 +5,19 @@
 
 ---
 
+## Contents
+
+- Universal law of configuration
+- I. BIOLOGY -- Organism-level rules
+- II. PHYSICS -- Laws that map to wizard rules
+- III. INFORMATION THEORY -- Optimal questioning
+- IV. GAME DESIGN -- Teaching without a manual
+- V. COGNITIVE SCIENCE / UX -- How humans process config
+- Summary table
+- Sources
+
+---
+
 ## Universal law of configuration
 
 > The more choices you offer upfront, the less likely the user is to finish -- or to make good choices.

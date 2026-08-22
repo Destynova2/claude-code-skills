@@ -1,5 +1,17 @@
 # Proof Gates — Lithic OCI Rootless Migration
 
+## Contents
+
+- Gate notation
+- T0 — Bedrock / contract gates
+- T1 — Alloy / component gates
+- T2 — Fresh formation / deploy gates
+- T3 — Field operations / day-2 gates
+- T4 — Stress & fracture gates
+- M0 — Stratigraphic memory gates
+
+---
+
 The migration verdict must be based on executable proof, not architectural
 assertion. Use this matrix to turn claims into gates.
 

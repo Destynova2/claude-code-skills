@@ -4,6 +4,16 @@
 
 ---
 
+## Contents
+
+- The 5-second rule (the peacock test)
+- The Assertion-Evidence model (Michael Alley, Penn State)
+- Named structural patterns
+- Narrative framework reference
+- Minimalist approaches (optional modes)
+
+---
+
 ## The 5-second rule (the peacock test)
 
 Every slide must pass this test: **can the audience grasp the message in 5 seconds?**

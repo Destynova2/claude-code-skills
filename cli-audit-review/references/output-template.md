@@ -4,6 +4,15 @@
 
 ---
 
+## Contents
+
+- Full Scored Review
+- Compact MR Review Variant
+- Line Comment Only Variant
+- JSON-ish Machine-Readable Summary
+
+---
+
 ## Full Scored Review
 
 ```markdown

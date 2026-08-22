@@ -1,5 +1,17 @@
 # Quorum Sizing — Adaptive N by Criticality
 
+## Contents
+
+- The classifier
+- Classification rules (in order, first match wins)
+- LLM cost model
+- Heterogeneous quorums — the "1 strong + N-1 watchdogs" trick
+- When to override the classifier
+- Admission control — refuse if quorum unreachable
+- BFT formalism for the curious
+
+---
+
 ## The classifier
 
 Every task entering REC-Quorum is classified into one of four criticality levels, which maps to quorum size N and fault tolerance.

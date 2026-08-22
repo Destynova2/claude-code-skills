@@ -4,6 +4,19 @@
 
 ---
 
+## Contents
+
+- Go and Cobra/Viper CLIs
+- PowerShell
+- Shell and Bash
+- Python
+- Kubernetes, Containers and Runtimes
+- Dockerfiles / Containerfiles
+- Terraform / OpenTofu
+- Documentation as Code
+
+---
+
 ## Go and Cobra/Viper CLIs
 
 Review Go code for clarity, explicit contracts, and idiomatic simplification.

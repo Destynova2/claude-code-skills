@@ -1,5 +1,21 @@
 # Data invariant catalog / Catalogue d'invariants à examiner
 
+## Contents
+
+- Identité et cardinalité
+- Valeurs, unités et bornes
+- Temps
+- États et workflow
+- Conservation
+- Idempotence et ordre
+- Multi-tenancy et autorisation
+- Suppression, rétention et audit
+- Données dérivées et projections
+- Migration et coexistence
+- Observabilité et réparation
+
+---
+
 Utiliser ce catalogue comme générateur de questions. Ne pas appliquer mécaniquement toutes les
 règles ; retenir celles qui correspondent au domaine.
 

@@ -1,5 +1,19 @@
 # Math, physique & calcul numérique
 
+## Contents
+
+- Coût relatif des opérations (ordre de grandeur)
+- 1. Comparer des distances : garde le carré, jette le `sqrt`
+- 2. Éviter la trigonométrie
+- 3. Puissances, divisions, modulo
+- 4. Bit manipulation
+- 5. `sqrt` et inverse : intrinsics modernes
+- 6. SIMD & vectorisation
+- 7. Précision vs vitesse
+- Checklist math/calcul
+
+---
+
 Micro-optimisations CPU : **en dernier**, sur hot path mesuré (graphismes,
 géo/spatial, simulation, ML, traitement signal). Le principe transverse :
 **remplacer une opération chère par une équivalente moins chère** sans changer le

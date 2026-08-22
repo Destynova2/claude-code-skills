@@ -1,5 +1,32 @@
 # Anti-Patterns — what NOT to generate
 
+## Contents
+
+- 1. Same quorum for all tasks
+- 2. Majority vote on free text
+- 3. Reflect and Execute fused
+- 4. Skip Phase 2 ("ça marche en dev")
+- 5. Threshold signatures on every operation
+- 6. Human-in-the-loop as default
+- 7. Ticket without signature
+- 8. Ticket covering `**/*`
+- 9. No budget on tickets
+- 10. Orchestrator still reasoning during Execute
+- 11. Per-phase timeouts missing
+- 12. Using `shared-state.md` instead of `.jsonl`
+- 13. Reinventing BFT
+- 14. Petri net skipped because "it's just a diagram"
+- 15. Phase 2 validators identical
+- 16. Auto-approve on timeout
+- 17. Skill refused to print cost estimate
+- 18. Loading the orchestrator prompt via `$(cat ...)` in the tmuxinator YAML
+- 19. Inline `git worktree add ... | head -1` in `on_project_start`
+- 20. Shared branch across validators or commis
+- 21. First-time trust prompt ignored
+- 22. Obsolete wrapper script still referenced
+
+---
+
 REC-Quorum is powerful, easy to misapply. Refuse to generate any of these.
 
 ## 1. Same quorum for all tasks

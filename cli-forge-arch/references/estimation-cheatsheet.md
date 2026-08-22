@@ -1,5 +1,17 @@
 # Back-of-Envelope Estimation Cheatsheet
 
+## Contents
+
+- Latency Numbers Every Engineer Should Know
+- Unit Conversions
+- Core Formulas
+- Availability Math
+- Scalability Laws
+- Quick Estimation Workflow
+- Common System Scales (Reference Points)
+
+---
+
 Quick reference for capacity planning and system sizing. Use these formulas BEFORE designing architecture — the numbers drive the design.
 
 ---

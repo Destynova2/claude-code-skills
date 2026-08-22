@@ -1,5 +1,12 @@
 # LLD Template Reference
 
+## Contents
+
+- Document Structure
+- Section Guidelines
+
+---
+
 Use this template when producing a Low-Level Design document. The LLD translates the HLD's "what" into the "how" — detailed enough that a developer can implement without ambiguity.
 
 ---

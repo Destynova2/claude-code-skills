@@ -4,6 +4,23 @@
 
 ---
 
+## Contents
+
+- Basic structure
+- Frontmatter options
+- Auto-scaling headings
+- Slide-local directives
+- Background images
+- Two-column layout
+- Code blocks
+- Speaker notes
+- Mermaid diagrams
+- Dark theme — recommended defaults
+- Presenter view & navigation
+- CLI usage
+
+---
+
 ## Basic structure
 
 ```markdown

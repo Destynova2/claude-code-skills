@@ -1,5 +1,24 @@
 # PostgreSQL and SQLx patterns / Patrons PostgreSQL et SQLx
 
+## Contents
+
+- 1. Décrément atomique de stock
+- 2. Transition optimiste
+- 3. Unicité des lignes actives avec soft delete
+- 4. Référence tenant-aware
+- 5. Non-chevauchement temporel
+- 6. Idempotency key
+- 7. Transactional outbox
+- 8. Inbox consommateur
+- 9. File de workers
+- 10. Backfill reprenable
+- 11. Ajout progressif d'une contrainte
+- 12. Mapping d'erreur SQLx
+- 13. SQL dynamique sûr
+- 14. Ledger
+
+---
+
 Ces patrons sont des points de départ. Adapter types, index, niveau d'isolation et erreurs au
 projet. Ne pas les copier sans la matrice d'invariants.
 

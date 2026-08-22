@@ -4,6 +4,15 @@
 
 ---
 
+## Contents
+
+- Test isolation — the chaperone principle
+- 11 Anti-Patterns
+- Detection Heuristics
+- Recommendation Templates
+
+---
+
 ## Test isolation — the chaperone principle
 
 > **Biomimetic frame — molecular chaperones (HSP60/HSP70).** When a protein misfolds in the cell, chaperones do not patch the broken structure in place — patching is impossible because misfolding is structural, not local. Instead, they fully unfold the protein and let it re-fold from a clean state. Sometimes this happens many times before the protein folds correctly; if it never does, the cell ubiquitinates it for destruction. The principle: **patching corrupted state never works, only a full reset does.**

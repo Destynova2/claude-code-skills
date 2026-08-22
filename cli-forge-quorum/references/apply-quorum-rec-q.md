@@ -1,5 +1,20 @@
 # Apply Quorum in REC-Q — Phase 2 gating of infrastructure mutations
 
+## Contents
+
+- Why Phase 2 and not Phase 1
+- Gated commands (reference list)
+- Criticality class and quorum size
+- The flow
+- Per-validator checklists (extended from chef)
+- Production safeguard (PATRON ACK)
+- Rollback — Phase 3 (Post-apply recovery)
+- Audit artefacts
+- When apply-quorum is SKIPPED
+- Relationship with Brigade's apply-quorum
+
+---
+
 REC-Q's Phase 2 is designed for validating commit artifacts. Infrastructure
 mutations (`tofu apply`, `helm upgrade`, `kubectl apply`, `gh release create`,
 feature-branch force-push) fit natively as a specialised Phase 2 workflow: the

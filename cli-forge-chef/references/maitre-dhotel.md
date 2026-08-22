@@ -3,6 +3,20 @@
 > *"Un plat n'est servi que quand le client a la fourchette dedans."*
 > (A dish isn't served until the client has the fork in it.)
 
+## Contents
+
+- 1 — Position in the brigade
+- 2 — The 5 services du Maître d'hôtel
+- 3 — State machine
+- 4 — Spawn prompt (inject into Chef prompt)
+- 5 — Communication channels
+- 6 — Tmuxinator window
+- 7 — Scale rules — when to spawn a M'H
+- 8 — What the M'H prevents (the failure mode this exists for)
+- 9 — Integration with cli-forge-github
+
+---
+
 The **Maître d'hôtel** (M'H for short) stands at the pass between the brigade and the client. The Sous-Chef plates up (creates the PR with auto-merge enabled + runs the parallel conflict scan). The M'H carries the plat to the table and stays until the client has actually eaten — in our world: until the PR is `MERGED`, the tag is cut by release-plz, and the sprint report is updated.
 
 Without this role, "auto-merge enabled" is mistaken for "merged". It isn't. GitHub has seven ways for a PR with auto-merge to stall (`BEHIND`, `BLOCKED`, `DIRTY`, pending CodeQL, transient CI, release-plz reshuffle, branch protection arbitration). Each of them requires a human-like intervention. The M'H is that intervention, on a polling loop, so nobody has to babysit the merge queue.

@@ -4,6 +4,18 @@
 
 ---
 
+## Contents
+
+- Repository structure
+- GitHub Actions
+- GitLab CI
+- Docker local build
+- npx local build (no Docker)
+- Makefile (drop-in for any project)
+- Notes
+
+---
+
 ## Repository structure
 
 ```

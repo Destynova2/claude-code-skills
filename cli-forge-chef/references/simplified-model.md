@@ -4,6 +4,16 @@
 
 ---
 
+## Contents
+
+- Principle: nature does not coordinate, it lets things emerge
+- Decision: which model to use
+- The 5 patterns of the simplified model
+- Runtime architecture of the simplified model
+- Comparison
+
+---
+
 ## Principle: nature does not coordinate, it lets things emerge
 
 The Brigade de Cuisine model (Chef + 3 Sous-Chefs + Merge + N Commis) is justified for regulated projects (XL). For tiers S/M/L, nature offers a simpler model: **no central coordinator, agents self-organize via the shared environment.**

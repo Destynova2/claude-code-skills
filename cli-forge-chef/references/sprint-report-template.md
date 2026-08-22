@@ -1,5 +1,12 @@
 # Template — Sprint report
 
+## Contents
+
+- Rules for filling the template
+- Companion prose section
+
+---
+
 Generate this file at `{project}/.claude/reports/sprint-{id}.md` (or `docs/sprints/` if the project prefers). The Chef writes it in the shutdown protocol after every plat is `Envoye` or explicitly cut, and **after** the roadmap/features docs have been updated (cf. gotchas G17).
 
 The report has one job: let a human retro the sprint in under 5 minutes without re-reading `shared-state.md`. Four diagrams, each answering one question a human actually asks.

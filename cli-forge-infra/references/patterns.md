@@ -4,6 +4,15 @@
 
 ---
 
+## Contents
+
+- Patch Bankruptcy Rule
+- Simplify-Before-Complexify (SBC)
+- Network-First Debugging (NFD)
+- Banned Entropy Patterns
+
+---
+
 ## Patch Bankruptcy Rule
 
 When debugging or fixing infra, **count your failed attempts** on the same approach. Each consecutive failure doubles the probability that the approach itself is wrong, not the details.

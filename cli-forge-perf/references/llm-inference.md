@@ -1,5 +1,17 @@
 # Inférence LLM — optimiser les tok/s
 
+## Contents
+
+- Le modèle mental : prefill vs decode
+- Niveau modèle
+- Niveau système / serving
+- Niveau application — le ROI le plus élevé
+- Hardware & moteur
+- Diagnostic : où va le temps GPU, sans deviner ?
+- Checklist tok/s
+
+---
+
 Domaine spécialisé. Le fil rouge : **la génération (decode) est limitée par la
 bande passante mémoire, pas par le calcul** — chaque token relit tous les poids
 + le KV cache depuis la mémoire. C'est pourquoi réduire la précision

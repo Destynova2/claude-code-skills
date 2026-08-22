@@ -4,6 +4,15 @@
 
 ---
 
+## Contents
+
+- What to generate
+- codebook.json structure
+- VERIFY.md template
+- Automation script
+
+---
+
 ## What to generate
 
 | File | Content | Public? |

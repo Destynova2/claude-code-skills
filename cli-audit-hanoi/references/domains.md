@@ -1,5 +1,16 @@
 # Domain Stacks — Canonical Orders, Anti-Patterns, Quick Checks
 
+## Contents
+
+- Container images (Dockerfile / Containerfile)
+- Ansible
+- Kubernetes
+- Rust workspaces and build systems
+- CI pipelines
+- Text and documents
+
+---
+
 For each domain: the canonical stack reads bottom → top, i.e. first
 executed → last executed, most stable → most volatile.
 

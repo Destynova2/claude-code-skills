@@ -4,6 +4,20 @@
 
 ---
 
+## Contents
+
+- 1. LEAFCUTTER ANTS (Atta / Acromyrmex) — Task Partitioning
+- 2. SLIME MOLD (Physarum polycephalum) — Adaptive Path Pruning
+- 3. ARMY ANTS (Eciton burchellii) — Self-Organizing Parallelism
+- 4. HONEYBEES (Apis mellifera) — Dynamic Resource Allocation
+- 5. MYCELIUM — Fault-Tolerant Routing + Nutrient Sharing
+- 6. MITOSIS (Cell division) — Pipeline Splitting
+- 7. IMMUNE SYSTEM (VDJ Recombination) — Combinatorial Fuzzing
+- 8. FUNGAL SPORES (Diversity + Dispersal) — Combinatorial Matrix Testing
+- 9. TARDIGRADE (Ramazzottius varieornatus) — Chaos Engineering
+
+---
+
 ## 1. LEAFCUTTER ANTS (Atta / Acromyrmex) — Task Partitioning
 
 **Biology**: Workers do NOT do everything from start to finish. They are specialized:

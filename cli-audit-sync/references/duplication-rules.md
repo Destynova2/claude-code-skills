@@ -4,6 +4,21 @@
 
 ---
 
+## Contents
+
+- Authoritative quotes (use as evidence in findings)
+- Rule family D — Doc-doc duplication
+- Rule family C — Code-code cross-format duplication
+- Rule family S — SSOT (code ↔ doc)
+- Rule family M — Anti-false-DRY (Sandi Metz)
+- Rule family I — Information theoretic (optional, advanced)
+- Severity grading (use in cli-cycle triage)
+- Rule of Three application (Fowler default)
+- Modern enhancements (2024-2026 research)
+- Tools that already implement parts of this
+
+---
+
 ## Authoritative quotes (use as evidence in findings)
 
 1. **DRY** — Hunt & Thomas, *The Pragmatic Programmer* (1999):

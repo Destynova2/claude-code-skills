@@ -4,6 +4,15 @@
 
 ---
 
+## Contents
+
+- Detection workflow per function
+- Classification decision tree
+- Severity scoring
+- Common drift patterns by domain
+
+---
+
 ## Detection workflow per function
 
 For each contracted function, execute these checks in order:

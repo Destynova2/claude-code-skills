@@ -4,6 +4,20 @@
 
 ---
 
+## Contents
+
+- Formula
+- Score Scale
+- Category Weights
+- RMI Thresholds
+- Gate Caps
+- Severity Classification
+- Category Scoring Hints
+- Decision from RMI
+- Tech Debt Estimate
+
+---
+
 ## Formula
 
 ```text

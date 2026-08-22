@@ -1,5 +1,22 @@
 # Optimiser comme une recherche : hypothèse → expérience → preuve
 
+## Contents
+
+- 1. Hypothèse falsifiable (et chercher à la réfuter)
+- 1b. Discipline de la conclusion (« définitif » ≠ « plausible »)
+- 2. Borne théorique d'abord (raisonner par l'absurde)
+- 3. La table de mixage : ablation contrôlée
+- 3b. Comparer deux stacks (langue + lib) : pin emboîté
+- 3c. Port-by-comparison : ne pas quit à la frontière framework
+- 4. Gérer l'aléa (variance) — dans les deux sens
+- 5. Mesurer en plusieurs dimensions (4D, 5D, 6D…)
+- 6. Challenger les chiffres : les pièges statistiques
+- 7. "Vrai et faux à la fois" : l'équivalence abstraite trompe
+- 8. La boucle complète
+- Checklist expérimentation
+
+---
+
 Mode **convergent**. Quand on ne sait pas, on n'optimise pas au pif : on
 expérimente avec rigueur. Méthode scientifique appliquée à la perf. Les idées
 viennent de `idea-generation.md` ; ici on les **réfute ou on les prouve**.

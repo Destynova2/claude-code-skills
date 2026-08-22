@@ -1,5 +1,16 @@
 # REC Phases — Reflect / Execute / Control
 
+## Contents
+
+- Phase 0 — Reflect (planning)
+- Phase 1 — Execute (parallel work)
+- Phase 2 — Control (validation)
+- Timeouts summary
+- Phase transition invariants
+- Example sprint flow (grob-s5 redesigned in REC-Quorum)
+
+---
+
 Three phases, each with a distinct role, signed certificate output, and timeout+view-change mechanism.
 
 ## Phase 0 — Reflect (planning)

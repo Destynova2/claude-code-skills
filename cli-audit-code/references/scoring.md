@@ -4,6 +4,19 @@
 
 ---
 
+## Contents
+
+- CQI Formula
+- Scoring Guide
+- Category Weights
+- CQI Thresholds
+- Derived Metrics
+- Anti-Patterns (Named, from Fowler/Mantyla + extended taxonomy)
+- Comparative Benchmarks
+- Sources
+
+---
+
 ## CQI Formula
 
 ```

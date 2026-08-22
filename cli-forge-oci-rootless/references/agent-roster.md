@@ -1,5 +1,22 @@
 # Agent Roster — Lithic OCI Rootless Migration
 
+## Contents
+
+- Shared packet format
+- 1. Bedrock Surveyor
+- 2. Stratigraphy Archaeologist
+- 3. Fault-Line Geomechanic
+- 4. Reservoir & Recovery Engineer
+- 5. Field Operator Ethnographer
+- 6. Seismic Observability Analyst
+- 7. Alloy Architect
+- 8. Assay Gate Engineer
+- 9. Tailings Remediation Engineer
+- 10. Fracture Risk Analyst
+- Recommended agent sets by tier
+
+---
+
 Use these sub-agents when `/cli-forge-oci-rootless` runs in `--agents` or
 `--deep` mode. Agents are surveying instruments: they extract evidence, map
 risks, and return mergeable packets. The main skill owns synthesis and verdict.

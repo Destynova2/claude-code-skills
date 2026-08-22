@@ -3,6 +3,22 @@
 > Every irreversible shell command goes through a quorum vote on its plan before it executes.
 > The file-diff quorum protects code. This protocol protects infrastructure and releases.
 
+## Contents
+
+- Why this exists
+- Gated commands
+- The protocol
+- Quorum rule
+- Plan artefact format
+- Voter checklists
+- Implementation sketch
+- Audit trail
+- Scale rule
+- Interaction with the file-diff quorum
+- When the apply quorum should be SKIPPED
+
+---
+
 ## Why this exists
 
 `permissions-template.md` already denies dangerous commands to every role except

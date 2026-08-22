@@ -1,5 +1,15 @@
 # Worked examples (traces de bout en bout)
 
+## Contents
+
+- Exemple 1 — Le N+1 (illustratif)
+- Exemple 2 — Ordre de boucle `i`/`j` & layout (mesuré, résultat surprenant)
+- Exemple 3 — Quantization LLM, tok/s (publié)
+- Exemple 4 — Recherche linéaire → set (mesuré, reproductible)
+- À retenir transversalement
+
+---
+
 Le reste du skill donne des principes ; ici, des traces complètes
 **symptôme → mesure → diagnostic → fix → re-mesure → leçon**. Les exemples
 marqués *(mesuré)* ont été chronométrés par A/B interleavé + test de

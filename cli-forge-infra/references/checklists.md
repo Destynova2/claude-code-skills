@@ -4,15 +4,47 @@
 
 ---
 
+## Contents
+
+- Entropy Checklist for Every Secret/Key
+- Config Simplification Checklist (Step 5)
+- Container Image Audit (Step 5)
+- Comment Audit Checklist (Step 8)
+- Inline Documentation Rules (Step 8)
+- Container Deployment Checklist (Step 5)
+- Templating Strategy Checklist (Step 5)
+- ops-decisions.md Template
+- ADR Template
+
+---
+
 ## Entropy Checklist for Every Secret/Key
 
 For every cryptographic key or secret in the infra:
 - [ ] **Source**: Is it generated from a CSPRNG? (not $RANDOM, not date, not predictable)
 - [ ] **Size**: Is the key the correct size for its algorithm? (e.g., 32 bytes for AES-256)
 - [ ] **Storage**: Is it stored securely? (not in git, not in env var visible in `ps`, not world-readable)
-- [ ] **Rotation**: Is there a plan to rotate it? Document the rotation procedure.
+- [ ] **Rotation**: Is there a plan to rotate it? Document the rotation procedure, and order it `create -> deploy -> verify -> revoke` (see below).
 - [ ] **Scope**: Is the key scoped correctly? (not one master key for everything)
 - [ ] **Transit**: Is the key transmitted securely? (not logged, not in CLI args visible in process list)
+
+### Rotation ordering (the only order that avoids an outage)
+
+```
+1. CREATE   generate the new credential
+2. DEPLOY   configure it alongside the old one, both valid
+3. VERIFY   confirm every consumer works with the new one
+4. REVOKE   only then revoke the old credential
+```
+
+Two orderings that cause incidents, and are worth flagging on sight:
+
+- `revoke -> create`: every consumer is broken until the new credential lands.
+- `create -> revoke -> deploy`: a coverage gap between revoke and deploy.
+
+The overlap window in step 2 is the whole point: it is what makes rotation a
+non-event. A provider that cannot hold two valid credentials at once forces a
+maintenance window, which is itself worth calling out in the audit.
 
 ---
 

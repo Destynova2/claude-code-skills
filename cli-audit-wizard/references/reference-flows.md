@@ -6,6 +6,16 @@
 
 ---
 
+## Contents
+
+- Auth Discovery -- The Universal Three-Tier Hierarchy
+- Re-Run Behavior -- Four Patterns
+- Doctor Mode -- The `flutter doctor` Standard
+- Progressive Disclosure -- Zero-Config as Ideal
+- Sources
+
+---
+
 ## Auth Discovery -- The Universal Three-Tier Hierarchy
 
 Every well-designed CLI follows the same order. Deviation is an anti-pattern.

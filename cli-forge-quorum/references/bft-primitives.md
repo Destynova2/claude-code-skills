@@ -1,5 +1,17 @@
 # BFT Primitives — What to reuse, what not to re-implement
 
+## Contents
+
+- Consensus protocols — pick one
+- Threshold signatures
+- Membership & gossip
+- View-change / leader rotation
+- Append-only log — signed and ordered
+- What REC-Quorum generates vs what it expects pre-existing
+- Further reading
+
+---
+
 REC-Quorum is a dispatch pattern, not a consensus protocol. Do **not** write your own BFT from scratch. Pick from existing, battle-tested primitives, and wire them.
 
 ## Consensus protocols — pick one

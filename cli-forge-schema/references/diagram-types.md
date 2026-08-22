@@ -1,5 +1,33 @@
 # Mermaid Diagram Types — GitHub-Tested Reference
 
+## Contents
+
+- 1. Flowchart
+- 2. Sequence Diagram
+- 3. Class Diagram
+- 4. State Diagram
+- 5. ER Diagram
+- 6. Gantt Chart
+- 7. Pie Chart
+- 8. Mind Map
+- 9. Timeline
+- 10. Quadrant Chart
+- 11. Git Graph
+- 12. Sankey Diagram
+- 13. Kanban
+- 14. Radar Chart
+- 15. XY Chart
+- 16. Block Diagram
+- 17. Architecture Diagram
+- 18. Timeline
+- 19. Treemap
+- 20. Ishikawa (Fishbone)
+- 21. Venn Diagram
+- Color Palette (GitHub-safe)
+- GitHub Rendering Limits
+
+---
+
 Every example below has been validated for GitHub rendering. Copy-paste safe.
 
 ---

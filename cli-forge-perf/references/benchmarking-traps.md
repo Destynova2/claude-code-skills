@@ -1,5 +1,23 @@
 # Pièges de mesure (red-team tes propres chiffres)
 
+## Contents
+
+- 1. Le compilateur a supprimé ton benchmark (dead-code elimination)
+- 2. Constant folding / hoisting
+- 3. Warmup oublié (le premier run ment)
+- 4. Coordinated omission (le piège latence n°1 — Gil Tene)
+- 5. Observer effect (mesurer change la mesure)
+- 6. Résolution & overhead du chronomètre
+- 7. A/B confondu (tu compares deux moments, pas deux variantes)
+- 8. État de cache (chaud vs froid)
+- 9. Charge & concurrence non représentatives
+- 10. GC / pauses & autres queues
+- 11. Benchmarker la mauvaise chose
+- 12. Workaround net-négatif présenté comme fix
+- Checklist anti-pièges (avant de claimer un gain)
+
+---
+
 Complément de `experiment-method.md`. Là-bas : les pièges **statistiques**
 (interpréter les données). Ici : les pièges de **mesure** (la donnée elle-même
 est fausse avant toute interprétation). Un benchmark non audité ment plus souvent

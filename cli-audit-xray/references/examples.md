@@ -2,6 +2,14 @@
 
 > **When to read:** When the user asks for examples or when calibrating report style.
 
+## Contents
+
+- Repeated Normalization
+- AI Runtime Boundary
+- DLP Boundary
+
+---
+
 ## Repeated Normalization
 
 Input:

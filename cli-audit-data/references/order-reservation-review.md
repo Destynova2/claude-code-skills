@@ -1,5 +1,24 @@
 # Worked example — réservation de la dernière unité d'un produit
 
+## Contents
+
+- 1. Verdict
+- 2. Décision de base de données
+- 3. Sources de vérité
+- 4. Invariants
+- 5. Conservation
+- 6. Machine à états
+- 7. Interleaving dangereux
+- 8. Frontière transactionnelle
+- 9. SQLx
+- 10. Migration
+- 11. Tests
+- 12. Homéostasie
+- 13. Pré-mortem
+- 14. Points non prouvés
+
+---
+
 Cet exemple montre le niveau de raisonnement attendu. Il ne remplace pas l'analyse du projet réel.
 
 ## 1. Verdict

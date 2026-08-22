@@ -4,6 +4,19 @@
 
 ---
 
+## Contents
+
+- Core Principle
+- The Tooling Ladder
+- Decision Tree
+- Common Mismatches (Anti-Patterns)
+- Scoring Impact
+- Real-World Example: MariaDB Deployment
+- Quick Reference Card
+- Dependencies & Availability
+
+---
+
 ## Core Principle
 
 > **The tool must match the complexity of the problem, not the other way around.**

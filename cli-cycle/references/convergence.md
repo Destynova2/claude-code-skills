@@ -4,6 +4,18 @@
 
 ---
 
+## Contents
+
+- Concept
+- Workflow
+- Convergence criteria
+- Safety rules
+- Cascade detection
+- Deferred items — What NOT to auto-fix
+- Invocation
+
+---
+
 ## Concept
 
 Instead of the interactive loop (audit → user chooses → fix → re-audit → repeat), Autonomous Convergence mode runs the entire correction cycle **autonomously in an isolated worktree**, accumulating ALL findings and fixes across N passes, then presents a **single unified plan** with the complete diff.

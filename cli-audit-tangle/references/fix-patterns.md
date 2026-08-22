@@ -5,6 +5,18 @@
 
 ---
 
+## Contents
+
+- Rust
+- Python
+- TypeScript / Node
+- CI/CD — GitHub Actions
+- CI/CD — GitLab
+- General Architectural Patterns
+- Validation Metrics
+
+---
+
 ## Rust
 
 ### Circular Dependencies (Anti-Pattern #2)
