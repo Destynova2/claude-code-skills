@@ -1,9 +1,10 @@
 """Order processing for the widget shop.
 
 FIXTURE: this module is deliberately flawed. It is the input for the
-cli-audit-code evaluation in evals/cases/. Every defect is listed in that case
-file with the dimension it should be reported under. Do not "fix" this file:
-the evaluation depends on the defects staying exactly as they are.
+cli-audit-code evaluation in evals/cases/. The defects are listed in that case
+file, deliberately not here: a fixture that names its own bugs tests whether a
+skill can read comments, not whether it can audit. Do not "fix" this file: the
+evaluation depends on the defects staying exactly as they are.
 """
 
 import sqlite3
@@ -13,7 +14,6 @@ DB_PASSWORD = "EXAMPLE-NOT-A-REAL-PASSWORD-0000"
 
 def get_order(conn, user_input):
     d = conn.cursor()
-    # SQL injection: user input interpolated straight into the statement.
     d.execute(f"SELECT * FROM orders WHERE id = '{user_input}'")
     return d.fetchall()
 
@@ -27,7 +27,6 @@ def process_order(order, user, config, registry, notifier):
                     if item.get("qty"):
                         if item["qty"] > 0:
                             subtotal = item["price"] * item["qty"]
-                            # Duplicated tax rule, see compute_invoice below.
                             tax = subtotal * 0.2
                             tmp = tmp + subtotal + tax
                             if user.get("vip"):
@@ -52,7 +51,6 @@ def compute_invoice(lines):
     total = 0
     for line in lines:
         subtotal = line["price"] * line["qty"]
-        # Same tax rule as process_order, kept in sync by hand.
         tax = subtotal * 0.2
         total = total + subtotal + tax
     return total

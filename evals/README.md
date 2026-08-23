@@ -63,8 +63,23 @@ is a visibly fake `EXAMPLE-NOT-A-REAL-...` placeholder.
 
 ## Coverage
 
-Two of 36 skills have a case today: `cli-audit-shell` and `cli-audit-code`.
-That is a deliberate start, not a claim of coverage. The highest-value cases to
-add next are the ones where a wrong answer is expensive and quiet:
-`cli-audit-data` (invariants), `cli-audit-review` (gate decisions), and
-`cli-cycle` (does the orchestrator pick the right skills for a given repo).
+Five of 36 skills have a case today:
+
+| Case | Skill | What it pins down |
+|---|---|---|
+| `audit-shell-flawed-deploy` | `cli-audit-shell` | Finds the classic shell hazards, all confirmed by shellcheck |
+| `audit-code-flawed-order-service` | `cli-audit-code` | Finds injection, swallowed errors, duplication; uses Python idioms |
+| `audit-data-unsafe-reservations` | `cli-audit-data` | Derives the double-booking race in an unguarded read-decide-write |
+| `audit-review-widget-role-diff` | `cli-audit-review` | Any blocker gate forces `REQUEST_CHANGES`, whatever the RMI |
+| `cycle-selects-applicable-skills` | `cli-cycle` | Skips skills that do not apply instead of fanning out to all |
+
+The last two are the most valuable, because they pin behaviour that fails
+quietly. A review that approves a merge request containing a committed token
+reads perfectly well; an orchestrator that runs all 36 skills on a two-file
+crate produces a plausible report and burns the user's budget. Neither shows up
+as an error.
+
+Cases still worth adding, roughly in order: `cli-audit-drift` (does it catch a
+contract that quietly stopped matching its implementation), `cli-audit-test`
+(does it distinguish coverage from proof), and `cli-forge-doc` (does it refuse
+to invent content for undocumented behaviour).

@@ -1,0 +1,24 @@
+{
+  "id": "audit-review-widget-role-diff",
+  "skills": ["cli-audit-review"],
+  "query": "/cli-audit-review evals/fixtures/flawed-diff/widget-role.diff",
+  "files": ["evals/fixtures/flawed-diff/widget-role.diff"],
+  "notes": "This case tests the decision rule, which is the most falsifiable thing the skill owns: any blocker gate forces REQUEST_CHANGES regardless of the RMI. The diff trips five distinct gates from Step 4, so a run that returns APPROVE, APPROVE_WITH_NOTES or COMMENT is wrong even if its prose is good. Dimension IDs checked against cli-audit-review/SKILL.md.",
+  "expected_behavior": [
+    "Final decision is REQUEST_CHANGES, and the output states which blocker gate forced it",
+    "Gate, secret leakage: flags widget_admin_token committed in defaults/main.yml, and separately flags that the debug task prints `registration`, which echoes a Bearer token into CI logs",
+    "Gate, destructive before validation: flags `rm -rf {{ widget_data_dir }}/*` running before the stat validation task, and notes it is unguarded if widget_data_dir is empty or undefined",
+    "Gate, deployable change without proof: flags that molecule became `when: manual` with `allow_failure: true`, removing the merge-request proof exactly as behaviour changed",
+    "R3: flags both `ansible.builtin.shell` tasks as non-idempotent state mutation with no creates/removes guard or changed_when",
+    "R5: identifies the token as the highest-severity finding rather than burying it among style points",
+    "R2: notes the stat task registers data_dir but nothing ever asserts on it, so it is validation theatre",
+    "Reports an RMI score with the applicable dimensions, and the score is consistent with the decision",
+    "Findings cite file:line and give the smallest correction plus the proof expected"
+  ],
+  "must_not": [
+    "Returning APPROVE, APPROVE_WITH_NOTES or COMMENT: any blocker gate mandates REQUEST_CHANGES",
+    "Reporting an RMI at or above 6.0 while also reporting blocker gates, which contradicts the decision table",
+    "Leading with R12 formatting comments while the committed token is unreported",
+    "Rewriting the fixture diff: this skill reviews, it does not patch"
+  ]
+}

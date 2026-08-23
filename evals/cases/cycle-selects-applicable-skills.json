@@ -1,0 +1,25 @@
+{
+  "id": "cycle-selects-applicable-skills",
+  "skills": ["cli-cycle"],
+  "query": "/cli-cycle evals/fixtures/mini-repo",
+  "files": ["evals/fixtures/mini-repo/Cargo.toml", "evals/fixtures/mini-repo/src/lib.rs", "evals/fixtures/mini-repo/README.md"],
+  "notes": "This tests orchestration rather than any single audit: the key rule in Step 3 is 'do not run skills that do not apply'. The fixture was built around verified absences, no CI config, no Dockerfile, no .sql or .sh files, no CONTRACTS.md and no tests directory, so the skills that must be skipped are unambiguous. A run that fans out to every skill wastes the user's tokens and is a real regression, even though it never looks wrong in the output.",
+  "expected_behavior": [
+    "Detects the project context first: Rust crate via Cargo.toml, a README, and a small file count",
+    "Runs cli-audit-code, which applies because the crate has source code",
+    "Skips cli-audit-data and states why: no SQLx dependency, no .sql files, no migrations directory",
+    "Skips cli-audit-shell and states why: the repo contains no shell scripts",
+    "Skips cli-audit-drift and states why: there is no CONTRACTS.md",
+    "Skips cli-forge-pipeline and cli-forge-github and states why: there is no CI configuration in the repo",
+    "Skips cli-audit-hanoi or justifies it: there is no Dockerfile, playbook or manifest, and a single-crate workspace has little ordering surface",
+    "Reports honestly on cli-audit-test: the crate has no tests, which is a finding rather than a reason to claim the dimension passed",
+    "Presents a scorecard plus a prioritised action plan in tiers, without truncating the findings list",
+    "Produces reports only. No file in the fixture is modified"
+  ],
+  "must_not": [
+    "Running every available skill regardless of applicability, which Step 3 explicitly forbids",
+    "Reporting results for a skill it did not actually run",
+    "Claiming a CI, Docker, database or contracts finding: none of those artifacts exist in the fixture",
+    "Editing the fixture: cycle orchestrates audits and proposes a plan, it does not apply fixes"
+  ]
+}

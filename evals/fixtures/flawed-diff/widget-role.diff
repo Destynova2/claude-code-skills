@@ -1,0 +1,68 @@
+# FIXTURE: a deliberately unsafe merge request, input for the cli-audit-review
+# evaluation in evals/cases/. Generated with `git diff` against a clean base and
+# verified with `git apply --check`, so it is a real patch, not a hand-typed
+# approximation. The defects are listed in the case file, deliberately not here.
+# Do not "fix" this diff: the evaluation depends on the defects.
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index fbd5a0a..4254089 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -7,8 +7,8 @@ molecule:
+   stage: test
+   script:
+     - molecule test
+-  rules:
+-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
++  when: manual
++  allow_failure: true
+ 
+ release:
+   stage: release
+diff --git a/roles/widget/defaults/main.yml b/roles/widget/defaults/main.yml
+index cf4a8ee..f26b277 100644
+--- a/roles/widget/defaults/main.yml
++++ b/roles/widget/defaults/main.yml
+@@ -1,6 +1,9 @@
+ ---
+ widget_version: "1.4.0"
+ widget_port: 8080
++widget_admin_token: "EXAMPLE-NOT-A-REAL-TOKEN-000000"
++widget_purge_on_deploy: true
++widget_endpoint: "{{ widget_host }}/api"
+ widget_user: widget
+ widget_group: widget
+ widget_data_dir: /var/lib/widget
+diff --git a/roles/widget/tasks/main.yml b/roles/widget/tasks/main.yml
+index ba9b3e7..35ef4df 100644
+--- a/roles/widget/tasks/main.yml
++++ b/roles/widget/tasks/main.yml
+@@ -1,10 +1,29 @@
+ ---
++- name: Purge previous deployment
++  ansible.builtin.shell: rm -rf {{ widget_data_dir }}/*
++  when: widget_purge_on_deploy
++
++- name: Register node with the control plane
++  ansible.builtin.shell: |
++    curl -s -X POST {{ widget_endpoint }}/register \
++      -H "Authorization: Bearer {{ widget_admin_token }}"
++  register: registration
++
++- name: Show registration result
++  ansible.builtin.debug:
++    var: registration
++
+ - name: Ensure widget user exists
+   ansible.builtin.user:
+     name: "{{ widget_user }}"
+     group: "{{ widget_group }}"
+     state: present
+ 
++- name: Validate the data directory is present
++  ansible.builtin.stat:
++    path: "{{ widget_data_dir }}"
++  register: data_dir
++
+ - name: Install widget package
+   ansible.builtin.package:
+     name: "widget-{{ widget_version }}"

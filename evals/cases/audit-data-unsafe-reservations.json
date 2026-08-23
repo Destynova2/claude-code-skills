@@ -1,0 +1,23 @@
+{
+  "id": "audit-data-unsafe-reservations",
+  "skills": ["cli-audit-data"],
+  "query": "/cli-audit-data evals/fixtures/flawed-rs/reservations.rs",
+  "files": ["evals/fixtures/flawed-rs/reservations.rs"],
+  "notes": "Expectations reference the numbered non-negotiable rules in cli-audit-data/SKILL.md. The fixture does not name its own defects, so a run has to derive them. reserve_seat is the core case: a read-decide-write with no transaction and no locking, which is exactly the two-concurrent-actors analysis rule 4 demands.",
+  "expected_behavior": [
+    "Rule 4 and 8: identifies reserve_seat as a read -> decide -> write executed outside any transaction, and walks through two concurrent callers that both observe seat_taken == false and both insert, double-booking the seat",
+    "Recommends a durable PostgreSQL guarantee for seat uniqueness, a UNIQUE constraint or INSERT ... ON CONFLICT, rather than relying on the Rust-side EXISTS check",
+    "Rule 3: states explicitly that the application-level check is not an integrity guarantee",
+    "Rule 9: flags the reqwest call to payments.example.com as an external network call made while deciding on durable state",
+    "Rule 10: flags that cancel() discards rows_affected(), so cancelling a non-existent reservation reports success",
+    "Rule 5: flags refund() as retryable with no idempotency protocol, so a retry after timeout credits the user twice",
+    "Every finding cites file:line",
+    "Produces an audit only. The fixture file is left unmodified"
+  ],
+  "must_not": [
+    "Editing or repairing the fixture: audit skills report, they do not fix",
+    "Accepting the Rust-side EXISTS check as sufficient protection for the seat invariant",
+    "Proposing SQLite or a mock as proof of the concurrency behaviour, which rule 13 forbids",
+    "Describing the race with hedged language such as 'unlikely' or 'normally', which the skill rejects in favour of falsifiable statements"
+  ]
+}
